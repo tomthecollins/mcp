@@ -17,7 +17,7 @@ Office Hours: Friday 1:10-4:00 pm
 [Grading](#grading)  
 [Course Policies](#course-policies)  
 [Accommodations for Students with Disabilities](#accommodations-for-students-with-disabilities)  
-[Reading](#reading)  
+[Required Reading](#required-reading)  
 [Tentative Schedule](#tentative-schedule)
 
 ## Course Overview
