@@ -111,7 +111,7 @@ The following list is roughly in the order in which you should read the items. W
 
 ## Tentative Schedule
 | Class. Date, Leader | Topics | Reading Requirements and Deadlines  |
-| ------- | -------------------- | ------------- |
+| -------- | --------------------- | ------------ |
 | 1. 1/26/17, KK | Syllabus Overview and Web-based Music Demos (Tone.js, NexusUI, and VexFlow) | Deutsch (1980), Deutsch, Henthorn, and Lapidis (2011) |
 | | Coding: HTML, JavaScript, and PHP | |
 | 2. 2/1/17, CC | Audio Representations of Music | Ch. 1 of Deutsch, Collins (2011, pp. 327-340) |
