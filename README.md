@@ -1,17 +1,15 @@
 # mcp
 A repo to support PSYC/COGS 397 Music Computing and Psychology
 
-# Syllabus for PSYC 397 Seminar in Music Computing and Psychology
+# Syllabus
 
 Meeting time: Thursday 1:10-4:00 pm
 
-Location: Maginnes 475 for discussions; Digital Media
-
-Classroom for assignment work
+Location: Maginnes 475 for discussions; Digital Media Classroom for assignment work
 
 Instructor: Dr. Tom Collins
 
-Office: Chandler-Ullman 223
+Office: Chandler-Ullmann 223
 
 Phone: 610-758-4209
 
@@ -21,6 +19,13 @@ Office Hours: Friday 1:10-4:00 pm
 
 ##### Table of Contents  
 [Course Overview](#course-overview)
+[Course Goals](#course-goals)
+[Methods of Assessment](#methods-of-assessment)
+[Grading](#grading)
+[Course Policies](course-policies)
+[Accommodations for Students with Disabilities](accommodations-for-students-with-disabilities)
+[Reading](reading)
+[Tentative Schedule](tentative-schedule)
 
 ## Course Overview
 This seminar examines key papers and concepts from the fields of music psychology and music computing. Development of music processing and programming skills is part of the course, enabling a fuller exploration of the intersection of the two fields. We will be addressing questions such as: Why is music cognition important to psychology as a whole? How might computing and psychology combine to widen participation in music, and to what end?
