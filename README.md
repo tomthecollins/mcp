@@ -1,7 +1,7 @@
 # mcp
 A repo to support PSYC/COGS 397 Music Computing and Psychology
 
-# Syllabus
+# Syllabus for Seminar in Music Computing and Psychology
 Meeting time: Thursday 1:10-4:00 pm  
 Location: Maginnes 475 for discussions; Digital Media Classroom for assignment work  
 Instructor: Dr. Tom Collins  
