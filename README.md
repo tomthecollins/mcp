@@ -85,8 +85,8 @@ Academic Integrity: It is your responsibility to make sure that your work meets 
 That said, in this course you are expected to develop your work in consultation with Dr. Collins and with one another, to make the most of differing backgrounds and areas of expertise that students and I bring to this interdisciplinary seminar. There is no such thing as a "stupid question" in this class.
 
 General Considerations:  
-1.	Please arrive for class on time. It is disruptive to both me and your classmates if you are late. 
-2.	Please put away silenced cells phones and do not text or use social media in class.
+1.	Please arrive for class on time. It is disruptive to both me and your classmates if you are late.  
+2.	Please put away silenced cells phones and do not text or use social media in class.  
 3.	Put in the time to do well. Make sure that you allocate a sufficient amount of time to reading, writing, and coding.
 
 Deadlines: No work will be accepted after the due date. If you have an emergency that means you will not be able to complete an assignment on time, you need to contact Dr. Collins before the due date to discuss the possibility of an extension. It is up to Dr. Collins' discretion to provide an extension, and there is no guarantee that one will be granted. 
