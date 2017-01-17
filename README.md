@@ -3,13 +3,24 @@ A repo to support PSYC/COGS 397 Music Computing and Psychology
 
 # Syllabus for PSYC 397 Seminar in Music Computing and Psychology
 
-Meeting time: Thursday 1:10-4:00 pm 
-Location: Maginnes 475 for discussions; Digital Media Classroom for assignment work
+Meeting time: Thursday 1:10-4:00 pm
+
+Location: Maginnes 475 for discussions; Digital Media
+
+Classroom for assignment work
+
 Instructor: Dr. Tom Collins
+
 Office: Chandler-Ullman 223
+
 Phone: 610-758-4209
+
 Email: toc215@lehigh.edu
+
 Office Hours: Friday 1:10-4:00 pm
+
+##### Table of Contents  
+[Course Overview](#courseoverview)
 
 ## Course Overview
 This seminar examines key papers and concepts from the fields of music psychology and music computing. Development of music processing and programming skills is part of the course, enabling a fuller exploration of the intersection of the two fields. We will be addressing questions such as: Why is music cognition important to psychology as a whole? How might computing and psychology combine to widen participation in music, and to what end?
@@ -60,7 +71,7 @@ Attendance at Music and Mind Spring Talk Series............5%
   *	Annotated bibliography;
   *	Topic of your own devising, by arrangement.
 *	Assignment 3 - Web-based Demo: Based on what you have learnt in the course to date (just after Spring Break), Assignment 3 provides the opportunity to develop a Web-based demo of a music-psychological phenomenon or an interface that does or encapsulates something related to one of the topics we have covered. You will be assessed on the time and effort that goes into making the demo, how well you present and explain it and its construction in the last-but-one class of semester, and my appraisal of the demo’s overall quality.
-  Assignments of sufficient quality may be published, with your permission and under your authorship, at http://tomcollinsresearch.net, in the spirit of https://musiclab.chromeexperiments.com/
+   Assignments of sufficient quality may be published, with your permission and under your authorship, at http://tomcollinsresearch.net, in the spirit of https://musiclab.chromeexperiments.com/
 *	Attendance at Music and Mind Spring Talk Series: The second half of semester sees 3 speakers present at Lehigh on the theme of “music and mind”. If you attend all 3 talks, you will receive 3 credits. To receive the final 2 allotted credits, you should ask one speaker an informed question in the open discussion session that follows his/her talk.
 
 ## Grading
