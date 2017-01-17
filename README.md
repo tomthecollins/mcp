@@ -84,7 +84,7 @@ The Principles of Our Equitable Community: Lehigh University endorses The Princi
 Academic Integrity: It is your responsibility to make sure that your work meets the standard of academic honesty set forth in the Lehigh Code of Conduct (http://studentaffairs.lehigh.edu/content/code-conduct). Academic dishonesty on assignments will be treated as an extremely serious matter, and will be reported to The Office of Student Conduct & Community Expectations. Plagiarism occurs when material is taken from a source without proper citation. If you quote something directly (i.e., if you use another author's exact words), you must use quotation marks. If you borrow an idea and reword it, you must report your source and include it in your reference list. If you use somebody else's code, you must acknowledge this use where it occurs and in any readme file. It is never permissible to turn in work that has been copied from another student or copied from a source (including the Internet) without properly acknowledging that source.
 That said, in this course you are expected to develop your work in consultation with Dr. Collins and with one another, to make the most of differing backgrounds and areas of expertise that students and I bring to this interdisciplinary seminar. There is no such thing as a "stupid question" in this class.
 
-General Considerations:
+General Considerations:  
 1.	Please arrive for class on time. It is disruptive to both me and your classmates if you are late. 
 2.	Please put away silenced cells phones and do not text or use social media in class.
 3.	Put in the time to do well. Make sure that you allocate a sufficient amount of time to reading, writing, and coding.
