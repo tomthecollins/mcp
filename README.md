@@ -20,7 +20,7 @@ Email: toc215@lehigh.edu
 Office Hours: Friday 1:10-4:00 pm
 
 ##### Table of Contents  
-[Course Overview](#courseoverview)
+[Course Overview](#course-overview)
 
 ## Course Overview
 This seminar examines key papers and concepts from the fields of music psychology and music computing. Development of music processing and programming skills is part of the course, enabling a fuller exploration of the intersection of the two fields. We will be addressing questions such as: Why is music cognition important to psychology as a whole? How might computing and psychology combine to widen participation in music, and to what end?
