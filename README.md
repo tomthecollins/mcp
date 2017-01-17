@@ -99,7 +99,7 @@ The following list is roughly in the order in which you should read the items. W
 
 * Levitin, D. J. (2007). This is your brain on music: The science of a human obsession. Plume/Penguin, New York, NY. (Available for cost of shipping on Amazon.)
 * Loy, G. (2006). Musimathics: The mathematical foundations of music. (2 Vols.). MIT Press, Cambridge, MA. (Available in the Library in hardcopy https://asa.lib.lehigh.edu/Record/957653 or as ebook https://asa.lib.lehigh.edu/Record/1486305 , https://asa.lib.lehigh.edu/Record/10615305 .)
-* Deutsch, D. (2013). The psychology of music, 3rd ed. Academic Press, San Diego, CA. (Available in the Library either in hardcopy https://asa.lib.lehigh.edu/Record/10734338 or as ebook https://asa.lib.lehigh.edu/Record/10733074 .)
+* Deutsch, D. (2013). The psychology of music, 3rd ed. Academic Press, San Diego, CA. (Available in the Library in hardcopy at present https://asa.lib.lehigh.edu/Record/10734338 and soon as ebook https://asa.lib.lehigh.edu/Record/10733074 .)
 * Huron, D. (2006). Sweet anticipation: Music and the psychology of expectation. MIT Press, Cambridge, MA. (Available in the Library as ebook https://asa.lib.lehigh.edu/Record/1486325 .)
 * Deutsch, D. (1980). The processing of structured and unstructured tonal sequences. Perception and Psychophysics, 28, 381-389.
 * Deutsch, D., Henthorn, T., and Lapidis, R. (2011). Illusory transformation from speech to song. Journal of the Acoustical Society of America, 129, 2245-2252.
