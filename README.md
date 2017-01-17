@@ -99,13 +99,13 @@ The following list is roughly in the order in which you should read the items. W
 * Shepard, R. N. (1964). Circularity in judgments of relative pitch. Journal of the Acoustical Society of America, 36, 2346-2353.
 * Conklin, D., and Witten, I. H. (1995). Multiple viewpoint systems for music prediction. Journal of New Music Research, 24, 51-73.
 * Collins and Laney. (in press). Computer-generated stylistic compositions with long-term repetitive and phrasal structure. Journal of Creative Music Systems
-* Krebs, F. B&uuml;ck, S, and Widmer, G. (2013). Rhythmic pattern modeling for beat and downbeat tracking in musical audio. Proceedings of the International Society for Music Information Retrieval Conference (pp. 227-232). Curitiba, Brazil.
-* B&uuml;ck, S., & Schedl, M. (2012). Polyphonic piano note transcription with recurrent neural networks. Proceedings of the International Conference on Acoustics, Speech, and Signal Processing, (4 pages). Kyoto, Japan.
+* Krebs, F. B&ouml;ck, S, and Widmer, G. (2013). Rhythmic pattern modeling for beat and downbeat tracking in musical audio. Proceedings of the International Society for Music Information Retrieval Conference (pp. 227-232). Curitiba, Brazil.
+* B&ouml;ck, S., & Schedl, M. (2012). Polyphonic piano note transcription with recurrent neural networks. Proceedings of the International Conference on Acoustics, Speech, and Signal Processing, (4 pages). Kyoto, Japan.
 * Joyful Noise (chorus). (n.d.). In Wikipedia. Retrieved January 3, 2017, from https://en.wikipedia.org/wiki/Joyful_Noise_(chorus)
 * Krumhansl, C. L., & Kessler, E. J. (1982). Tracing the dynamic changes in perceived tonal organization in a spatial representation of musical keys. Psychological Review, 89, 334-368.
 * Sapp, C. S. (2005). Visual hierarchical key analysis. ACM Computers in Entertainment, 3(4), 1-19.
 * Wang, A. L.-C., & Smith III, J. O. (2006). US Patent No. 6,990,453. Washington, DC: U.S. Patent and Trademark Office. (Filed July 31, 2000.)
-* Meredith, D., Lemstr&uuml;m, K., & Wiggins, G. A. (2002). Algorithms for discovering repeated patterns in multidimensional representations of polyphonic music. Journal of New Music Research, 31, 321-345.
+* Meredith, D., Lemstr&ouml;m, K., & Wiggins, G. A. (2002). Algorithms for discovering repeated patterns in multidimensional representations of polyphonic music. Journal of New Music Research, 31, 321-345.
 * Collins, T., Arzt, A., Frostel, H., & Widmer, G. (2016). Using geometric symbolic fingerprinting to discover distinctive patterns in polyphonic music corpora. In D. Meredith (Ed.), Computational Music Analysis (pp. 445-474). Berlin: Springer.
 * Müllensiefen, D., & Halpern, A. R. (2014). The role of features and context in recognition of novel melodies. Music Perception, 31, 418-435.
 
@@ -123,20 +123,21 @@ The following list is roughly in the order in which you should read the items. W
 | 5. 2/23/17, AK | Automatic Generation of Music | Ch. 8 of Deutsch, Conklin and Witten (1995), Collins and Laney (in press) |
 | | Coding: PatternViewer toward Assignment 1 and/or student-led | |
 | 2/27/17 at 12 noon | |	Assignment 1 due |
-| 6. 3/2/17, NJ | Rhythm, Beat-tracking, and Quantization | Ch. 9 of Deutsch, Krebs, B&uuml;ck, and Widmer (2013) |
+| 6. 3/2/17, NJ | Rhythm, Beat-tracking, and Quantization | Ch. 9 of Deutsch, Krebs, B&ouml;ck, and Widmer (2013) |
 | | Coding: Toward Assignment 2 and/or student-led | |
-| 7. 3/9/17, TM | F0-estimation, Transcription, and Training | B&uuml;ck & Schedl (2012), “Joyful Noise (chorus)” Wikipedia article |
+| 7. 3/9/17, TM | F0-estimation, Transcription, and Training | B&ouml;ck & Schedl (2012), “Joyful Noise (chorus)” Wikipedia article |
 | | Coding: Toward Assignment 2 and/or student-led | |
 | 3/13/17 | Spring Break | |
 | 3/20/17 at 12 noon | | Assignment 2 due |
 | 3/20/17 at 4 pm |	Music and Mind Spring Talk Series I (Alison Fromm) |	Location TBC |
 | 8. 3/23/17, AK | Tonality | Ch. 7 of Deutsch, Krumhansl and Kessler (1982), Sapp (2005) |
 | | Coding: Coding hereafter is aimed toward Assignment 3 and/or student-led | |
-| 9. 3/30/17, CC | Fingerprinting (or “How Shazam Works”) | Wang and Smith III (2006/2000), Arzt, B&uuml;ck, and Widmer (2012) |
-| 10. 4/6/17, TM | Repetition, Repetition, Repetition | Meredith, Lemstr&uuml;m, and Wiggins (2002), Collins, Artz, Frostel, and Widmer (2016) |
+| 9. 3/30/17, CC | Fingerprinting (or “How Shazam Works”) | Wang and Smith III (2006/2000), Arzt, B&ouml;ck, and Widmer (2012) |
+| 10. 4/6/17, TM | Repetition, Repetition, Repetition | Meredith, Lemstr&ouml;m, and Wiggins (2002), Collins, Artz, Frostel, and Widmer (2016) |
+| 4/6/17 at 4.10 pm |	Music and Mind Spring Talk Series II
+(Tom Collins) |	Location TBC |
 | 11. 4/13/17, KK | Musical Expectation I | Ch. 1-6 of Huron |
-| 12. 4/20/17, SC | Musical Expectation II | Ch. 7-11 of Huron,
-Müllensiefen and Halpern (2014) |
+| 12. 4/20/17, SC | Musical Expectation II | Ch. 7-11 of Huron, M&uuml;llensiefen and Halpern (2014) |
 | 4/20/17 at 4.10 pm |	Music and Mind Spring Talk Series III
 (Andrea Halpern) |	Location TBC |
 | 13. 4/27/17, ?? | Presentations | |
