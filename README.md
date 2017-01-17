@@ -129,8 +129,7 @@ The following list is roughly in the order in which you should read the items. W
 | | Coding: Toward Assignment 2 and/or student-led | |
 | 3/13/17 | Spring Break | |
 | 3/20/17 at 12 noon | | Assignment 2 due |
-| 3/20/17 at 4 pm |	Music and Mind Spring Talk Series I
-(Alison Fromm) |	Location TBC |
+| 3/20/17 at 4 pm |	Music and Mind Spring Talk Series I (Alison Fromm) |	Location TBC |
 | 8. 3/23/17, AK | Tonality | Ch. 7 of Deutsch, Krumhansl and Kessler (1982), Sapp (2005) |
 | | Coding: Coding hereafter is aimed toward Assignment 3 and/or student-led | |
 | 9. 3/30/17, CC | Fingerprinting (or “How Shazam Works”) | Wang and Smith III (2006/2000), Arzt, B&uuml;ck, and Widmer (2012) |
