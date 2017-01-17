@@ -2,7 +2,6 @@
 A repo to support PSYC/COGS 397 Music Computing and Psychology
 
 # Syllabus
-
 Meeting time: Thursday 1:10-4:00 pm  
 Location: Maginnes 475 for discussions; Digital Media Classroom for assignment work  
 Instructor: Dr. Tom Collins  
@@ -11,7 +10,7 @@ Phone: 610-758-4209
 Email: toc215@lehigh.edu  
 Office Hours: Friday 1:10-4:00 pm
 
-##### Table of Contents  
+##### Table of Contents
 [Course Overview](#course-overview)  
 [Course Goals](#course-goals)  
 [Methods of Assessment](#methods-of-assessment)  
