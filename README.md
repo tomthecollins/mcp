@@ -31,9 +31,9 @@ Upon successful completion of this course, students will be able to:
 Participation in Class Discussion.........................28%
 Leading Class Discussion..................................12%
 Written Discussion Points.................................10%
-Assignment 1 – Representations, Databases, and Software...10%
-Assignment 2 – Web-based Essay............................10%
-Assignment 3 – Web-based Demo
+Assignment 1 - Representations, Databases, and Software...10%
+Assignment 2 - Web-based Essay............................10%
+Assignment 3 - Web-based Demo
  Time and Effort..........................................10%
  In-class Presentation.....................................5%
  Quality of Finished Demo.................................10%
@@ -41,17 +41,17 @@ Attendance at Music and Mind Spring Talk Series............5%
 ```
 
 *	Participation in Class Discussion: This is a discussion-based course. At each class, it is expected you will participate in the discussion (which requires regular attendance). Participation includes asking for clarification on any aspects of the readings you did not understand, as well as making more in-depth comments about the broader meaning of the work. For each paper, you should be prepared to answer the following questions (and should expect to be called on to do so!):
-..*	What was the goal of the paper? (research question or hypothesis)
-..*	How did they address the goal? (specific methods and statistical analyses)
-..*	What did they find? (results)
-..*	What did they conclude? (specific conclusions and broader implications)
+..+	What was the goal of the paper? (research question or hypothesis)
+..+	How did they address the goal? (specific methods and statistical analyses)
+..+	What did they find? (results)
+..+	What did they conclude? (specific conclusions and broader implications)
 *	Leading Class Discussion: For each class that you are assigned as discussion leader (see initials in Schedule below), it will be your responsibility to keep the conversation moving. You will get access to your peer’s written discussion points shortly after they are due, and you can use these to engage your fellow students in exchanging ideas and views. You will receive your grade based on whether you keep the discussion moving, actively engage all members of the group, move through the main points of the paper (described in the above section), and guide deeper analysis of the work by incorporating other’s discussion points as well as your own probing questions. You will receive feedback each time you lead discussion to help you improve.
 *	Written Discussion Points: For each assigned reading you will post a discussion question or comment on the Course Site at least 24 hours in advance of the class. These posts will form the basis of our discussion. These posts should not involve clarification questions, but should focus on one of the following:
 ..*	Critical Evaluation. Critiquing the arguments, methods, assumptions, or conclusions of the authors;
 ..*	Implications. Relate the findings to the broader world, or generate a novel experimental prediction based on the findings;
 ..*	Integration/Synthesis. Draw connections between the present reading and other ideas or readings, highlighting points of agreement or conflict.
-*	Assignment 1 – Representations, Databases, and Software: Based on classes 2 and 3 (see Schedule below), Assignment 1 provides the opportunity to demonstrate knowledge of (i) audio and symbolic representations of music, (ii) some databases from which representations of a song/piece of your choice can be acquired, and (iii) software for manipulating those representations in order to visualize them in the PatternViewer program.
-*	Assignment 2 – Web-based Essay: Based on your developing Web programming skills and course reading/research to date (beginning of March), Assignment 2 provides the opportunity to write an essay (1,000 words maximum) on one of the following topics:
+*	Assignment 1 - Representations, Databases, and Software: Based on classes 2 and 3 (see Schedule below), Assignment 1 provides the opportunity to demonstrate knowledge of (i) audio and symbolic representations of music, (ii) some databases from which representations of a song/piece of your choice can be acquired, and (iii) software for manipulating those representations in order to visualize them in the PatternViewer program.
+*	Assignment 2 - Web-based Essay: Based on your developing Web programming skills and course reading/research to date (beginning of March), Assignment 2 provides the opportunity to write an essay (1,000 words maximum) on one of the following topics:
 ..*	“Top 10” music databases, including links, descriptions, and justification of rank;
 ..*	Exposition of 1 book, 1 patent, or 2 papers;
 ..*	Original empirical research proposal;
@@ -59,13 +59,13 @@ Attendance at Music and Mind Spring Talk Series............5%
 ..*	Glossary of terms from music computing and psychology;
 ..*	Annotated bibliography;
 ..*	Topic of your own devising, by arrangement.
-*	Assignment 3 – Web-based Demo: Based on what you have learnt in the course to date (just after Spring Break), Assignment 3 provides the opportunity to develop a Web-based demo of a music-psychological phenomenon or an interface that does or encapsulates something related to one of the topics we have covered. You will be assessed on the time and effort that goes into making the demo, how well you present and explain it and its construction in the last-but-one class of semester, and my appraisal of the demo’s overall quality. Assignments of sufficient quality may be published, with your permission and under your authorship, at http://tomcollinsresearch.net
+*	Assignment 3 - Web-based Demo: Based on what you have learnt in the course to date (just after Spring Break), Assignment 3 provides the opportunity to develop a Web-based demo of a music-psychological phenomenon or an interface that does or encapsulates something related to one of the topics we have covered. You will be assessed on the time and effort that goes into making the demo, how well you present and explain it and its construction in the last-but-one class of semester, and my appraisal of the demo’s overall quality. Assignments of sufficient quality may be published, with your permission and under your authorship, at http://tomcollinsresearch.net
 *	Attendance at Music and Mind Spring Talk Series: The second half of semester sees 3 speakers present at Lehigh on the theme of “music and mind”. If you attend all 3 talks, you will receive 3 credits. To receive the final 2 allotted credits, you should ask one speaker an informed question in the open discussion session that follows his/her talk.
 
 ## Grading
 Grades will be based on the following points system:
-A = 94–100; A- = 90–93; B+ = 87–89; B = 84–86; B- = 80–83; C+ = 77–79; C = 74–76;
-C- = 70–73; D+ = 67–69; D = 64–66; D- = 60–63; F = 59 and below.
+A = 94-100; A- = 90-93; B+ = 87-89; B = 84-86; B- = 80-83; C+ = 77-79; C = 74-76;
+C- = 70-73; D+ = 67-69; D = 64-66; D- = 60-63; F = 59 and below.
 
 ## Course Policies
 Course Site and GitHub: This course will make use of both a Course Site (https://coursesite.lehigh.edu) and, to help teach the principles of version control, a GitHub repository (https://github.com/tomthecollins/mcp). Version control helps people to work on the same (coding) project simultaneously.
@@ -111,16 +111,16 @@ The following list is roughly in the order in which you should read the items. W
 | ------- | -------------------- | ------------- |
 | 1. 1/26/17, KK | Syllabus Overview and Web-based Music Demos (Tone.js, NexusUI, and VexFlow) | Deutsch (1980), Deutsch, Henthorn, and Lapidis (2011) |
 | | Coding: HTML, JavaScript, and PHP | |
-| 2. 2/1/17, CC | Audio Representations of Music | Ch. 1 of Deutsch, Collins (2011, pp. 327–340) |
+| 2. 2/1/17, CC | Audio Representations of Music | Ch. 1 of Deutsch, Collins (2011, pp. 327-340) |
 | | Coding: Signal processing in Matlab and Tone.js; Audacity and Sonic Visualiser | |
 
 Class. Date, Leader	Class Topics	Reading Requirements and Deadlines
 1. 1/26/17, KK	Syllabus Overview and Web-based Music Demos (Tone.js, NexusUI, and VexFlow)	Deutsch (1980), Deutsch, Henthorn, and Lapidis 
 	Coding: HTML, JavaScript, and PHP	(2011)
 2. 2/1/17,	Audio Representations of Music	Ch. 1 of Deutsch
-CC	Coding: Signal processing in Matlab and Tone.js; Audacity and Sonic Visualiser	Collins (2011, pp. 327–340)
+CC	Coding: Signal processing in Matlab and Tone.js; Audacity and Sonic Visualiser	Collins (2011, pp. 327-340)
 3. 2/9/17,	Symbolic Representations of Music	Ch. 6 of Deutsch
-LM	Coding: MuseScore, MCStylistic, and PattDisc	Collins (2011, pp. 341–366)
+LM	Coding: MuseScore, MCStylistic, and PattDisc	Collins (2011, pp. 341-366)
 4. 2/16/17,	Pitch	Ch. 4 and 5 of Deutsch
 SC	Coding: PatternViewer toward Assignment 1 and/or student-led	Shepard (1964)
 5. 2/23/17,	Automatic Generation of Music	Ch. 8 of Deutsch
@@ -149,16 +149,16 @@ Collins, Artz, Frostel, and Widmer (2016)
 4/6/2017 at 4.10 pm	Music and Mind Spring Talk Series II
 (Tom Collins)	Location TBC
 11. 4/13/17,
-KK	Musical Expectation I	Ch. 1–6 of Huron
+KK	Musical Expectation I	Ch. 1-6 of Huron
 12. 4/20/17,
-SC	Musical Expectation II	Ch. 7–11 of Huron
+SC	Musical Expectation II	Ch. 7-11 of Huron
 Müllensiefen and Halpern (2014)
 4/20/17 at 4.10 pm	Music and Mind Spring Talk Series III
 (Andrea Halpern)	Location TBC
 13. 4/27/17,	Presentations	
 5/1/17 at 12 noon		Assignment 3 due
 14. 5/4/17,
-LM	Musical Expectation III	Ch. 12–17 of Huron
+LM	Musical Expectation III	Ch. 12-17 of Huron
 
 
 Acknowledgments: With thanks to Dr. Carlisle for help with course design.
