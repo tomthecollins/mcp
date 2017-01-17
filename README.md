@@ -41,10 +41,11 @@ Attendance at Music and Mind Spring Talk Series............5%
 ```
 
 *	Participation in Class Discussion: This is a discussion-based course. At each class, it is expected you will participate in the discussion (which requires regular attendance). Participation includes asking for clarification on any aspects of the readings you did not understand, as well as making more in-depth comments about the broader meaning of the work. For each paper, you should be prepared to answer the following questions (and should expect to be called on to do so!):
-..+	What was the goal of the paper? (research question or hypothesis)
-..+	How did they address the goal? (specific methods and statistical analyses)
-..+	What did they find? (results)
-..+	What did they conclude? (specific conclusions and broader implications)
+
+..*	What was the goal of the paper? (research question or hypothesis)
+..*	How did they address the goal? (specific methods and statistical analyses)
+..*	What did they find? (results)
+..*	What did they conclude? (specific conclusions and broader implications)
 *	Leading Class Discussion: For each class that you are assigned as discussion leader (see initials in Schedule below), it will be your responsibility to keep the conversation moving. You will get access to your peer’s written discussion points shortly after they are due, and you can use these to engage your fellow students in exchanging ideas and views. You will receive your grade based on whether you keep the discussion moving, actively engage all members of the group, move through the main points of the paper (described in the above section), and guide deeper analysis of the work by incorporating other’s discussion points as well as your own probing questions. You will receive feedback each time you lead discussion to help you improve.
 *	Written Discussion Points: For each assigned reading you will post a discussion question or comment on the Course Site at least 24 hours in advance of the class. These posts will form the basis of our discussion. These posts should not involve clarification questions, but should focus on one of the following:
 ..*	Critical Evaluation. Critiquing the arguments, methods, assumptions, or conclusions of the authors;
@@ -52,7 +53,7 @@ Attendance at Music and Mind Spring Talk Series............5%
 ..*	Integration/Synthesis. Draw connections between the present reading and other ideas or readings, highlighting points of agreement or conflict.
 *	Assignment 1 - Representations, Databases, and Software: Based on classes 2 and 3 (see Schedule below), Assignment 1 provides the opportunity to demonstrate knowledge of (i) audio and symbolic representations of music, (ii) some databases from which representations of a song/piece of your choice can be acquired, and (iii) software for manipulating those representations in order to visualize them in the PatternViewer program.
 *	Assignment 2 - Web-based Essay: Based on your developing Web programming skills and course reading/research to date (beginning of March), Assignment 2 provides the opportunity to write an essay (1,000 words maximum) on one of the following topics:
-..*	“Top 10” music databases, including links, descriptions, and justification of rank;
+??*	“Top 10” music databases, including links, descriptions, and justification of rank;
 ..*	Exposition of 1 book, 1 patent, or 2 papers;
 ..*	Original empirical research proposal;
 ..*	Profile (Wikipedia-style) of 2 figures from music computing and psychology;
@@ -81,7 +82,8 @@ General Considerations:
 
 Deadlines: No work will be accepted after the due date. If you have an emergency that means you will not be able to complete an assignment on time, you need to contact Dr. Collins before the due date to discuss the possibility of an extension. It is up to Dr. Collins’ discretion to provide an extension, and there is no guarantee that one will be granted. 
 
-## Accommodations for Students with Disabilities: If you have a disability for which you are or may be requesting accommodations, please contact both your instructor and the Office of Academic Support Services, University Center C212 (610-758-4152) as early as possible in the semester.  You must have documentation from the Academic Support Services office before accommodations can be granted.
+## Accommodations for Students with Disabilities
+If you have a disability for which you are or may be requesting accommodations, please contact both your instructor and the Office of Academic Support Services, University Center C212 (610-758-4152) as early as possible in the semester.  You must have documentation from the Academic Support Services office before accommodations can be granted.
 
 ## Required Reading
 The following list is roughly in the order in which you should read the items. We will use two books, referred to on the Schedule overleaf as “Deutsch” and “Huron”. The first, Deutsch (2013), is a general guide to music psychology, consisting of chapters contributed by different experts in the field, and so we will use this to help place specific research papers in their broader context. The second, Huron (2006), concerns the topic of musical expectancy, which we will discuss toward the end of semester, and so you may wish to begin reading it now to avoid cramming. The first two books listed below are optional reading. They are very accessible, and so ideal if you are a novice in music psychology (read Levitin, 2007), music computing (read Loy, 2006), or both!
