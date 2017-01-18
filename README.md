@@ -12,7 +12,7 @@ Office Hours: Friday 1:10-4:00 pm
 
 ##### Table of Contents
 [Course Overview](#course-overview)  
-[Course Goals](#course-goals)  
+[Learning Objectives](#learning-objectives)  
 [Methods of Assessment](#methods-of-assessment)  
 [Grading](#grading)  
 [Course Policies](#course-policies)  
@@ -29,7 +29,7 @@ Classes will start with a discussion of one or more chapters/papers (1-1.5 hrs),
 
 As a seminar course, the entire class is responsible for reading the assigned materials closely and thoughtfully before each meeting. Assessment of performance is designed to reward students who come to class prepared to ask questions, raise issues, and generally contribute to the discussion.
 
-## Course Goals
+## Learning Objectives
 Upon successful completion of this course, students will be able to: 
 * Discuss findings/achievements associated with the fields of music psychology and music computing, both broadly and in detail, and displaying knowledge of benefits and limitations of the techniques via which findings/achievements were realized.
 *	Adapt existing code or write their own in order to process music representations and publish interactive Web pages.
