@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Mic analysis</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="icon" type="image/png" sizes="174x174" href="http://tonejs.org/examples/style/favicon.png">
+		<script type="text/javascript" src="./../../../lib/Tone.js"></script>
+		<script type="text/javascript" src="./../../../lib/jquery.min.js"></script>
+		<script type="text/javascript" src="./../../../lib/draggabilly.js"></script>
+		<script type="text/javascript" src="./../../../lib/Interface.js"></script>
+		<script type="text/javascript" src="https://tonejs.github.io/Logo/build/Logo.js"></script>
+		<link rel="stylesheet" type="text/css" href="./../../../lib/examples.css">
+	</head>
+	<body>
+		<style type="text/css">
+			canvas {
+				width: 100%;
+				height: 300px;
+				background-color: black;
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
+			}
+		</style>
+		<div id="Content" class="FullScreen">
+			<div id="Title">Mic analysis</div>
+			<div id="Explanation">
+				Press the Start Mic button, make some high and low noises, and see what
+    happens in the interface.
+			</div>
+			<script type="text/javascript">
+				// Probably don't connect the microphone directly to the master output
+				// because of feedback.
+				var mic = new Tone.UserMedia();
+    // var mic = new Tone.Microphone();
+				// mic.sync(0);
+				var analyser = new Tone.Analyser({
+					"type" : "fft",
+					"size" : 256
+				});
+				console.log('analyser:', analyser);
+				mic.connect(analyser);
+    var Fs;
+			</script>
+			<script id="GUI" type="text/javascript">
+				$(function(){
+					// Indicate if the microphone is supported or not
+					if (!Tone.UserMedia.supported){
+						$("<div>", {
+							"id" : "NotSupported",
+							"text" : "getUserMedia is not supported by your browser."
+						}).appendTo("#Content");
+					}
+					else {
+						// mic.open(function(){
+      
+      // Draw the power spectra as they come in.
+      var canvas = $("<canvas>").appendTo("#Content");
+      var context = canvas.get(0).getContext("2d");
+      context.canvas.width = canvas.width();
+      context.canvas.height = canvas.height();
+      function drawLoop(){
+       var canvasWidth = context.canvas.width;
+       var canvasHeight = context.canvas.height;
+       requestAnimationFrame(drawLoop);
+       context.clearRect(0, 0, canvasWidth, canvasHeight);
+       var values = analyser.analyse();
+       // Capture and log sampling rate (Fs).
+       if (Fs == undefined && mic._mediaStream !== null){
+        Fs = mic._mediaStream.context.sampleRate;
+        console.log('Fs:', Fs);
+       }
+       
+       context.beginPath();
+       // context.lineJoin = "round";
+       context.lineWidth = 6;
+       context.strokeStyle = "white";
+       // context.moveTo(0, (values[0] / 255) * canvasHeight);
+       for (var i = 1, len = values.length; i < len; i++){
+        var val = values[i] / 255;
+        var x = canvasWidth * Math.log(i) / Math.log(255);
+        var y = canvasHeight * (1 - val);
+        context.lineTo(x, y);
+       }
+       context.stroke();
+      }
+      drawLoop();
+      new Interface.Button({
+       type: "toggle",
+       text: "Start Mic",
+       activeText: "Stop Mic",
+       start: function(){
+        mic.open();
+       },
+       end: function(){
+        mic.close();
+       }
+      });
+						// });
+					}
+				});
+			</script>
+		</div>
+	</body>
+</html>

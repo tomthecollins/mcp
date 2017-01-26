@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)http://tonejs.org/examples/stepSequencer.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+	<title>Step sequencer</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<script type="text/javascript" src="./outdated_sources/Tone.js"></script>
+	<script type="text/javascript" src="./outdated_sources/jquery.min.js"></script>
+	<script type="text/javascript" src="./outdated_sources/Notone.GUI.js"></script>
+	<script type="text/javascript" src="./outdated_sources/Interface.js"></script>
+	<script type="text/javascript" src="./outdated_sources/nexusUI.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="./outdated_sources/examples.css">
+
+	<script type="text/javascript">
+		// jshint ignore: start
+	</script>
+
+</head>
+<body>
+	<div id="Content" class="FullScreen">
+		<div id="Title">Step sequencer</div>
+		<div id="Explanation">
+			See how Tone.js and NexusUI can be combined.
+		</div>
+		<canvas nx="matrix" id="matrix1" height="500" width="2102"</canvas>
+	<script type="text/javascript">
+		//setup a polyphonic sampler
+		var keys = new Tone.PolySynth(4, Tone.Sampler, {
+			"bass_drum" : "https://dl.dropboxusercontent.com/u/11997856/samples/20150810/unpitched_percussion/drum_kits/drum_kit_1/bass_drum_mf.wav",
+			"snare" : "https://dl.dropboxusercontent.com/u/11997856/samples/20150810/unpitched_percussion/drum_kits/drum_kit_1/snare_mf.wav",
+			"hi-hat_closed" : "https://dl.dropboxusercontent.com/u/11997856/samples/20150810/unpitched_percussion/drum_kits/drum_kit_1/hi-hat_closed_mf.wav",
+			"ride" : "https://dl.dropboxusercontent.com/u/11997856/samples/20150810/unpitched_percussion/drum_kits/drum_kit_1/ride_cymbal_mf.wav",
+		}, {
+			"envelope" : {
+				"release" : 0.2
+			}
+		}).toMaster();
+		keys.volume.value = -5;
+
+		//keep track of steps and notes
+		var stepNumber = 0;
+		var noteNames = ["bass_drum", "snare", "hi-hat_closed", "ride"];
+
+		//the repeated callback
+		Tone.Transport.setInterval(function(time){
+			//get the notes at the step
+			var column = matrix1.matrix[stepNumber];
+			for (var i = 0; i < 4; i++){
+				if (column[i] === 1){
+					keys.triggerAttackRelease(noteNames[i], "32n", time);
+				}
+			}
+			stepNumber++;
+			stepNumber = stepNumber % 16;
+		}, "16n");
+
+		//transport settings
+		Tone.Transport.loopEnd = "1m";
+		Tone.Transport.loop = true;
+	</script>
+	<script type="text/javascript">
+		nx.onload = function(){
+			nx.colorize("#f5871f");
+			
+			matrix1.col = 16;
+			matrix1.init();
+			matrix1.resize($("#Content").width(), 250);
+			matrix1.draw();
+		}
+
+		$(function(){
+
+			new Interface.Slider({
+				name : "BPM",
+				min : 80,
+				max : 200,
+				value : Tone.Transport.bpm.value,
+				drag : function(val){
+					Tone.Transport.bpm.value = val;
+				}
+			});
+
+			new Interface.Button({
+				text : "Start",
+				activeText : "Stop",
+				type : "toggle",
+				key : 32, //spacebar
+				start : function(){
+					Tone.Transport.start();
+				},
+				end : function(){
+					Tone.Transport.stop();
+				},
+			});
+
+			$(window).on("resize", function(){
+				matrix1.resize($("#Content").width(), 250);
+				matrix1.draw();	
+			});
+		});
+	</script>
+
+</body></html>
