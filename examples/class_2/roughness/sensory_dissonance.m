@@ -29,7 +29,7 @@ ampthresh = 1e-9;
 nfft = 4096;
 
 % Load the wav file and create the amplitude vector to be tested, tfl.
-[snd, Fs, ~] = wavread(fName);
+[snd, Fs, ~] = audioread(fName);
 siz = size(snd);
 % len = siz(1)/Fs;
 tfl = snd(1:siz(1), 1);
