@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://tonejs.org/examples/score.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+	<title>Synth</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<script type="text/javascript" src="./../../../lib/Tone.js"></script>
+	<script type="text/javascript" src="./../../../lib/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="./../../../lib/Notone.GUI.js"></script>-->
+	<!--<link rel="stylesheet" type="text/css" href="./../../../lib/style.css">-->
+	<script type="text/javascript" src="./../../../lib/Interface.js"></script>
+	<link rel="stylesheet" type="text/css" href="./../../../lib/examples.css">
+	<script type="text/javascript">
+		// jshint ignore: start
+	</script>
+
+</head>
+<body>
+	<div id="Content">
+		<script id="ToneCode" type="text/javascript">
+			// Define a synthesizer.
+			var synth_bass = new Tone.PolySynth(4, Tone.MonoSynth, {
+				"volume" : -10,
+				"envelope" : {
+						"attack" : 0.1,
+						"decay" : 0.3,
+						"release" : 2,
+				},
+				"filterEnvelope" : {
+						"attack" : 0.01,
+						"decay" : 0.1,
+						"sustain" : 0.5,
+						"min" : 200,
+						"max" : 1200
+				}
+			}).toMaster();
+			
+   // Include some notes in a part.
+   var part_bass = new Tone.Part(function(time, value){
+    // The notes given as the second element in the array
+    // will be passed in as the second argument.
+    synth_bass.triggerAttackRelease(value.note, value.duration, time, value.velocity);
+   },
+   [
+    {
+     "time": "0:1:1",
+     "note": "G4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+		{
+     "time": "0:1:3",
+     "note": "G4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "0:2",
+     "note": "G4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "0:3",
+     "note": "Eb4",
+     "duration": "1",
+     "velocity": 0.4
+    },
+
+		{
+     "time": "1:1:1",
+     "note": "F4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+		{
+     "time": "1:1:3",
+     "note": "F4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "1:2",
+     "note": "F4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "1:3",
+     "note": "D4",
+     "duration": "1",
+     "velocity": 0.95
+		},
+		{
+     "time": "2:1:1",
+     "note": "G4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+		{
+     "time": "2:1:3",
+     "note": "G4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "2:2:1",
+     "note": "G4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "2:2:3",
+     "note": "Eb4",
+     "duration": "8n",
+     "velocity": 0.95
+		},
+		{
+     "time": "2:3:1",
+     "note": "Ab4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "2:3:3",
+     "note": "Ab4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "2:4:1",
+     "note": "Ab4",
+     "duration": "8n",
+     "velocity": 0.95
+		},
+		 {
+     "time": "2:4:3",
+     "note": "G4",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+		{
+     "time": "3:1:1",
+     "note": "Eb5",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "3:1:3",
+     "note": "Eb5",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+		{
+     "time": "3:2:1",
+     "note": "Eb5",
+     "duration": "8n",
+     "velocity": 0.4
+    },
+    {
+     "time": "3:2:3",
+     "note": "C5",
+     "duration": "1",
+     "velocity": 0.95
+    },
+		    {
+     "time": "3:2:3",
+     "note": "G4",
+     "duration": "1",
+     "velocity": 0.95
+    },
+		    {
+     "time": "3:2:3",
+     "note": "Eb4",
+     "duration": "1",
+     "velocity": 0.95
+    },
+		    {
+     "time": "3:2:3",
+     "note": "C4",
+     "duration": "1",
+     "velocity": 0.95
+    },
+
+   ]);
+   part_bass.start(0);
+   part_bass.loop = true;
+   part_bass.loopEnd = "6m";
+   
+   // Set tempo and overall transport loop points.
+			Tone.Transport.bpm.value = 120;
+			Tone.Transport.setLoopPoints(0, "2m");
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				//Notone.config({
+				//	"search" : false,
+				//	"expandInDrawer" : true,
+				//	"hideDrawer" : Interface.isMobile,
+				//	"drawer" : true,
+				//	"container" : "body"
+				//});
+				
+				new Interface.Button({
+					key : 32,
+					type : "toggle",
+					text : "Start",
+					activeText : "Stop",
+					start : function(){
+						Tone.Transport.start();
+					},
+					end : function(){
+						Tone.Transport.stop();
+					}
+				});
+			});
+		</script>
+	</div>
+</body>
+</html>
