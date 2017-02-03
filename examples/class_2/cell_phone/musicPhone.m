@@ -1,10 +1,10 @@
 
-dest = fullfile('/home', 'tommyc', 'projects', 'nancySignalProcessing');
+dest = fullfile('.');
 % Load music excerpt.
-[y, Fsy] = wavread(fullfile(dest, 'liberaMePerf.wav'));
+[y, Fsy] = audioread(fullfile(dest, 'liberaMePerf.wav'));
 y = y(:, 1); % Just left channel.
 % Load ringtone.
-[x, Fsx] = wavread(fullfile(dest, 'cellPhone2.wav'));
+[x, Fsx] = audioread(fullfile(dest, 'cellPhone2.wav'));
 
 % Superpose some of the cell phone on the music excerpt.
 z = y;
@@ -12,7 +12,7 @@ Fsz = Fsy;
 z(176401:210400, 1) = z(176401:210400, 1) + x(1:34000, 1);
 plot(z);
 
-wavwrite(z, Fsy, fullfile(dest, 'corrupt.wav'))
+audiowrite(fullfile(dest, 'corrupt.wav'), z, Fsy)
 
 % Fourier transform of corrupted signal.
 L = 34000; % Length of signal.
@@ -45,6 +45,6 @@ y_hat = [z(1:176400); y_hat_insert; z(210401:end)];
 y_hat = [z(1:176400); y_hat_insert(1:L); z(210401:end)];
 plot(y_hat)
 % Save to wav file.
-wavwrite(y_hat, Fsy, fullfile(dest, 'uncorrupt.wav'));
+audiowrite(fullfile(dest, 'uncorrupt.wav'), y_hat, Fsy);
 
 
