@@ -1,0 +1,23 @@
+<question number="001" music_file="tallis-love.xml" divisions="1">
+    <text>perfect cadence</text>
+</question>
+
+<question number="002" music_file="tallis-love.xml" divisions="1">
+    <text>authentic cadence</text>
+</question>
+
+<question number="003" music_file="tallis-love.xml" divisions="1">
+    <text>homophony</text>
+</question>
+
+<question number="004" music_file="tallis-love.xml" divisions="2">
+    <text>dotted crotchet G</text>
+</question>
+
+<question number="005" music_file="tallis-love.xml" divisions="1">
+    <text>two melodic unisons then a melodic rising third</text>
+</question>
+
+<question number="006" music_file="tallis-love.xml" divisions="1">
+    <text>word "love"</text>
+</question>

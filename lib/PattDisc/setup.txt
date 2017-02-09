@@ -1,0 +1,37 @@
+PattDisc-Jun2014
+
+Copyright 2014 Tom Collins. See copying.txt for licence details.
+
+
+PattDisc-Jun2014 supports research into the discovery of repeated patterns within and across pieces of music. It accompanies the publications:
+
+Tom Collins, Andreas Arzt, Sebastian Flossmann, and Gerhard Widmer. SIARCT-CFP: improving precision and the discovery of inexact musical patterns in point-set representations. In Alceu S. Britto Jr, Fabien Gouyon, and Simon Dixon (Eds), Proceedings of the International Symposium on Music Information Retrieval, in press, Curitiba, 2013. International Society for Music Information Retrieval.
+
+Tom Collins. Improved methods for pattern discovery in music, with applications in automated stylistic composition. PhD thesis, Faculty of Mathematics, Computing and Technology, The Open University, 2011. Available from http://oro.open.ac.uk/30103/
+
+Tom Collins, Jeremy Thurlow, Robin Laney, Alistair Willis, and Paul H. Garthwaite. A comparative evaluation of algorithms for discovering translational patterns in Baroque keyboard works. In J. Stephen Downie and Remco Veltkamp (Eds), Proceedings of the International Symposium on Music Information Retrieval, pages 3-8, Utrecht, 2010. International Society for Music Information Retrieval.
+
+If you use this code or the data in your own work, please cite one of the above papers or thesis.
+
+To begin using the functions and scripts in a Matlab environment, place the downloaded folder at a convenient location and open the demo script exampleRunSIARCT_CFP_sectn_motif.m (in PattDisc-Jun2014 -> examples). Paths are set in lines 46-50 and will need to match your chosen location.
+
+The pattern discovery algorithms at the heart of this package are implemented as the functions SIA.m, SIAR.m, SIACT.m, SIARCT.m, and SIARCT-CFP.m, and SIARCT_CFP_sectn_motif.m. The script exampleRunSIARCT_CFP_sectn_motif.m runs SIARCT_CFP_sectn_motif on five pieces, saves the output, and then evaluates this output according to metrics set out in the 2013 Music Information Retrieval Evaluation EXchange task on Discovery of Repeated Themes and Sections:
+
+http://www.music-ir.org/mirex/wiki/2013:Discovery_of_Repeated_Themes_%26_Sections
+
+Those wishing for more details should begin with the above papers, and a straightforward function such as maximalTranslatablePattern.m. Each function is accompanied by an explanation and some come with commented-out examples.
+
+The following references may also be helpful.
+
+Andreas Arzt, Sebastian Böck, and Gerhard Widmer. Fast identification of piece and score position via symbolic fingerprinting. In F. Gouyon, P. Herrera, L.G. Martin, and M. Müller (Eds), Proceedings of the International Symposium on Music Information Retrieval, pp. 433-438, Porto, 2012. International Society for Music Information Retrieval.
+
+Tom Collins, Robin Laney, Alistair Willis, and Paul H. Garthwaite. Modeling pattern importance in Chopin's mazurkas. Music Perception, 28(4):387-414, 2011.
+
+David Meredith, Kjell Lemstrom, and Geraint A. Wiggins. Algorithms for discovering repeated patterns in multidimensional representations of polyphonic music. Journal of New Music Research, 31(4):321-345, 2002.
+
+Esko Ukkonen, Kjell Lemstrom, and Veli Makinen. Geometric algorithms for transposition invariant content-based music retrieval. In Holger H. Hoos and David Bainbridge (Eds), Proceedings of the International Symposium on Music Information Retrieval, pages 193-99, Baltimore, MD, 2003. International Society for Music Information Retrieval.
+
+
+Tom Collins,
+Leicester, home of Gary Lineker and Richard III,
+June 2014

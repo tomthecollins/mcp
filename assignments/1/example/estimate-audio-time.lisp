@@ -1,0 +1,105 @@
+#| Copyright Tom Collins 2/9/2017.
+
+Script for loading a symbolic version of a piece, as
+well as the audio_time_to_symbolic_time information,
+and outputting a new file that contains the symbolic
+version of the piece and an extra column for the
+estimated audio time. |#
+
+#| Set some paths. |#
+(setq
+ *music-data-root*
+ (make-pathname
+  :directory
+  '(:absolute
+     "Users" "tomthecollins" "Shizz" "repos" "mcp"
+     "assignments" "1")))
+(setq
+ *path&name*
+ (merge-pathnames
+  (make-pathname
+   :directory
+   '(:relative
+     "example"))
+  *music-data-root*))
+(setq *piece-name* "Fantaisie-impromptu_Op.66_-_Chopin")
+(setq *synch-name* "Fantaisie-impromptu_Op.66_-_Chopin_synch")
+
+#| Symbolic version, bar2beat, and
+audioTime2symbolicTime information. |#
+(setq
+ symbolic-source
+ (merge-pathnames
+  (make-pathname
+   :name *piece-name* :type "mid") *path&name*))
+(setq
+ audioTime2symbolicTime-source
+ (merge-pathnames
+  (make-pathname
+   :name "silverswan_audio_time_to_symbolic_time"
+   :type "mid") *path&name*))
+(setq
+ dataset-destination
+ (merge-pathnames
+  (make-pathname
+   :name *synch-name* :type "txt") *path&name*))
+(setq
+ dataset-destination
+ (merge-pathnames
+  (make-pathname
+   :name *synch-name* :type "txt") *path&name*))
+(setq
+ csv-destination
+ (merge-pathnames
+  (make-pathname
+   :name *synch-name* :type "csv") *path&name*))
+
+#| Read in the symbolic version of the piece. |#
+(progn
+  (setq
+   dataset
+   (load-midi-file symbolic-source))
+  "Yes!")
+
+#| Read in audioTime2symbolicTime information. |#
+(progn
+  (setq
+   as-info-raw
+   (load-midi-file audioTime2symbolicTime-source))
+  "Yes!")
+#| Create a list of knot-value pairs. |#
+(progn
+  (setq
+   knot-value-pairs
+   (loop for i from 0 to (- (length as-info-raw) 1)
+     collect
+     (list
+      (+ i 1) (float (first (nth i as-info-raw))))))
+  "Yes!")
+
+#| Estimate the onsets and offsets. |#
+(progn
+  (setq
+   on-est
+   (linearly-interpolate-x-values
+    (nth-list-of-lists 0 dataset) knot-value-pairs))
+  (setq
+   off-est
+   (linearly-interpolate-x-values
+    (add-two-lists
+     (nth-list-of-lists 0 dataset)
+     (nth-list-of-lists 3 dataset)) knot-value-pairs))
+  (setq
+   dataset-synch
+   (mapcar
+    #'(lambda (x y z)
+        (append x (list y) (list z)))
+    dataset on-est off-est))
+  "Yes!")
+
+#| Now write the symbolic-audio synchronised version
+of the piece to text and csv files as usual. |#
+(progn
+  (write-to-file
+   dataset-synch dataset-destination)
+  (dataset2csv dataset-synch csv-destination))

@@ -1,0 +1,35 @@
+!!!COM: Chopin, Frederic
+!!!CDT: 1810///-1849///
+!!!OTL: Mazurka in F-sharp Minor, Op. 6, No. 1
+!!!OPS: Op. 6
+!!!ONM: No. 1
+!!!ODT: 1830///-1832///
+!!!PDT: 1832///-1833///
+!!!PPP: Leipzig (1832); Paris (1833) and London
+!!!ODE: Pauline Plater
+**kern	**kern	**dynam
+*thru	*thru	*thru
+*staff2	*staff1	*staff1/2
+*Ipiano	*Ipiano	*Ipiano
+*>A	*>A	*>A
+*clefF4	*clefG2	*clefG2
+*k[f#c#g#]	*k[f#c#g#]	*k[f#c#g#]
+*f#:	*f#:	*f#:
+*M3/4	*M3/4	*M3/4
+*MM132	*MM132	*MM132
+4r	([4f#^/	p
+=1	=1	=1
+4CC#/	12f#_/L	.
+.	12f#/]	.
+.	12f#/J	.
+4C#\ 4G#\ 4B\	8e#/L	<
+.	8f#/	.
+4C#\ 4E#\ 4B\	8..g#/	.
+.	32d/Jk	.
+=2	=2	=2
+*	*^	*
+4FF#/	8c#/L)	4r	.
+.	16r	.	.
+.	(16f#/Jk	.	.
+4F#\ 4c#\	4a/)	4r	.
+4F#\ 4c#\	([4a^/	[4f#\	.
