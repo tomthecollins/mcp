@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sonic-visualiser>
+<sv>
+  <data>
+    <model id="2" name="Pixies __ Where Is My Mind.wav: Beats" sampleRate="44100" start="8192" end="654848" type="sparse" dimensions="1" resolution="512" notifyOnAdd="true" dataset="1" />
+    <dataset id="1" dimensions="1">
+      <point frame="8192" label="3" />
+      <point frame="40960" label="4" />
+      <point frame="72704" label="1" />
+      <point frame="105472" label="2" />
+      <point frame="136704" label="3" />
+      <point frame="169984" label="4" />
+      <point frame="201216" label="1" />
+      <point frame="234496" label="2" />
+      <point frame="267264" label="3" />
+      <point frame="299008" label="4" />
+      <point frame="330752" label="1" />
+      <point frame="363520" label="2" />
+      <point frame="394752" label="3" />
+      <point frame="427520" label="4" />
+      <point frame="459264" label="1" />
+      <point frame="492544" label="2" />
+      <point frame="525824" label="3" />
+      <point frame="557568" label="4" />
+      <point frame="589824" label="1" />
+      <point frame="622592" label="2" />
+      <point frame="654848" label="3" />
+    </dataset>
+  </data>
+  <display>
+    <layer id="0" type="timeinstants" name="Beats" model="2"  plotStyle="0" colourName="Purple" colour="#c832ff" darkBackground="false" />
+  </display>
+</sv>

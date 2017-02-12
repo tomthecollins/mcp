@@ -60,6 +60,21 @@ audioTime2symbolicTime information. |#
    dataset
    (load-midi-file symbolic-source))
   "Yes!")
+; Round up durations because they are annoying!
+(progn
+  (setq
+   dataset
+   (mapcar
+    #'(lambda (x)
+        (append
+         (firstn 2 x)
+         (list (+ (third x) 1/480))
+         (lastn 2 x)))
+    dataset))
+   "Yes!")
+
+
+#| Needs work from here. |#
 
 #| Read in audioTime2symbolicTime information. |#
 (progn
