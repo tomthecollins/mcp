@@ -6,7 +6,7 @@ direction = {'up' 'down'};
 centerFreq = 261.6255653005986;
 nTone = 12;
 nRepeat = 4;
-location = fullfile('.');
+location = fullfile('wavFiles');
 shepardTones(tempo, durPercent, direction, centerFreq, nTone, nRepeat,...
              location);
 
