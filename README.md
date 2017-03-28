@@ -137,16 +137,16 @@ The following list is roughly in the order in which you should read the items. W
 | | Coding: Toward Assignment 2 and/or student-led | |
 | 3/13/17 | Spring Break | |
 | 3/20/17 at 12 noon | | Assignment 2 due |
-| 3/20/17 at 4 pm |	Music and Mind Spring Talk Series I (Alison Fromm) |	Location TBC |
+| 3/20/17 at 4 pm |	Music and Mind Spring Talk Series I (Alison Fromm) |	Baker Hall, Zoellner |
 | 8. 3/23/17, AK | Tonality | Ch. 7 of Deutsch, Krumhansl and Kessler (1982), Sapp (2005) |
 | | Coding: Coding hereafter is aimed toward Assignment 3 and/or student-led | |
 | 9. 3/30/17, CC | Fingerprinting (or "How Shazam Works") | Wang and Smith III (2006/2000), Arzt, B&ouml;ck, and Widmer (2012) |
 | 10. 4/6/17, TM | Repetition, Repetition, Repetition | Meredith, Lemstr&ouml;m, and Wiggins (2002), Collins, Artz, Frostel, and Widmer (2016) |
-| 4/6/17 at 4.10 pm |	Music and Mind Spring Talk Series II (Tom Collins) |	Location TBC |
+| 4/6/17 at 4.10 pm |	Music and Mind Spring Talk Series II (Tom Collins) |	STEPS 290 |
 | 11. 4/13/17, KK | Musical Expectation I | Ch. 1-6 of Huron |
 | 12. 4/20/17, SC | Musical Expectation II | Ch. 7-11 of Huron, M&uuml;llensiefen and Halpern (2014) |
-| 4/20/17 at 4.10 pm |	Music and Mind Spring Talk Series III (Andrea Halpern) |	Location TBC |
-| 13. 4/27/17, ?? | Presentations | |
+| 4/20/17 at 4.10 pm |	Music and Mind Spring Talk Series III (Andrea Halpern) |	STEPS 290 |
+| 13. 4/27/17, TC | Presentations | |
 | 5/1/17 at 12 noon | | Assignment 3 due |
 | 14. 5/4/17, LM | Musical Expectation III | Ch. 12-17 of Huron |
 
