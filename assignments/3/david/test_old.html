@@ -39,8 +39,6 @@
 				$(this).text("start");
 			}
 		});
-  
-
   //update the meters
 		//setInterval(function(){
 			//$("#left").text("left: " + outputMeter.getDb(0).toFixed(2) + " db");
@@ -99,60 +97,11 @@
   
   var i2 = $("#input2");
   i2.on("input", function(e){
-			var kilmer = $(this).val();
+			var val = $(this).val();
    console.log('pre-drag panner2 value:', panner2.pan);
-   panner2.pan.value = (kilmer - 50)/50;
+   panner2.pan.value = (val - 50)/50;
    console.log('post-drag panner2 value:', panner2.pan);
 		});
-  
-  // KeyEvents controlling pan.
-  var listener1 = undefined;
-  document.removeEventListener('keydown', listener1);
-  listener1 = function listener1(event) {
-   var keyCode = event.keyCode;
-   if (keyCode==65) {
-    panner1.pan.value = Math.max(panner1.pan.value - .1, -1);
-   }
-   if (keyCode==83) {
-    panner1.pan.value = Math.min(panner1.pan.value + .1, 1);
-   }
-   document.getElementById("input1").value = 50*(panner1.pan.value + 1);
-   console.log('panner1:', panner1.pan.value);
-  };
-  document.addEventListener('keydown', listener1);
-  
-  var listener2 = undefined;
-  document.removeEventListener('keydown', listener2);
-  listener2 = function listener2(event) {
-   var keyCode = event.keyCode;
-   if (keyCode==70) {
-    panner2.pan.value = Math.max(panner2.pan.value - .1, -1);
-   }
-   if (keyCode==71) {
-    panner2.pan.value = Math.min(panner2.pan.value + .1, 1);
-   }
-   document.getElementById("input2").value = 50*(panner2.pan.value + 1);
-   console.log('panner2:', panner2.pan.value);
-  };
-  document.addEventListener('keydown', listener2);
-  
-  var listener3 = undefined;
-  document.removeEventListener('keydown', listener3);
-  listener3 = function listener3(event) {
-   var keyCode = event.keyCode;
-   if (keyCode==74) {
-    panner3.pan.value = Math.max(panner3.pan.value - .1, -1);
-   }
-   if (keyCode==75) {
-    panner3.pan.value = Math.min(panner3.pan.value + .1, 1);
-   }
-   document.getElementById("input3").value = 50*(panner3.pan.value + 1);
-   console.log('panner3:', panner3.pan.value);
-  };
-  document.addEventListener('keydown', listener3);
-  
-  
-	
  </script>
  <br/><br/><br/><br/>
  
