@@ -111,11 +111,12 @@ Tone.Transport.setTimeline(function(time){
 
 var metronome2 = new Tone.NoiseSynth().toMaster();
 var metronome3 = new Tone.NoiseSynth().toMaster();
+metronome3.volume = -20;
 var xcrptBeats = [0.001, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 for (bti = 0; bti < xcrptBeats.length; bti++){
 	Tone.Transport.setTimeline(function(time){
 		metronome2.triggerAttackRelease(
-			0.15,
+			0.1,
 			time,
 			0.2);
 	}, xcrptBeats[bti]*60/Tone.Transport.bpm.value);

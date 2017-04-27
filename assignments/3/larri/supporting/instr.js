@@ -36,6 +36,7 @@ var kit = new Tone.PolySynth(6, Tone.Sampler, {
           //"G#2" : "./data/hi-hat_pedal_mf.wav",
           //"A#2" : "./data/hi-hat_open_mf.wav"
         }).toMaster();
+kit.volume = -10;
 
 Tone.Note.route("hello", function(time, note, duration, velocity){
   kit.triggerAttackRelease(note, duration, time, velocity);
