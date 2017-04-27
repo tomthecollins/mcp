@@ -10,7 +10,7 @@ var metronome = new Tone.PolySynth(1, Tone.Sampler, metronomeSamples, {
 metronome.volume.value = 0;
 
 
-var kit = new Tone.PolySynth(4, Tone.Sampler, {
+var kit = new Tone.PolySynth(6, Tone.Sampler, {
           "60" : "https://dl.dropboxusercontent.com/u/11997856/samples/20150810/unpitched_percussion/drum_kits/drum_kit_1/bass_drum_f.wav",
           "C#2" : "https://dl.dropboxusercontent.com/u/11997856/samples/20150810/unpitched_percussion/drum_kits/drum_kit_1/snare_drum_rim_mf.wav",
           "62" : "https://dl.dropboxusercontent.com/u/11997856/samples/20150810/unpitched_percussion/drum_kits/drum_kit_1/snare_mf.wav",

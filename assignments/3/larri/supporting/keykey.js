@@ -10,28 +10,51 @@ var noteOffs = [];
 function keyCodeToPitchClass(keyCode){
   // console.log('keyCode:', keyCode);
   var notes = {
-      65: 'Cl',
-      87: 'C#l',
-      83: 'Dl',
-      69: 'D#l',
-      68: 'El',
-      70: 'Fl',
-      84: 'F#l',
-      71: 'Gl',
-      89: 'G#l',
-      72: 'Al',
-      85: 'A#l',
-      74: 'Bl',
-      75: 'Cu',
-      79: 'C#u',
-      76: 'Du',
-      80: 'D#u',
-      59: 'Eu',
-      186: 'Eu',
-      222: 'Fu',
-      221: 'F#u',
-      220: 'Gu'
+      65: '60',
+      87: '60',
+      83: '60',
+      69: '60',
+      68: '60',
+      70: '60',
+      84: '60',
+      71: '62',
+      89: '62',
+      72: '62',
+      85: '62',
+      74: '62',
+      75: '62',
+      79: '62',
+      76: '62',
+      80: '62',
+      59: '62',
+      186: '62',
+      222: '62',
+      221: '62',
+      220: '62'
   };
+  //var notes = {
+  //    65: 'Cl',
+  //    87: 'C#l',
+  //    83: 'Dl',
+  //    69: 'D#l',
+  //    68: 'El',
+  //    70: 'Fl',
+  //    84: 'F#l',
+  //    71: 'Gl',
+  //    89: 'G#l',
+  //    72: 'Al',
+  //    85: 'A#l',
+  //    74: 'Bl',
+  //    75: 'Cu',
+  //    79: 'C#u',
+  //    76: 'Du',
+  //    80: 'D#u',
+  //    59: 'Eu',
+  //    186: 'Eu',
+  //    222: 'Fu',
+  //    221: 'F#u',
+  //    220: 'Gu'
+  //};
   // var noteToFrequency = Tone.prototype.noteToFrequency;
   var note = notes[keyCode];
   // console.log('note:', note);
@@ -40,7 +63,8 @@ function keyCodeToPitchClass(keyCode){
   }
   //var freq = ;
   // console.log(note.replace('l', octave).replace('u', octave + 1));
-  return note.replace('l', octave).replace('u', octave + 1);
+  // return note.replace('l', octave).replace('u', octave + 1);
+  return note;
   // return noteToFrequency(note.replace('l', octave).replace('u', octave + 1));
 };
 
@@ -73,7 +97,7 @@ function keyCode2MNNSimple(keyCode){
 
 var onKeyDown = function () {
   var listener = undefined;
-  return function (synth) {
+  return function (kit) {
     document.removeEventListener('keydown', listener);
     listener = function listener(event) {
         var keyCode = event.keyCode;
@@ -85,7 +109,7 @@ var onKeyDown = function () {
           console.log('playedPitch:', playedPitch);
           if (playedPitch) {
            keyboard1.toggle( keyboard1.keys[keyCode2MNNSimple(keyCode) - 60], true );
-           synth.triggerAttack(playedPitch);
+           kit.triggerAttack(playedPitch);
             
            prevKeyCode = keyCode;
            // Push it to the noteOns.
@@ -104,13 +128,13 @@ var onKeyDown = function () {
 var onKeyUp = function () {
   var listener = undefined;
   var prev = undefined;
-  return function (synth) {
+  return function (kit) {
     if (prev) {
      console.log('We got past the if prev!');
       prev.triggerRelease();
     }
     document.removeEventListener('keyup', listener);
-    prev = synth;
+    prev = kit;
     listener = function listener(event) {
       var keyCode2 = event.keyCode;
       if (keys[keyCode2]) {
@@ -119,7 +143,7 @@ var onKeyUp = function () {
         var playedPitch2 = keyCodeToPitchClass(keyCode2);
         console.log('playedPitch2:', playedPitch2);
         
-        synth.triggerRelease(playedPitch2);
+        kit.triggerRelease(playedPitch2);
         keyboard1.toggle( keyboard1.keys[keyCode2MNNSimple(keyCode2) - 60], false );
         
         //if (synth instanceof Tone.PolySynth) {
@@ -148,10 +172,10 @@ var onKeyUp = function () {
 //      octave = Math.min(octave + 1, 9);
 //  }
 //});
-(function () {
- var synth = new Tone.PolySynth(6, Tone.MonoSynth);
- synth.toMaster();
- synth.volume.value = -20;
- onKeyDown(synth);
- onKeyUp(synth);
-}());
+//(function () {
+ //var synth = new Tone.PolySynth(6, Tone.MonoSynth);
+ //synth.toMaster();
+ //synth.volume.value = -20;
+ onKeyDown(kit);
+ onKeyUp(kit);
+//}());

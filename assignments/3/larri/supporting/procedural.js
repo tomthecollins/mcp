@@ -17,7 +17,7 @@ function make_things_happen(){
 
 
 
-Tone.Transport.setTimeLine(function(time){
+Tone.Transport.setTimeline(function(time){
  
  // Log the current time.
  curr_time = time;
@@ -56,17 +56,17 @@ Tone.Transport.setTimeLine(function(time){
 
 
 // Collect what's been played and analyze it.
-Tone.Transport.schedule(function(time){
+Tone.Transport.setTimeline(function(time){
 	console.log('Do some analysis here!');
 	console.log('noteOns', noteOns);
  
 	var count_bass = 0;
 	var count_snare = 0;
 	noteOns.map(function(a){
-		if (a[1] == "G4"){ // Encodes snare hits.
+		if (a[1] == "62"){ // Encodes snare hits.
 			count_snare = count_snare + 1;
 		}
-		if (a[1] == "F4"){ // Encodes snare hits.
+		if (a[1] == "60"){ // Encodes bass hits.
 			count_bass = count_bass + 1;
 		}
 	});
@@ -90,11 +90,12 @@ Tone.Transport.schedule(function(time){
 		
 		// This chunk of code attempts to use a sample-based instrument.
 		kit.triggerAttackRelease(
-			0.25,
+			a.mnn.toString(),
+   0.25,
 			curr_time + ((a.ontime - 1)/4 + 16)*60/Tone.Transport.bpm.value,
 			0.8);
 		
-		
+  
 		// This chunk of code works but uses a synth instrument.
 		// metronome3.triggerAttackRelease(
 		// 	0.25,
@@ -112,9 +113,9 @@ var metronome2 = new Tone.NoiseSynth().toMaster();
 var metronome3 = new Tone.NoiseSynth().toMaster();
 var xcrptBeats = [0.001, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 for (bti = 0; bti < xcrptBeats.length; bti++){
-	Tone.Transport.schedule(function(time){
+	Tone.Transport.setTimeline(function(time){
 		metronome2.triggerAttackRelease(
-			0.25,
+			0.15,
 			time,
 			0.2);
 	}, xcrptBeats[bti]*60/Tone.Transport.bpm.value);
