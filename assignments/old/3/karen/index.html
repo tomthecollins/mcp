@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+ <title>Musical Donuts</title>
+</head>
+
+<body>
+    <h1>Musical Donuts!</h1>
+    <!--<div id="splash"><div id="rain"></div><div id="logo"></div></div>-->
+    <div id="safezone">
+      <!--<script>
+       function getParameterByName(name) {
+         var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+         return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+       }
+       var subID = getParameterByName("subID");
+       var w = document.getElementById("subjectID");
+       w.value = subID;
+       var expSt = getParameterByName("expSt");
+       var w1 = document.getElementById("QExpSt");
+       w1.value = expSt;
+       var nxtIs = getParameterByName("nxtIs");
+       var w2 = document.getElementById("nextIs");
+       w2.value = nxtIs;
+      </script>-->
+      
+      <h2>
+       An extremely legitimate personality test
+      </h2>
+      <p>
+       In 1982,
+       <a href="http://psycnet.apa.org/journals/rev/89/4/334/" target="_blank">Carol Krumhansl and Edward Kessler</a>
+       proposed that in Western music, the tonal relationships between major
+       and minor keys can be represented on the surface a torus, or donut shape.
+       
+       In 1739, in his
+       <a href="http://eulerarchive.maa.org/" target="_blank"><i>Tentamen novae theoriae musicae ex certissismis har- moniae principiis dilucide expositae</i></a> [An attempt at a new theory of music, exposed in all clearness according to the most well-founded principles of harmony],
+       Leonhard Euler (after whom the <i>e</i> of the exponential
+       function is named) drew a similar
+       <a href="./supporting/p147fromEuler1739.png" target="_blank">map of key regions</a>.
+       
+       Research into the psychological plausibility of such representations, e.g. by
+       <a href="http://psycnet.apa.org/journals/rev/121/1/33/" target="_blank">Tom Collins and his collaborators</a>,
+       continues to this day.
+       
+      </p>
+      <p>
+       What these scientists neglected to study, however, was the natural
+       variation in donut frosting(!) Through a very rigorous scientific
+       process, our team has discovered that different varieties of donuts are
+       associated with different varieties of music. It makes a lot of sense,
+       if you think about it.      
+      </p>
+      
+      <h3>
+       Find out what type of donut you are based on how you play music!
+      </h3>
+       
+      <p>
+       Use the keyboard below to practice what you want to play. When you are ready, hit "start" and you will have about 10 seconds to perform your song. The music you play will determine what type of donut you are, so remember to scroll down to find out!
+      </p>
+      <pre> W E   T Y U   O P   ] \
+A S D F G H J K L ; '</pre>
+      <p>
+       That is, key A = pitch C4 (middle C), key W = pitch C&#x266f;4/D&#x266d;4,&#8230;.
+      </p>
+      <button onclick="Tone.Transport.start();"><h2>Start</h2></button>
+      
+      <div id="placehere">
+
+      <h2>Here's what you're playing!</h2>
+      
+      <div>
+       <canvas nx="keyboard" id="keyboard1"></canvas>
+       &nbsp;
+       <canvas nx="typewriter" id="typewriter1"></canvas>
+       &nbsp;
+      </div>
+      
+      <script type="text/javascript" src="./supporting/Tone.min.js"></script>
+      <script type="text/javascript" src="./supporting/jquery.min.js"></script>
+      <script type="text/javascript" src="./supporting/nexusUI.js"></script>
+      <script type="text/javascript">
+       nx.onload = function(){
+        // This command defines default colors.
+        nx.colorize("#f5871f");
+        // Add two octaves to the keyboard.
+        keyboard1.octaves = 2;
+        // Initialize the keyboard.
+        keyboard1.init();
+        typewriter1.init();
+       }
+      </script>
+    </div>
+    
+
+</div>
+    
+
+
+    <script type="text/javascript">
+    var console= window['console'] ? window['console'] : { log : function(){} };
+    </script>
+
+
+    <script type="text/javascript" src="./supporting/instr.js"></script>
+    <script type="text/javascript" src="./supporting/keykey.js"></script>
+    <script type="text/javascript" src="./supporting/procedural.js"></script>
+    <script type="text/javascript" src="./supporting/key_type.js"></script>
+    
+    
+    
+    <p>
+     This project was made possible with the help of
+     <a href="http://tonejs.org/" target="_blank">Tone.js</a>
+     and
+     <a href="http://nexusosc.com/" target="_blank">NexusIU</a>.
+     The demo was coded by Karen Konkoly as part of Dr.&nbsp;Collins'
+     <a href="http://tomcollinsresearch.net/mcpc/" target="_blank">PSYC397 Seminar in Music
+     Computing and Psychology</a>.
+    </p>
+</body>
+</html>

@@ -3,12 +3,12 @@ A repo to support PSYC/COGS 397 Music Computing and Psychology
 
 # Syllabus for Seminar in Music Computing and Psychology
 Meeting time: Thursday 1:10-4:00 pm  
-Location: Maginnes 475 for discussions; Digital Media Classroom for assignment work  
+Location: EWFM 520 (CITL Classroom) for discussions; Digital Media Classroom for assignment work  
 Instructor: Dr. Tom Collins  
 Office: Chandler-Ullmann 223  
 Phone: 610-758-4209  
 Email: toc215@lehigh.edu  
-Office Hours: Friday 1:10-4:00 pm
+Office Hours: Friday 1:10-3:00 pm
 
 ##### Table of Contents
 [Course Overview](#course-overview)  
@@ -74,8 +74,8 @@ Attendance at Music and Mind Spring Talk Series............5%
 
 ## Grading
 Grades will be based on the following points system:
-A = 94-100; A- = 90-93; B+ = 87-89; B = 84-86; B- = 80-83; C+ = 77-79; C = 74-76;
-C- = 70-73; D+ = 67-69; D = 64-66; D- = 60-63; F = 59 and below.
+x ≥ 93 -> A;  90 ≤ x < 93 -> A−;  87 ≤ x < 90 -> B+;  83 ≤ x < 87 -> B;  80 ≤ x < 83 -> B−
+77 ≤ x < 80 -> C+;  73 ≤ x < 77% -> C;  70 ≤ x < 73 -> C−;  67 ≤ x < 70 -> D+;  63 ≤ x < 67 -> D;  60 ≤ x < 63 -> D−;  x < 60% -> F.
 
 ## Course Policies
 Course Site and GitHub: This course will make use of both a Course Site (https://coursesite.lehigh.edu) and, to help teach the principles of version control, a GitHub repository (https://github.com/tomthecollins/mcp). Version control helps people to work on the same (coding) project simultaneously.
@@ -101,6 +101,8 @@ The following list is roughly in the order in which you should read the items. W
 * Loy, G. (2006). Musimathics: The mathematical foundations of music. (2 Vols.). MIT Press, Cambridge, MA. (Available in the Library in hardcopy https://asa.lib.lehigh.edu/Record/957653 or as ebook https://asa.lib.lehigh.edu/Record/1486305 , https://asa.lib.lehigh.edu/Record/10615305 .)
 * Deutsch, D. (2013). The psychology of music, 3rd ed. Academic Press, San Diego, CA. (Available in the Library in hardcopy at present https://asa.lib.lehigh.edu/Record/10734338 and soon as ebook https://asa.lib.lehigh.edu/Record/10733074 .)
 * Huron, D. (2006). Sweet anticipation: Music and the psychology of expectation. MIT Press, Cambridge, MA. (Available in the Library as ebook https://asa.lib.lehigh.edu/Record/1486325 .)
+* Zuk, J., Benjamin, C., Kenyon, A., & Gaab, N. (2014). Behavioral and neural correlates of executive functioning in musicians and non-musicians. PloS one, 9(6), e99868.
+* Ferreri, L., Aucouturier, J. J., Muthalib, M., Bigand, E., & Bugaiska, A. (2013). Music improves verbal memory encoding while decreasing prefrontal cortex activity: an fNIRS study. Frontiers in human neuroscience, 7.
 * Deutsch, D. (1980). The processing of structured and unstructured tonal sequences. Perception and Psychophysics, 28, 381-389.
 * Deutsch, D., Henthorn, T., and Lapidis, R. (2011). Illusory transformation from speech to song. Journal of the Acoustical Society of America, 129, 2245-2252.
 * Collins, T. (2011). Improved methods for pattern discovery in music, with applications in automated stylistic composition (Doctoral dissertation). Retrieved from http://oro.open.ac.uk/30103/ (Only need to read Appendix B for this course. Appendix A provides helpful mathematical definitions.)
@@ -120,7 +122,7 @@ The following list is roughly in the order in which you should read the items. W
 ## Tentative Schedule
 | Class. Date, Leader | Topics | Reading Requirements and Deadlines  |
 | -------- | --------------------- | ------------ |
-| 1. 1/26/17, KK | Syllabus Overview and Web-based Music Demos (Tone.js, NexusUI, and VexFlow) | Deutsch (1980), Deutsch, Henthorn, and Lapidis (2011) |
+| 1. 1/26/17, KK | Syllabus Overview and Web-based Music Demos (Tone.js, NexusUI, and VexFlow) | Zuk et al. (2014), Ferreri et al. (2013) |
 | | Coding: HTML, JavaScript, and PHP | |
 | 2. 2/1/17, CC | Audio Representations of Music | Ch. 1 of Deutsch, Collins (2011, pp. 327-340) |
 | | Coding: Signal processing in Matlab and Tone.js; Audacity and Sonic Visualiser | |
@@ -133,19 +135,16 @@ The following list is roughly in the order in which you should read the items. W
 | 2/27/17 at 12 noon | |	Assignment 1 due |
 | 6. 3/2/17, NJ | Rhythm, Beat-tracking, and Quantization | Ch. 9 of Deutsch, Krebs, B&ouml;ck, and Widmer (2013) |
 | | Coding: Toward Assignment 2 and/or student-led | |
-| 7. 3/9/17, TM | F0-estimation, Transcription, and Training | B&ouml;ck & Schedl (2012), "Joyful Noise (chorus)" Wikipedia article |
+| 7. 3/9/17, TM | F0-estimation, Transcription, and Training | Deutsch (1980), B&ouml;ck & Schedl (2012) |
 | | Coding: Toward Assignment 2 and/or student-led | |
 | 3/13/17 | Spring Break | |
 | 3/20/17 at 12 noon | | Assignment 2 due |
-| 3/20/17 at 4 pm |	Music and Mind Spring Talk Series I (Alison Fromm) |	Baker Hall, Zoellner |
 | 8. 3/23/17, AK | Tonality | Ch. 7 of Deutsch, Krumhansl and Kessler (1982), Sapp (2005) |
 | | Coding: Coding hereafter is aimed toward Assignment 3 and/or student-led | |
 | 9. 3/30/17, CC | Fingerprinting (or "How Shazam Works") | Wang and Smith III (2006/2000), Arzt, B&ouml;ck, and Widmer (2012) |
 | 10. 4/6/17, TM | Repetition, Repetition, Repetition | Meredith, Lemstr&ouml;m, and Wiggins (2002), Collins, Artz, Frostel, and Widmer (2016) |
-| 4/6/17 at 4.10 pm |	Music and Mind Spring Talk Series II (Tom Collins) |	STEPS 290 |
 | 11. 4/13/17, KK | Musical Expectation I | Ch. 1-6 of Huron |
 | 12. 4/20/17, SC | Musical Expectation II | Ch. 7-11 of Huron, M&uuml;llensiefen and Halpern (2014) |
-| 4/20/17 at 4.10 pm |	Music and Mind Spring Talk Series III (Andrea Halpern) |	STEPS 290 |
 | 13. 4/27/17, TC | Presentations | |
 | 5/1/17 at 12 noon | | Assignment 3 due |
 | 14. 5/4/17, LM | Musical Expectation III | Ch. 12-17 of Huron |
@@ -153,4 +152,4 @@ The following list is roughly in the order in which you should read the items. W
 ## Acknowledgments
 With thanks to Dr. Carlisle for help with course design.
 
-Last modified: January 17, 2017
+Last modified: January 11, 2018

@@ -1,0 +1,147 @@
+<html>
+<head>
+	<title>PANNER</title>
+
+	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="./../../../lib/Tone.js"></script>
+	<link rel="stylesheet" type="text/css" href="./../../../lib/examples.css">
+</head>
+<body>
+ <div>
+  Some pan examples, adapted from https://github.com/jffng and
+  <a href="https://searchcode.com/file/94387438/examples/panner.html" target="_blank">here</a>.
+ </div>
+ <br/><br/>
+ 
+	<div>Pan a sine wave Left/Right</div>
+	<br>
+	<button type="button" id="button1">start</button>
+	<input type='range' id="input1" value='50'>
+	<!--<div id='left'>0</div>-->
+	<!--<div id='right'>0</div>-->
+	<script type="text/javascript">
+  var panner1 = new Tone.Panner();
+		var sine = new Tone.Oscillator();
+  // connect it up
+		sine.connect(panner1);
+  panner1.toMaster();
+  // meters (not currently in use)
+		var outputMeter = new Tone.Meter(2);
+		panner1.connect(outputMeter);
+		// interface
+  var b1 = $("#button1");
+  b1.click(function(){
+			if (sine.state !== "started"){
+				sine.start();
+				$(this).text("stop");
+			} else {
+				sine.stop();
+				$(this).text("start");
+			}
+		});
+  //update the meters
+		//setInterval(function(){
+			//$("#left").text("left: " + outputMeter.getDb(0).toFixed(2) + " db");
+			//$("#right").text("right: " + outputMeter.getDb(1).toFixed(2) + " db");
+		//}, 100);
+  var i1 = $("#input1");
+		i1.on("input", function(e){
+			var val = $(this).val();
+   console.log('pre-drag panner1 value:', panner1.pan);
+   panner1.pan.value = (val - 50)/50;
+   console.log('post-drag panner1 value:', panner1.pan);
+		});
+ </script>
+ <br/><br/><br/><br/>
+ 
+ <div>Pan a bass synth left/right</div>
+	<br>
+	<button type="button" id="button2">start</button>
+	<input type='range' id="input2" value='50'>
+	<!--<div id='left'>0</div>-->
+	<!--<div id='right'>0</div>-->
+ <script>
+  var panner2 = new Tone.Panner();
+		var synth_bass = new Tone.PolySynth(4, Tone.MonoSynth, {
+   "volume" : -10,
+   "envelope" : {
+     "attack" : 0.1,
+     "decay" : 0.3,
+     "release" : 2,
+   },
+   "filterEnvelope" : {
+     "attack" : 0.01,
+     "decay" : 0.1,
+     "sustain" : 0.5,
+     "min" : 200,
+     "max" : 1200
+   }
+  }).toMaster();
+  synth_bass.connect(panner2);
+  panner2.toMaster();
+  
+  var b2 = $("#button2");
+  var state = "stopped";
+		b2.click(function(){
+   if (state == "stopped"){
+				synth_bass.triggerAttack("C3");
+    state = "started";
+    console.log('synth_bass:', synth_bass);
+				$(this).text("stop");
+			} else {
+				synth_bass.triggerRelease("C3");
+    state = "stopped";
+    $(this).text("start");
+			}
+		});
+  
+  var i2 = $("#input2");
+  i2.on("input", function(e){
+			var val = $(this).val();
+   console.log('pre-drag panner2 value:', panner2.pan);
+   panner2.pan.value = (val - 50)/50;
+   console.log('post-drag panner2 value:', panner2.pan);
+		});
+ </script>
+ <br/><br/><br/><br/>
+ 
+ <div>Pan a piano sample left/right</div>
+	<br>
+	<button type="button" id="button3">start</button>
+	<input type='range' id="input3" value='50'>
+	<!--<div id='left'>0</div>-->
+	<!--<div id='right'>0</div>-->
+ <script>
+  var panner3 = new Tone.Panner();
+		var sample_piano = new Tone.Sampler("https://dl.dropboxusercontent.com/u/11997856/samples/20150810/keyboards/pianos/piano_2/067_f.wav").toMaster();
+  sample_piano.connect(panner3);
+  panner3.toMaster();
+  
+  var b3 = $("#button3");
+  var state = "stopped";
+		b3.click(function(){
+   if (state == "stopped"){
+				sample_piano.triggerAttack();
+    state = "started";
+    $(this).text("stop");
+			} else {
+				sample_piano.triggerRelease();
+    state = "stopped";
+    $(this).text("start");
+			}
+		});
+  
+  var i3 = $("#input3");
+  i3.on("input", function(e){
+			var val = $(this).val();
+   console.log('pre-drag panner3 value:', panner3.pan);
+   panner3.pan.value = (val - 50)/50;
+   console.log('post-drag panner3 value:', panner3.pan);
+		});
+ </script>
+ 
+ <br/><br/><br/><br/><br/><br/><br/><br/>
+ 
+ 
+</body>
+</html>

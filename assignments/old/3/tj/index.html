@@ -1,0 +1,265 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Tempo estimator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+  <script type="text/javascript" src="./supporting/Tone.js"></script>
+  <script type="text/javascript" src="./supporting/jquery.min.js"></script>
+  <script type="text/javascript" src="./supporting/Interface.js"></script>
+  <script type="text/javascript" src="./supporting/Logo.js"></script>
+  <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);</style><style type="text/css">#TonejsLogo{background-color:#000;cursor:pointer}#TonejsLogo,#TonejsLogo #Border,#TonejsLogo #Canvas,#TonejsLogo #Title{position:absolute}#TonejsLogo #TextContainer{position:absolute;width:auto;-webkit-transform:translate(-50%, 0px);-ms-transform:translate(-50%, 0px);transform:translate(-50%, 0px);left:50%;height:100%}#TonejsLogo #TextContainer #Title{position:relative;display:inline-block;font-family:Roboto Mono,monospace;color:#fff;text-align:center;height:100%;top:0;width:100%;font-weight:400}#TonejsLogo #TextContainer #Title .Closer{margin:-3%}#TonejsLogo #TextContainer #Canvas{position:absolute;height:100%;top:0;border-radius:2%;z-index:0;right:0;width:10px;background-color:#f734d7}</style>
+  <script type="text/javascript" src="./supporting/math.min.js"></script>
+  <script type="text/javascript" src="./supporting/fb_256_to_82.js"></script>
+  <link rel="stylesheet" type="text/css" href="./supporting/examples.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ </head>
+ <body>
+  <style type="text/css">
+   canvas {
+    width: 100%;
+    height: 200px;
+    background-color: black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+   }
+  </style>
+  <div id="Content" class="FullScreen">
+   <div id="Title">Tempo estimator</div>
+   <div id="Explanation">
+    Hit Play! This demo analyses the frequency content of the audio file, and
+				plots it as white on black, with frequency on the x-axis (left	for
+				low-frequency sounds and right for high-frequency sounds).
+				<br/><br/>
+				Changes in the frequency content over time are calcualted (but not shown
+				here), in an effort to estimate locations of onsets in the audio (e.g.,
+				drum hits, vocalizations).
+				<br/><br/>
+				Differences between adjacent onsets are then calculated and
+				plotted in light blue, with time difference on the x-axis (in seconds) and
+				count on the y-axis.
+				<br/><br/>
+				The peak around 0.45 sec suggests that the predominant inter-onset time in
+				this audio snippet is	0.45 sec, corresponding to a tempo of 133 bpm
+				(= 60/0.45). This is the tempo of 'Old Yellow Bricks' by the
+				Arctic Monkeys.
+				<br/><br/>
+				This project was made possible with the help of
+				<a href="http://tonejs.org/" target="_blank">Tone.js</a>. The demo was
+				coded by TJ Marrapodi as part of Dr.&nbsp;Collins'
+				<a href="http://tomcollinsresearch.net/mcpc/" target="_blank">PSYC397 Seminar in Music
+				Computing and Psychology</a>.
+   </div>
+  <script type="text/javascript">
+   // For creating times at which to analyse signal.
+   var nfft = 256;
+   var frame_rate = 20 // So this is 50 ms, or hop of 2050 at sampling rate of 44100.
+   var tinc = 1/frame_rate;
+   
+   // You probably DONT want to connect the microphone directly to the master
+   // output because of feedback.
+   // var mic = new Tone.Microphone();
+   //var mic = new Tone.Player("https://dl.dropboxusercontent.com/u/11997856/samples/20160503/audio_for_score_following/k_397_IMSLP275633-PMLP01869_Ligoratti_perf2c.wav").toMaster();
+   var mic = new Tone.Player("./Arctic_Monkeys_Old_Yellow_Bricks.wav").toMaster();
+   mic.sync(0);
+   var analyser = new Tone.Analyser({
+    "type" : "fft",
+    "size" : nfft
+   });
+   mic.connect(analyser);
+  </script>
+  
+  <script id="GUI" type="text/javascript">
+   $(function(){
+    // Indicate if the microphone is supported or not
+    if (!Tone.Microphone.supported){
+     $("<div>", {
+      "id" : "NotSupported",
+      "text" : "getUserMedia is not supported by your browser."
+     }).appendTo("#Content");
+    }
+    else {
+     //mic.open(function(){
+     Tone.Buffer.onload = function(){
+      // Create some times at which to analyse signal.
+      // console.log(':', mic.buffer._buffer);
+      var Fs = mic.buffer._buffer.sampleRate;
+      var nsamp = mic.buffer._buffer.length;
+						//var dur_sec = 20;
+       var dur_sec = nsamp/Fs;
+      // This next variable holds the analysis times.
+      var ts = [];
+      for (i = 0; i < frame_rate*(dur_sec - nfft/Fs); i++){
+        ts.push(tinc*i);
+      }
+      // console.log('ts:', ts);
+ 
+      // Analyse the signal at these times.
+      var X = [];
+      for (i = 0; i < ts.length; i++){
+        Tone.Transport.setTimeline(function(time){
+          // console.log('hello again!');
+          var values2 = analyser.analyse();
+          values2 = [].slice.call(values2);
+          // values2 = values2.slice(0, 100);
+          // console.log("Tone.Transport.position:", Tone.Transport.position);
+          // console.log("values2.slice(0, 10):", values2.slice(0, 10));
+          X.push(values2);
+        }, ts[i]);
+      }
+      // Show the stored info:
+      Tone.Transport.setTimeline(function(time){
+       // X has 40 (= ts.length) rows and 256 columns. Each row contains the
+       // power spectrum of the signal at the sampled time.
+       // console.log('X.length:', X.length);
+       console.log('X', X);
+       // The filterbank is the filterbank82_sb variable, reduced from 1024 to
+       // 256 rows (and still 82 columns). The result of multiplying X (40x256)
+       // against fb (256x82) is a 40x82 matrix. It contains a log-scaled,
+       // 82-point spectrum for each sampled time. In more detail: we take each
+       // row of X and multiply against the filterbank, to 'logify' the
+       // linearly-spaced ft output, taking low-frequency bins in their entirety
+       // and averaging over higher-frequency bins.
+       // var Xfb = X;
+       var Xfb = math.multiply(X, fb);
+       // console.log('Xfb:', Xfb);
+							var siz_Xfb = math.size(Xfb);
+							console.log('szi_Xfb:', siz_Xfb);
+							var dXfb = [];
+							for (var i = 1; i < siz_Xfb[0]; i++){
+								dXfb.push(math.subtract(Xfb[i], Xfb[i - 1]));
+							}
+							console.log('dXfb:', dXfb);
+							
+							var msd = dXfb.map(function(a){
+								return math.mean(a);
+							});
+							console.log('msd:', msd);
+							
+							var THRESHOLD = 14;
+							var indexes = [];
+							for(i = 0; i < msd.length; i++)
+							{
+									if(msd[i] > THRESHOLD)
+									{
+											indexes.push(i);
+									}
+							}
+							
+							var times = [];
+							for(var i=0; i<indexes.length; i++)
+							{
+								times.push(indexes[i]/frame_rate);
+							}
+							console.log('times', times);
+							
+							var dtime = [];
+							for(var i = 0; i < times.length; i++)
+							{
+								for(var j = i+1; j < times.length; j++)
+								{
+									dtime.push(times[j] - times[i]);
+								}
+							}
+							
+							console.log('dtime:', dtime)
+							
+							
+							
+						console.log('indexes', indexes);
+						var onset_times = indexes.map(function(a){
+							return a/frame_rate;
+						});
+							
+							
+							var diff_mtx = [];
+							var diff_adj = [];
+							var diff_arr = [];
+							for (i = 0; i < onset_times.length; i++){
+								diff_mtx[i] = [];
+								for (var j = 0; j < onset_times.length; j++){
+									if (j > i){
+										diff_mtx[i][j] = onset_times[j] - onset_times[i];
+										diff_arr.push(diff_mtx[i][j]);
+									}
+									if (j - i == 1 && onset_times[j] - onset_times[i] > .05){
+										diff_adj.push(onset_times[j] - onset_times[i]);
+									}
+								}
+							}
+							console.log('diff_mtx:', diff_mtx);
+							console.log('diff_adj:', diff_adj);
+							
+							//plot histogram of possible beat times
+							var data = 
+							[
+								{
+									x: diff_adj,
+									type: 'histogram',
+									xbins: { end: 2, size: 0.05, start: 0.025 },
+									marker : { 
+										color: 'skyblue',
+										}
+								}	
+							];
+							Plotly.newPlot('Content', data);
+							
+       // Write to file.
+       //var textToSave = JSON.stringify(Xfb, null, 2);
+       //var hiddenElement = document.createElement('a');
+       //hiddenElement.href = 'data:attachment/text,' + encodeURI(textToSave);
+       //hiddenElement.target = '_blank';
+       //hiddenElement.download = 'Xfb.js';
+       //hiddenElement.click();
+      }, dur_sec);
+      
+      var canvas = $("<canvas>").appendTo("#Content");
+      var context = canvas.get(0).getContext("2d");
+      context.canvas.width = canvas.width();
+      context.canvas.height = canvas.height();
+      function drawLoop(){
+       var canvasWidth = context.canvas.width;
+       var canvasHeight = context.canvas.height;
+       requestAnimationFrame(drawLoop);
+       //draw the waveform
+       context.clearRect(0, 0, canvasWidth, canvasHeight);
+       var values = analyser.analyse();
+       context.beginPath();
+       //context.lineJoin = "round";
+       context.lineWidth = 6;
+       context.strokeStyle = "white";
+       //context.moveTo(0, (values[0] / 255) * canvasHeight);
+       for (var i = 1, len = values.length; i < len; i++){
+        var val = values[i] / 255;
+        var x = canvasWidth * (i - 1) / 50;
+        // var x = canvasWidth * (Math.log(i) - Math.log(255)) / (0 - Math.log(255));
+								var y = val * canvasHeight;
+        context.lineTo(x, y);
+       }
+       context.stroke();
+      }
+      drawLoop();
+      
+      new Interface.Button({
+       type : "toggle",
+       text : "Play",
+       activeText : "Stop",
+       start : function(){
+        Tone.Transport.start();
+        //mic.start();
+       },
+       end : function(){
+        Tone.Transport.stop();
+        //mic.stop();
+       }
+      });
+     //});
+     };
+ 
+    }
+ 
+   });
+  </script>
+ 
+ </body>
+</html>
