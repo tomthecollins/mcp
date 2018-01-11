@@ -145,7 +145,7 @@ The following list is roughly in the order in which you should read the items. W
 | 12. 4/20/17, AT | Musical Expectation II | Ch. 7-11 of Huron, M&uuml;llensiefen and Halpern (2014) |
 | 13. 4/27/17, TC | Presentations | |
 | 5/1/17 at 12 noon | | Assignment 3 due |
-| 14. 5/4/17, ?? | Musical Expectation III | Ch. 12-17 of Huron |
+| 14. 5/4/17, TC | Musical Expectation III | Ch. 12-17 of Huron |
 
 ## Acknowledgments
 With thanks to Dr. Carlisle for help with course design.
