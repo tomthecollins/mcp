@@ -120,32 +120,32 @@ The following list is roughly in the order in which you should read the items. W
 ## Tentative Schedule
 | Class. Date, Leader | Topics | Reading Requirements and Deadlines  |
 | -------- | --------------------- | ------------ |
-| 1. 1/26/17, JD | Does Music Make You Clever? Syllabus Overview and Web-based Music Demos (Tone.js, NexusUI, and VexFlow) | Zuk et al. (2014), Ferreri et al. (2013) |
+| 1. 1/25/17, JD | Does Music Make You Clever? Syllabus Overview and Web-based Music Demos (Tone.js, NexusUI, and VexFlow) | Zuk et al. (2014), Ferreri et al. (2013) |
 | | Coding: HTML, JavaScript, and PHP | |
-| 2. 2/1/17, MB | Audio Representations of Music | Ch. 1 of Deutsch, Collins (2011, pp. 327-340) |
+| 2. 1/31/17, MB | Audio Representations of Music | Ch. 1 of Deutsch, Collins (2011, pp. 327-340) |
 | | Coding: Signal processing in Matlab and Tone.js; Audacity and Sonic Visualiser | |
-| 3. 2/9/17, AS | Symbolic Representations of Music | Ch. 6 of Deutsch, Collins (2011, pp. 341-366) |
+| 3. 2/8/17, AS | Symbolic Representations of Music | Ch. 6 of Deutsch, Collins (2011, pp. 341-366) |
 | | Coding: MuseScore, MCStylistic, and PattDisc | |
-| 4. 2/16/17, ER | Pitch | Ch. 4 and 5 of Deutsch, Shepard (1964) |
+| 4. 2/15/17, ER | Pitch | Ch. 4 and 5 of Deutsch, Shepard (1964) |
 | | Coding: PatternViewer toward Assignment 1 and/or student-led | |
-| 5. 2/23/17, PDM | Automatic Generation of Music | Ch. 8 of Deutsch, Conklin and Witten (1995), Collins and Laney (2017) |
+| 5. 2/22/17, PDM | Automatic Generation of Music | Ch. 8 of Deutsch, Conklin and Witten (1995), Collins and Laney (2017) |
 | | Coding: PatternViewer toward Assignment 1 and/or student-led | |
-| 2/27/17 at 12 noon | |	Assignment 1 due |
-| 6. 3/2/17, AGR | Rhythm, Beat-tracking, and Quantization | Ch. 9 of Deutsch, Krebs, B&ouml;ck, and Widmer (2013) |
+| 2/26/17 at 12 noon | |	Assignment 1 due |
+| 6. 3/1/17, AGR | Rhythm, Beat-tracking, and Quantization | Ch. 9 of Deutsch, Krebs, B&ouml;ck, and Widmer (2013) |
 | | Coding: Toward Assignment 2 and/or student-led | |
-| 7. 3/9/17, CD | F0-estimation, Transcription, and Training | Deutsch (1980), B&ouml;ck & Schedl (2012) |
+| 7. 3/8/17, CD | F0-estimation, Transcription, and Training | Deutsch (1980), B&ouml;ck & Schedl (2012) |
 | | Coding: Toward Assignment 2 and/or student-led | |
-| 3/13/17 | Spring Break | |
-| 3/20/17 at 12 noon | | Assignment 2 due |
-| 8. 3/23/17, MG | Tonality | Ch. 7 of Deutsch, Krumhansl and Kessler (1982), Sapp (2005) |
+| 3/12/17 | Spring Break | |
+| 3/19/17 at 12 noon | | Assignment 2 due |
+| 8. 3/22/17, MG | Tonality | Ch. 7 of Deutsch, Krumhansl and Kessler (1982), Sapp (2005) |
 | | Coding: Coding hereafter is aimed toward Assignment 3 and/or student-led | |
-| 9. 3/30/17, TV | Fingerprinting (or "How Shazam Works") | Wang and Smith III (2006/2000), Arzt, B&ouml;ck, and Widmer (2012) |
-| 10. 4/6/17, MI | Repetition, Repetition, Repetition | Meredith, Lemstr&ouml;m, and Wiggins (2002), Collins, Artz, Frostel, and Widmer (2016) |
-| 11. 4/13/17, PDM | Musical Expectation I | Ch. 1-6 of Huron |
-| 12. 4/20/17, AT | Musical Expectation II | Ch. 7-11 of Huron, M&uuml;llensiefen and Halpern (2014) |
-| 13. 4/27/17, TC | Presentations | |
-| 5/1/17 at 12 noon | | Assignment 3 due |
-| 14. 5/4/17, TC | Musical Expectation III | Ch. 12-17 of Huron |
+| 9. 3/29/17, TV | Fingerprinting (or "How Shazam Works") | Wang and Smith III (2006/2000), Arzt, B&ouml;ck, and Widmer (2012) |
+| 10. 4/5/17, MI | Repetition, Repetition, Repetition | Meredith, Lemstr&ouml;m, and Wiggins (2002), Collins, Artz, Frostel, and Widmer (2016) |
+| 11. 4/12/17, PDM | Musical Expectation I | Ch. 1-6 of Huron |
+| 12. 4/19/17, AT | Musical Expectation II | Ch. 7-11 of Huron, M&uuml;llensiefen and Halpern (2014) |
+| 13. 4/26/17, TC | Presentations | |
+| 4/30/17 at 12 noon | | Assignment 3 due |
+| 14. 5/3/17, TC | Musical Expectation III | Ch. 12-17 of Huron |
 
 ## Acknowledgments
 With thanks to Dr. Carlisle for help with course design.
