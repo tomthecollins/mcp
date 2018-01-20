@@ -3,7 +3,7 @@ A repo to support PSYC/COGS 397 Music Computing and Psychology
 
 # Syllabus for Seminar in Music Computing and Psychology
 Meeting time: Thursday 1:10-4:00 pm  
-Location: Maginnes Hall, room 475 for discussions; Digital Media Classroom for assignment work  
+Location: Coppee Hall, room 101 for discussions; Digital Media Classroom for assignment work  
 Instructor: Dr. Tom Collins  
 Office: Chandler-Ullmann 223  
 Phone: 610-758-4209  
