@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.muicss.com/mui-0.9.16/css/mui.min.css" rel="stylesheet" type="text/css" />
+  <script src="./Tone.min_r11.js"></script>
+  
+  <title>Hive Chimes</title>
+
+</head>
+<body>
+
+  <!-- App mount -->
+  <div id="rpaApp"></div>
+  
+  <script src="https://cdn.muicss.com/mui-0.9.16/js/mui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/1.1.6/mithril.js"></script>
+  <!-- <script type="text/javascript" src="./mithril.min.js"></script> -->
+  <script type="text/javascript" >
+    // Holds a collection of bee data events sent from server.
+    var beeIoData = [];
+    // the volume of the bees is set in the interface with this number - higher increases the volume
+    var beeVolume = 1;
+    // the html component is rendered like so
+    var beeIoComponent = {
+      view:function(){
+        return(
+          m('ul',
+            m('li',
+              m('h1',[
+                beeVolume,
+                m('span',' --- Click '),
+                m('a',{onclick:setVolume(1)},' up '),
+                m('span',' or '),
+                m('a',{onclick:setVolume(-1)},' down '),
+                m('span',' to control the rate at which bees enter and exit. One is least frequent in/out rate and fifteen is most frequent.')
+              ])
+  
+            ),
+            beeIoData.map(function(data){
+              return  m('li', 'at '+data.stamp+' milliseconds Bee '+(data.io === 'i' ? 'IN':'OUT'));
+            })
+          )
+        );
+      }
+    };
+  
+    // mount our app
+    m.route(document.getElementById("rpaApp"), "/", {
+      "/": beeIoComponent
+    });
+    
+    // set the volume of bees coming in and out
+    function setVolume(i){
+      return function(){
+        beeVolume =  beeVolume + i;
+        // makes sure that our volume is between our upper and lower limits:
+        beeVolume = beeVolume > 15 ? 15 : beeVolume;
+        beeVolume = beeVolume < 1 ? 1 : beeVolume;
+      };
+  
+    }
+  
+  
+  
+     // set a random time in milliseconds for our random io generation interval
+    const ioTime = 5000;
+  
+    // start an interval within which random io's are seeded
+    setInterval(function(){
+      // seed a number of random io's
+      ioSeed();
+    }, ioTime);
+
+
+    // This is a function that sets a random set of io events within an ioTime interval.
+    // This function mimics the server sending data to the client.
+    function ioSeed(){
+      // Loop over the "beeVolume" such that each ioTime interval gets that number of io's
+      // per ioTime interval.
+      for(var i=0;i<beeVolume;i++){
+        // t is a random time in milliseconds between zero and ioTime
+        var t = Math.floor(Math.random()*ioTime);
+        // set a timeout so that the io fires after time in milliseconds t
+        setTimeout(
+          function(){
+            // our data
+            var data = {
+              // a random in or out
+              io : Math.round(Math.random()) == 1 ? 'i' : 'o',
+              // exactly when it happened
+              stamp : Date.now(),
+              // which gate it happened at
+              gate : Math.floor(Math.random()*(10-0+1)+0)
+            };
+            // fire the IO function with data
+            beeIO(data);
+  
+          }, t
+  
+        );
+      }
+  
+    }
+
+    // Setting up a Tone.js instrument, but you can do your own thing if you
+    // prefer.
+    var sampler = new Tone.Sampler({
+      "G#4": "./chime_samples/95750__3bagbrew__barn-chime1.wav",
+      "C#5": "./chime_samples/95751__3bagbrew__barn-chime2.wav",
+      "E5": "./chime_samples/95756__3bagbrew__barn-chime3.wav",
+      "G#5": "./chime_samples/95752__3bagbrew__barn-chime4.wav"
+    }, function(){
+      // Can put something here once resources have loaded if you like.
+    }).toMaster();
+    // Sounds fade out smoothly (takes 4 sec).
+    sampler.release = 4;
+    
+    // Here is where the client fires each time a bee IO event happens.
+    function beeIO(data) {
+      // have a look at the console log for your IO data.
+      // Basically we know if it was an in or out event ("i" or "o")
+      // and the time it occurred in milliseconds
+      // and the gate that was used.
+      console.log(data);
+  
+      // We create a temporary store for all the io events.
+      beeIoData.unshift(data);
+      // Here is where you might want to trigger a music event... Glad to help!
+      var notes = ["G#4", "A4", "C#5", "E5", "G#5"];
+      var ranNoteIdx = Math.floor(Math.random()*4);
+      sampler.triggerAttackRelease(notes[ranNoteIdx], 2, null, 0.25);
+      
+      // For the sake of the demo we expire the event from the UI after 5
+      // seconds.
+      setTimeout(function(){
+        beeIoData.pop();
+        m.redraw();
+      }, ioTime);
+  
+      m.redraw();
+    }
+
+
+
+  </script>
+
+
+
+</body>
+</html>
