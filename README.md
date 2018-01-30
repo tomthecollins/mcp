@@ -40,7 +40,7 @@ Upon successful completion of this course, students will be able to:
 Participation in Class Discussion.........................26%
 Leading Class Discussion..................................13%
 Written Discussion Points.................................13%
-Assignment 1 - Representations, Databases, and Software...10%
+Assignment 1 - Representations or Hive Chimes.............10%
 Assignment 2 - Web-based Essay............................10%
 Assignment 3 - Web-based Demo
  Time and Effort..........................................13%
@@ -58,7 +58,9 @@ Assignment 3 - Web-based Demo
     *	Critical Evaluation. Critiquing the arguments, methods, assumptions, or conclusions of the authors;
     *	Implications. Relate the findings to the broader world, or generate a novel experimental prediction based on the findings;
     *	Integration/Synthesis. Draw connections between the present reading and other ideas or readings, highlighting points of agreement or conflict.
-*	Assignment 1 - Representations, Databases, and Software: Based on classes 2 and 3 (see Schedule below), Assignment 1 provides the opportunity to demonstrate knowledge of (i) audio and symbolic representations of music, (ii) some databases from which representations of a song/piece of your choice can be acquired, and (iii) software for manipulating those representations in order to visualize them in the PatternViewer program.
+*	Assignment 1 - You have a choice for this assignment:
+    * Select a song/piece of music that you like, obtain audio and symbolic representations of it, annotate some repeated patterns, and visualize the whole thing in the PatternViewer application, or;
+				* Hive Chimes! This is a sonification project, which basically means turning non-musical data into sounds for the sake of analysis and/or enjoyment. There is a folder in the repo (assignments/1/hive_chimes) where data about bees going in and out of a hive appear. Your task is to come up with a strategy for how to turn these events into Tone.js sounds, such that trends in the data can be heard. To start you off, assignments/1/hive_chimes/example_instrument.html shows how to build an instrument with some wind chime samples.
 *	Assignment 2 - Web-based Essay: Based on your developing Web programming skills and course reading/research to date (beginning of March), Assignment 2 provides the opportunity to write an essay (1,000 words maximum) on one of the following topics:
     *	"Top 5" score-following apps, including links, descriptions, and justification of rank;
     *	"Top 10" music databases, including links, descriptions, and justification of rank;
@@ -150,4 +152,4 @@ The following list is roughly in the order in which you should read the items. W
 ## Acknowledgments
 With thanks to Dr. Carlisle for help with course design.
 
-Last modified: January 11, 2018
+Last modified: January 30, 2018

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+ <title>Page Title</title>
+ <script src="./Tone.min_r11.js"></script>
+</head>
+
+<body>
+ <script type="text/javascript">
+  // Define a Tone.js Sampler.
+  var sampler = new Tone.Sampler({
+   "C3": "./chime_samples/95750__3bagbrew__barn-chime1.wav",
+   "D#3": "./chime_samples/95751__3bagbrew__barn-chime2.wav",
+   "F#3": "./chime_samples/95756__3bagbrew__barn-chime3.wav",
+   "A3": "./chime_samples/95752__3bagbrew__barn-chime4.wav"
+  }, function(){
+   // Can put something here once resources have loaded if you like.
+   
+  }).toMaster();
+  // Sounds fade out smoothly (takes 4 sec).
+  sampler.release = 4;
+  
+  // Example use of Tone.Transport.schedule and triggerAttackRelease to specify
+  // events should happen at certain times.
+  // If the sampler doesn't have a certain pitch, Tone.js will repitch the
+  // closest sample.
+  Tone.Transport.schedule(function(time){
+   sampler.triggerAttackRelease("C3", 2, time, 0.25);
+   console.log('hello at 1 sec.');
+  }, 1);
+  Tone.Transport.schedule(function(time){
+   sampler.triggerAttackRelease("E3", 2, time, 0.25);
+   console.log('hello at 1 sec.');
+  }, 1);
+  Tone.Transport.schedule(function(time){
+   sampler.triggerAttackRelease("G3", 2, time, 0.25);
+   console.log('hello at 1 sec.');
+  }, 3);
+  
+  // Start the Transport.
+  Tone.Transport.start();
+ </script>
+
+
+</body>
+</html>
