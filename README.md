@@ -130,7 +130,7 @@ The following list is roughly in the order in which you should read the items. W
 | | Coding: MuseScore, MCStylistic, and PattDisc | |
 | 4. 2/15/17, ER | Pitch | Ch. 4 and 5 of Deutsch, Shepard (1964) |
 | | Coding: PatternViewer toward Assignment 1 and/or student-led | |
-| 5. 2/22/17, PDM | Automatic Generation of Music | Ch. 8 of Deutsch, Conklin and Witten (1995), Collins and Laney (2017) |
+| 5. 2/22/17, PDM | Automatic Generation of Music | Ch. 8 of Deutsch, Grachten and Widmer (2012), Collins and Laney (2017) |
 | | Coding: PatternViewer toward Assignment 1 and/or student-led | |
 | 2/26/17 at 12 noon | |	Assignment 1 due |
 | 6. 3/1/17, AGR | Rhythm, Beat-tracking, and Quantization | Ch. 9 of Deutsch, Krebs, B&ouml;ck, and Widmer (2013) |
