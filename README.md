@@ -144,7 +144,7 @@ The following list is roughly in the order in which you should read the items. W
 | 9. 3/29/17, TV | Fingerprinting (or "How Shazam Works") | Wang and Smith III (2006/2000), Arzt, B&ouml;ck, and Widmer (2012) |
 | 10. 4/5/17, MI | Repetition, Repetition, Repetition | Meredith, Lemstr&ouml;m, and Wiggins (2002), Collins, Artz, Frostel, and Widmer (2016) |
 | 11. 4/12/17, PDM | Musical Expectation I | Ch. 1-6 of Huron |
-| 12. 4/19/17, AT | Musical Expectation II | Ch. 7-11 of Huron, M&uuml;llensiefen and Halpern (2014) |
+| 12. 4/19/17, AT | Musical Expectation II | Ch. 7-11 of Huron, Barrett and Janata (2016) |
 | 13. 4/26/17, TC | Presentations | |
 | 4/30/17 at 12 noon | | Assignment 3 due |
 | 14. 5/3/17, TC | Musical Expectation III | Ch. 12-17 of Huron |
