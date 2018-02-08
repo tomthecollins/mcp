@@ -8,7 +8,7 @@ aspects of it. For instance,
 \nameref{fun:kern-file2ontimes-signatures} will
 identify all the time signature changes in a kern
 file and convert them to a list of bar numbers where
-they occur, and what they consist of. |#
+they occur, and what they consist of.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -26,6 +26,7 @@ they occur, and what they consist of. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

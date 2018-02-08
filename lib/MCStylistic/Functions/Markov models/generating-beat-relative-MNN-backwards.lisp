@@ -20,7 +20,7 @@ arguments. The main criterion that has been tested for
 too many consecutive states coming from the same
 source. It is not clear whether having to control for
 range or expectancy (as in Racchman-Oct2010) is
-necessary here. |#
+necessary here.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -101,6 +101,7 @@ necessary here. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

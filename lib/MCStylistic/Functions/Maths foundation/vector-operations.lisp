@@ -4,7 +4,7 @@
 
 Common things we do to vectors, such as taking
 norms, calculating dot products and distance
-functions. |#
+functions.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -22,6 +22,7 @@ functions. |#
    :name "sort-by"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

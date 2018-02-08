@@ -8,7 +8,7 @@ dataset. The main function is
 \nameref{fun:kern-file2dataset-by-col}. Conflicts
 between kern's relative encoding and the absolute
 parsing (which affected the function
-\nameref{fun:kern-file2dataset}) have been resolved. |#
+\nameref{fun:kern-file2dataset}) have been resolved.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -17,6 +17,13 @@ parsing (which affected the function
   (make-pathname
    :directory '(:relative "File conversion")
    :name "director-musices"
+   :type "lisp")
+  *MCStylistic-MonthYear-functions-path*))
+(load
+ (merge-pathnames
+  (make-pathname
+   :directory '(:relative "Markov models")
+   :name "generating-with-patterns-preliminaries"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
 (load
@@ -61,6 +68,7 @@ parsing (which affected the function
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

@@ -4,7 +4,7 @@
 
 \noindent The functions below will write a variable
 to a text file, and read such text files back in as
-lists. |#
+lists.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -12,9 +12,10 @@ lists. |#
    (merge-pathnames
     (make-pathname
    :directory '(:relative "Third party" "cl-fad")
-   :name "load"
+   :name "fad2"
    :type "lisp")
     *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -188,7 +189,8 @@ argument by the third argument. |#
              'string
              (subseq string 0 pos)
              replacement
-             (subseq string (+ pos (length part))))))))
+             (subseq
+              string (+ pos (length part))))))))
   (if string-with-replacement
     string-with-replacement string))
 
@@ -232,7 +234,7 @@ preserved. |#
              (pathname-name path&name) " "
              (write-to-string filename-counter))
             :type (pathname-type path&name))
-           (cl-fad:pathname-directory-pathname
+           (pathname-directory-pathname
              path&name)))))
   (progn
     (rplacd (assoc (car updatee) list-to-update
@@ -249,7 +251,7 @@ preserved. |#
         (pathname-name path&name) " "
         (write-to-string filename-counter))
        :type (pathname-type path&name))
-      (cl-fad:pathname-directory-pathname
+      (pathname-directory-pathname
        path&name)))))
 
 #|

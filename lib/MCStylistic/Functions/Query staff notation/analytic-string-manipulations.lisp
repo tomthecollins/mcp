@@ -5,7 +5,7 @@
 \noindent The functions below are for converting
 string-based representations of quantity into
 numeric representations, and for splitting question
-strings into $n$ components. |#
+strings into $n$ components.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -23,6 +23,7 @@ strings into $n$ components. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -277,194 +278,6 @@ embedded in the function
        (list numberless-question-string)
        (if (zerop i) time-interval (list 0))))
     (append (list question-string) time-interval)))
-
-#|
-\noindent Example:
-\begin{verbatim}
-(edit-out-duration-of-question-string
- "dotted crotchet C4")
---> "C4"
-(edit-out-duration-of-question-string
- "C4 dotted crotchet in the oboe")
---> "C4   in the oboe"
-\end{verbatim}
-
-\noindent This function, new for Stravinsqi-Jun2015,
-removes any mention of a musical duration from an input
-string, returning whatever remains of the string. As the
-second example shows, it could be improved by removing
-extra white spaces, which (might) otherwise lead to
-errors in subsequent processing. |#
-
-(defun edit-out-duration-of-question-string
-       (question-string &optional
-        (question-string
-         (replace-all
-          question-string "triple dotted" ""
-          :test #'string=))        
-        (question-string
-         (replace-all
-          question-string "double dotted" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "dotted" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "triplet" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "quintuplet" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "septuplet" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "hemidemisemiquaver" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "sixty-fourth note" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "demisemiquaver" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "thirty-second note" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "semiquaver" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "sixteenth note" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "quaver" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "eighth note" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "crotchet" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "quarter note" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "minim" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "half note" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "semibreve" ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "whole note" ""
-          :test #'string=)))
-  (string-trim " " question-string))
-
-#| Old version with specific space.
-(defun edit-out-duration-of-question-string
-       (question-string &optional
-        (question-string
-         (replace-all
-          question-string "triple dotted " ""
-          :test #'string=))        
-        (question-string
-         (replace-all
-          question-string "double dotted " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "dotted " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "triplet " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "quintuplet " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "septuplet " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "hemidemisemiquaver " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "sixty-fourth note " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "demisemiquaver " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "thirty-second note " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "semiquaver " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "sixteenth note " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "quaver " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "eighth note " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "crotchet " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "quarter note " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "minim " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "half note " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "semibreve " ""
-          :test #'string=))
-        (question-string
-         (replace-all
-          question-string "whole note " ""
-          :test #'string=)))
-  question-string)
-|#
 
 #|
 \noindent Example:
@@ -997,23 +810,6 @@ processing. |#
      (list
       (number&note2time-interval question-string)))))
 |#
-
-#|
-\noindent Example:
-\begin{verbatim}
-(my-last-string "F#5")
---> "5"
-(my-last-string "")
---> ""
-\end{verbatim}
-
-\noindent This function returns the last element of a
-string as a string. |#
-
-(defun my-last-string
-       (a-string &optional (n (length a-string)))
-  (if (zerop (length a-string)) ""
-    (subseq a-string (- n 1))))
 
 #|
 \noindent Example:

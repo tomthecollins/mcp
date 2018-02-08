@@ -6,7 +6,7 @@
 generated using a backwards running Markov chain Monte
 Carlo into datapoints. The functions have similar
 versions in the files realising-states.lisp and
-markov-compose.lisp. |#
+markov-compose.lisp.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -31,6 +31,7 @@ markov-compose.lisp. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

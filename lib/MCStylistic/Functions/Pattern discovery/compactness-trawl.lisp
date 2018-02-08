@@ -6,7 +6,7 @@ discovered patterns (usually MTPs) from beginning to
 end. They return subpatterns that have compactness
 \citep{meredith2003} and cardinality greater than
 thresholds that can be specified
-\citep{collins2010b}. |#
+\citep{collins2010b}.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -45,6 +45,7 @@ thresholds that can be specified
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

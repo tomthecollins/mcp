@@ -8,7 +8,7 @@ dataset. The main function is kern-file2dataset.
 Occasionally there are conflicts between kern's
 relative encoding and the timewise parsing function.
 These have been resolved by the function
-\nameref{fun:kern-file2dataset-by-col}. |#
+\nameref{fun:kern-file2dataset-by-col}.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -33,6 +33,7 @@ These have been resolved by the function
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -69,7 +70,9 @@ function \nameref{fun:kern-rows2col}. |#
 --> "put us together"
 \end{verbatim}
 
-\noindent This function by \href{http://stackoverflow.com/questions/5457346/lisp-function-to-concatenate-a-list-of-strings
+\noindent This function by \href{http://stackoverflow
+.com/questions/5457346/
+lisp-function-to-concatenate-a-list-of-strings
 }{Svante} concatenates a list of strings, ignoring
 elements of the list that are not strings. |#
 
@@ -380,7 +383,8 @@ of articulation. |#
 
 (defun not-articulation-char-p (a-char)
   (if (find
-       a-char '(#\~ #\' #\^ #\; #\( #\)) :test #'equalp)
+       a-char '(#\~ #\' #\^ #\; #\( #\))
+       :test #'equalp)
     (identity nil) (identity t)))
 
 #|

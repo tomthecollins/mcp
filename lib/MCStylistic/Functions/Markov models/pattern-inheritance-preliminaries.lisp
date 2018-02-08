@@ -10,7 +10,7 @@ occurrences, MTP vectors, rating, compactness,
 expected occurrences, compression ratio, pattern,
 region, and translators. The most important function
 in this file is called prepare-for-pattern-
-inheritance. |#
+inheritance.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -49,6 +49,7 @@ inheritance. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -147,6 +148,27 @@ inheritance. |#
         (norm-coeffs
 	 (list 73.5383283152 0.02114878519)))
   (subset-scores-of-patterns+
+   (remove-temporally-overlapping-points-of-patterns
+    (remove-patterns-equalp-trans&intersect
+     (remove-overlapping-translators-of-patterns
+      (translate-patterns-to-1st-occurrences
+       (evaluate-variables-of-patterns2hash
+        (remove-patterns-shorter-than
+         pattern-compact-vec-triples
+         duration-threshold)
+        projected-dataset coefficients
+        norm-coeffs)))))))
+
+#| Old version.
+(defun prepare-for-pattern-inheritance
+       (pattern-compact-vec-triples projected-dataset
+        &optional (duration-threshold 3)
+        (coefficients
+	 (list 4.277867 3.422478734 -0.038536808
+	       0.651073171))
+        (norm-coeffs
+	 (list 73.5383283152 0.02114878519)))
+  (subset-scores-of-patterns+
    (remove-patterns-equalp-trans&intersect
     (remove-overlapping-translators-of-patterns
      (translate-patterns-to-1st-occurrences
@@ -156,6 +178,7 @@ inheritance. |#
         duration-threshold)
        projected-dataset coefficients
        norm-coeffs))))))
+|#
 
 #|
 \noindent Example:
@@ -333,6 +356,148 @@ appear in the output of this function. |#
       (remove-patterns-shorter-than
         (rest pattern-compact-vec-triples)
         duration-threshold))))
+
+#|
+\noindent Example:
+\begin{verbatim}
+(setq pattern '((0 60 1) (1 58 1) (2 60 2) (4 63 1)))
+(setq translators '((0 0 0) (2 -7 0) (4 0 0)))
+(remove-temporally-overlapping-points
+ pattern translators)
+--> ((0 60 1) (1 58 1))
+\end{verbatim}
+
+\noindent This function determines whether points from
+the end of a pattern will overlap temporally with
+points from the beginning of any subsequent
+occurences. Such overlapping points are removed. |#
+
+(defun remove-temporally-overlapping-points
+       (pattern translators &optional (ontime-index 0)
+        (next-occ
+         (if (> (length translators) 1)
+           (translation
+            pattern (second translators))))
+        (pattern-trunc
+         (if next-occ
+           (loop for i from 0
+             to (- (length pattern) 1)
+             when
+             (<
+              (nth ontime-index (nth i pattern))
+              (nth ontime-index (first next-occ)))
+             collect (nth i pattern)))))
+  (if (null next-occ) pattern
+    (remove-temporally-overlapping-points
+     pattern-trunc (rest translators) ontime-index)))
+
+#|
+\noindent Example:
+\begin{verbatim}
+(setq
+ patterns-hash
+ (read-from-file-balanced-hash-table
+  (merge-pathnames
+   (make-pathname
+   :name "patterns-hash" :type "txt")
+  *MCStylistic-MonthYear-example-files-data-path*)))
+(setq
+ patterns-hash
+ (remove-temporally-overlapping-points-of-patterns
+  patterns-hash))
+--> gives a hash table called patterns-hash.
+\end{verbatim}
+
+\noindent This function applies the function
+remove-temporally-overlapping-points recursively to a
+list consisting of hash tables. Each hash table
+contains information about a discovered pattern, as
+returned by the function
+evaluate-variables-of-patterns2hash. The output is an
+updated hash table.
+
+The function also updates the region in the same way,
+so that these do not overlap with subsequent
+occurrences also. |#
+
+(defun
+    remove-temporally-overlapping-points-of-patterns
+    (patterns-hash &optional
+     (pattern-hash (first patterns-hash))
+     (pattern
+      (if pattern-hash
+        (gethash '"pattern" pattern-hash)))
+     (translators
+      (if pattern-hash
+        (gethash '"translators" pattern-hash)))
+     (new-pattern
+      (if pattern-hash
+        (remove-temporally-overlapping-points
+         pattern translators)))
+     (new-region
+      (if pattern-hash
+        (remove-temporally-overlapping-points
+         (gethash '"region" pattern-hash)
+         translators))))
+  (if (null patterns-hash) ()
+    (if new-pattern
+      (cons
+       (progn
+         (setf
+          (gethash '"pattern" pattern-hash)
+          new-pattern)
+         (setf
+          (gethash '"region" pattern-hash)
+          new-region)
+         pattern-hash)
+     (remove-temporally-overlapping-points-of-patterns
+        (rest patterns-hash)))
+     (remove-temporally-overlapping-points-of-patterns
+       (rest patterns-hash)))))
+
+#| Old version focused on adjacent pairs of
+occurrences and removing overlaps there.
+(setq pattern '((0 60 1) (1 58 1) (2 60 2) (4 63 1)))
+(setq translators '((0 0 0) (4 -7 0) (8 0 0)))
+(remove-temporally-overlapping-points
+ pattern translators)
+--> (((0 60 1) (1 58 1) (2 60 2))
+     ((4 67 1) (5 65 1) (6 67 2) (8 74 1))
+     ((8 60 1) (9 58 1) (10 60 2) (12 67 1)))
+
+(defun remove-temporally-overlapping-points
+       (pattern translators &optional (ontime-index 0)
+        (accumulated-occ nil)
+        (curr-occ
+         (if translators
+           (translation pattern (first translators))))
+        (next-occ
+         (if (> (length translators) 1)
+           (translation
+            pattern (second translators))))
+        (curr-occ-trunc
+         (if next-occ
+           (loop for i from 0
+             to (- (length curr-occ) 1)
+             when
+             (<
+              (nth ontime-index (nth i curr-occ))
+              (nth ontime-index (first next-occ)))
+             collect (nth i curr-occ))))
+        (accumulated-occ
+         (if accumulated-occ
+           (if curr-occ-trunc
+             (append
+              accumulated-occ (list curr-occ-trunc))
+             accumulated-occ)
+           (list curr-occ-trunc))))
+  (if (null next-occ)
+    (append accumulated-occ (list curr-occ))
+    (remove-temporally-overlapping-points
+     pattern (rest translators) ontime-index
+     accumulated-occ next-occ)))
+|#
+
 
 #|
 \noindent Example:

@@ -1,0 +1,23 @@
+# Config file for Musical PatternViewer Version 1.0 by Ali Nikrang, Tom Collins, and Gerhard Widmer
+# ‘Fantasie Impromptu’ by Chopin.
+# Set this to 1 in order to use a performance-score alignment.
+HAS_SAMPLE_TIME_DATA:1
+# Set this to 1 in order to use morphetic pitch numbers for displaying repeated patterns rather than MIDI note numbers.
+USE_MORPHETIC_PITCH_FOR_PATTERNS:0
+# If you are not using a performance-score alignment, put the tempo of the synthesised performance here in bpm.
+AUDIO_FILE_TEMPO:0
+# If you are not using a performance-score alignment and the piece has an anacrusis, put the bar length of the anacrusis here (e.g., 3 for a piece in 3/4).
+ANACRUSIS_VALUE:0
+# Filename for the symbolic representation of the piece. Source: https://musescore.com/user/263346/scores/1223091.
+CSV_FILE_IN_FOLDER:Fantaisie-impromptu_Op.66_-_Chopin_synch.csv
+# Filename for the symbolic representation of the repeated patterns.
+PATTERN_FILE_IN_FOLDER:patterns.txt
+# Filename for the audio representation of the piece (can be wav, mp3, aiff). Source: https://www.youtube.com/watch?v=75x6DncZDgI
+SOUND_FILE_IN_FOLDER:Chopin_Rubinstein.mp3
+# Controls for coloured dot display (top right of interface)
+# Control the x-zoom (e.g., .8 is twice as zoomed-in as .4).
+VISUALIZATION_X_SCALE_FACTOR:2
+# Control the y-zoom (e.g., .8 is twice as zoomed-in as .4).
+VISUALIZATION_Y_SCALE_FACTOR:.8
+# Control the y-position (e.g., -600 is further down the screen than -300).
+VISUALIZATION_Y_POSITION:-650

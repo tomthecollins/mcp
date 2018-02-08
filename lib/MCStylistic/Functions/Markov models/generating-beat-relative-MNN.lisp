@@ -22,7 +22,7 @@ source. It is not clear whether having to control for
 range or expectancy (as in Racchman-Oct2010) is
 necessary here. Some unusual pauses have been noted in
 the output already, however, so this will need
-checking. |#
+checking.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -96,6 +96,7 @@ checking. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

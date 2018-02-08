@@ -9,7 +9,7 @@ key profiles described by \citet*{krumhansl1982} and
 calculated keyscapes. The function
 \ref{fun:fifth-steps-mode} is an implementation of the
 Krumhansl-Schmuckler key-finding algorithm
-\citep*{krumhansl1990}. |#
+\citep*{krumhansl1990}.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -54,6 +54,7 @@ Krumhansl-Schmuckler key-finding algorithm
   'string
   "/Applications/CCL/Lisp code/Maths foundation"
   "/vector-operations.lisp"))
+|#
 |#
 
 (defvar

@@ -4,7 +4,7 @@
 
 \noindent The functions below aim towards computing
 the convex hull of a set of points in the plane
-according to the Graham scan algorithm. |#
+according to the Graham scan algorithm.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -36,6 +36,7 @@ according to the Graham scan algorithm. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

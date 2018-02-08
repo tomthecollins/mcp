@@ -1,6 +1,6 @@
 #| Copyright 2008-2013 Tom Collins
    Tuesday 17 November 2009
-   Incomplete |#
+   Incomplete
 
 ; REQUIRED PACAKGES
 ; (in-package :common-lisp-user)
@@ -11,6 +11,7 @@
    :name "structural-induction-merge"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #| Example:
 (check-pitch&octave "C3")
@@ -456,7 +457,7 @@ strings "" or non-pitch-and-octave strings. |#
              pitch
              '(
                ("B#" (12 6)) ("C" (0 0)) ("Dbb" (0 1))
-               ("B##" (13 6)) ("C#" (1 0)) ("Db" (1 1))
+              ("B##" (13 6)) ("C#" (1 0)) ("Db" (1 1))
                ("C##" (2 0)) ("D" (2 1)) ("Ebb" (2 2))
                ("D#" (3 1)) ("Eb" (3 2)) ("Fbb" (3 3))
                ("D##" (4 1)) ("E" (4 2)) ("Fb" (4 3))

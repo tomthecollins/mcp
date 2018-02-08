@@ -5,7 +5,7 @@
 The functions below will parse a kern file
 (http://kern.ccarh.org/) by column and convert the
 rests therein to a point set. The main function is
-\nameref{fun:kern-file2rest-set-by-col}. |#
+\nameref{fun:kern-file2rest-set-by-col}.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -37,6 +37,7 @@ rests therein to a point set. The main function is
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -95,7 +96,8 @@ C@merata task. |#
           (- (length dataset) 1) when
           (and
            (stringp (second (nth i dataset)))
-           (string= (second (nth i dataset)) "rest"))
+           (string=
+            (second (nth i dataset)) "rest"))
           collect
           (list
            (first (nth i dataset))
@@ -148,9 +150,9 @@ pairs of points (rests) that have the duration
 specified by the first string argument. It can be in
 the format `dotted minim rest' or `dotted half note
 rest', for instance. The function does not look for
-dotted rests in the case of the word dotted, but adds
-one half of the value to the corresponding rest type
-and looks for the numeric value. |#
+dotted rests in the case of the word dotted, but
+adds one half of the value to the corresponding rest
+type and looks for the numeric value. |#
 
 (defun rest-duration-time-intervals
        (question-string point-set staff&clef-names
@@ -162,7 +164,8 @@ and looks for the numeric value. |#
          (search " rest" question-string))
         (val
          (if rest-tf
-           (duration-string2numeric question-string)))
+           (duration-string2numeric
+            question-string)))
         ; modify question by any staff restriction.
         (question-string&staff-idx
          (modify-question-by-staff-restriction

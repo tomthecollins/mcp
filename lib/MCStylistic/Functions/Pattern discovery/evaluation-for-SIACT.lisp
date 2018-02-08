@@ -3,7 +3,7 @@
 
 The purpose of these functions is to rate the trawled
 patterns, according to the formula for perceived
-pattern importance \citep{collins2011a}. |#
+pattern importance \citep{collins2011a}.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -49,6 +49,7 @@ pattern importance \citep{collins2011a}. |#
    :name "structural-induction-mod"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

@@ -9,7 +9,7 @@ operations). At present they do not take correct pitch
 spelling into account. For instance, the operations
 `LPL' and `PLP' map C major to G$\sharp$ minor and
 A$\flat$ minor respectively, but both will be
-represented by pitch class 8. |#
+represented by pitch class 8.
  
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -20,6 +20,7 @@ represented by pitch class 8. |#
    :name "list-processing"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

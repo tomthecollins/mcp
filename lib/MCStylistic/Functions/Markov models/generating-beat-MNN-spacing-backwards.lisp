@@ -12,7 +12,7 @@ optional arguments. The criteria are things like: not
 too many consecutive states from the same source, the
 range is comparable with that of the template, and the
 likelihood of the states is comparable with that of
-the template. |#
+the template.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -93,6 +93,7 @@ the template. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 ;(defvar *rs* (make-random-state t))
 

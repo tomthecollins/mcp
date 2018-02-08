@@ -3,7 +3,7 @@
 
 The main functions of use here are for creating
 projections of datasets \citep{meredith2002}, which
-is a precursor to pattern discovery. |#
+is a precursor to pattern discovery.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -21,6 +21,7 @@ is a precursor to pattern discovery. |#
    :name "set-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

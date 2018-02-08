@@ -7,7 +7,7 @@ build different types of states. One, output by the
 function spacing-holding-states, consists of chord
 spacing and holding types. Another, output by the
 function beat-spacing-states, consists of beat-of-bar
-and chord spacing. |#
+and chord spacing.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -18,6 +18,7 @@ and chord spacing. |#
    :name "segmentation"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

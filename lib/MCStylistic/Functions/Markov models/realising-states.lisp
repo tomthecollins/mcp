@@ -5,7 +5,7 @@
 \noindent These functions are used to convert states
 generated using Markov-chain Monte Carlo into
 datapoints. A lot of the functions have similar
-versions in the file markov-compose.lisp. |#
+versions in the file markov-compose.lisp.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -30,6 +30,7 @@ versions in the file markov-compose.lisp. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

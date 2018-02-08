@@ -13,7 +13,7 @@ number of beats per bar); the third item is the
 lower number of the time signature (specifying the
 division used to count time, with 4 for crotchet,
 etc.); the fourth item is the corresponding
-ontime. |#
+ontime.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -24,6 +24,7 @@ ontime. |#
    :name "list-processing"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -116,8 +117,9 @@ numbers are expressed in crotchets counting from one
      ontime)
     (list 0 anacrusis-beat ontime)))
 
-#| This version did not work so well for an anacrusis
-when the bottom no. was something other than 4.
+#| This version did not work so well for an
+anacrusis when the bottom no. was something other
+than 4.
 (defun bar&beat-number-of-ontime
        (ontime time-sigs-with-ontimes &optional
         (n (length time-sigs-with-ontimes))
@@ -148,7 +150,8 @@ when the bottom no. was something other than 4.
     (list 0 anacrusis-beat ontime)))
 |#
 
-#| Old version could not handle ontimes less than zero.
+#| Old version could not handle ontimes less than
+zero.
 (defun bar&beat-number-of-ontime
        (ontime time-sigs-with-ontimes &optional
         (n (length time-sigs-with-ontimes))
@@ -265,12 +268,13 @@ signatures) of the maximal bar number less than or
 equal to the bar number argument. |#
 
 (defun row-of-max-bar<=bar-arg
-       (bar time-sigs-with-ontimes
-        &optional (n (length time-sigs-with-ontimes))
+       (bar time-sigs-with-ontimes &optional
+        (n (length time-sigs-with-ontimes))
         (i 0))
   (if (or (>= i n)
           (< bar
-             (first (nth i time-sigs-with-ontimes))))
+             (first
+              (nth i time-sigs-with-ontimes))))
     (if (equalp bar
                 (first
 		 (first time-sigs-with-ontimes)))
@@ -288,8 +292,8 @@ equal to the bar number argument. |#
 \end{verbatim}
 
 \noindent Returns the row (in a list of time
-signatures) of the maximal ontime less than or equal to
-the ontime argument.
+signatures) of the maximal ontime less than or equal
+to the ontime argument.
 
 2/1/2015. Added handling of negative ontimes
 (e.g., representing an anacrusis). |#

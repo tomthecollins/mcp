@@ -5,7 +5,7 @@ These functions make it possible to form empirical
 $n$-dimensional distributions. One of the applications
 of these empirical distributions is to adapt pattern
 interest \citep*{conklin2008a} for polyphonic
-music. |#
+music.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -37,6 +37,7 @@ music. |#
    :name "structural-induction-mod"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

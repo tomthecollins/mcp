@@ -3,7 +3,7 @@
 
 The aim of these functions is to provide support for
 the implementation of COSIATEC
-\citep{meredith2003,forth2009}. |#
+\citep{meredith2003,forth2009}.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -49,6 +49,7 @@ the implementation of COSIATEC
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

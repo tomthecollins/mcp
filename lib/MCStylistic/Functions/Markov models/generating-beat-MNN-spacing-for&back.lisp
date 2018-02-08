@@ -16,7 +16,7 @@ template likelihood profile is minimal.
 The criteria are things like: not too many consecutive
 states from the same source, the range is comparable
 with that of the template, and the likelihood of the
-states is comparable with that of the template. |#
+states is comparable with that of the template.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -83,6 +83,7 @@ states is comparable with that of the template. |#
    :name "spacing-states"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

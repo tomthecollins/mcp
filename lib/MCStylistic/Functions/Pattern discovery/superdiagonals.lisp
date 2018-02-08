@@ -6,7 +6,7 @@
 induction algorithm using merge sort, and with
 calculation of difference vectors restricted to the
 first $r$ superdiagonals of the dataset's similarity
-matrix. |#
+matrix.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -31,6 +31,7 @@ matrix. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

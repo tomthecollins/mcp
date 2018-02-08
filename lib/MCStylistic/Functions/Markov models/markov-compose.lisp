@@ -46,7 +46,6 @@ states2datapoints.
  (scale-datapoints-by-factor 1 *datapoints*))
 (saveit
  "/Users/tomcollins/Desktop/short.mid" *events*)
-|#
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -78,6 +77,7 @@ states2datapoints.
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 ;(defvar *rs* (make-random-state t))
 

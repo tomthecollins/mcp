@@ -2,7 +2,7 @@
    Friday 22 October 2010
    Incomplete
 
-\noindent Yes. |#
+\noindent Yes.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -46,6 +46,7 @@
    :name "structural-induction-merge"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -260,6 +261,59 @@ one bar in length. |#
          (merge-sort-by-vector<vector-car
           (subseq sequence half))
          #'vector<vector-car))))
+
+#|
+\noindent Example:
+\begin{verbatim}
+(setq input-datapoints '((0 60) (0 72) (8 86)))
+(setq MNN-min 41)
+(setq MNN-max 79)
+(transpose-to-sensible-range
+ input-datapoints MNN-min MNN-max)
+--> ((0 42) (0 54) (8 68)).
+\end{verbatim}
+
+\noindent This function identifies the lowest and
+highest MIDI note numbers in the input datapoints.
+It compares these to the minimum and maximum MIDI
+note numbers specified in the second and third
+arguments. If it's possible to transpose the input
+datapoints, given the range of the specified
+minimum and maximum datapoints, then the function
+choses a transposition at random and outputs the
+transposed datapoints. |#
+
+(defun transpose-to-sensible-range
+       (input-datapoints MNN-min MNN-max
+        &optional
+        (MNN-idx 1)
+        (inp-MNNs
+         (nth-list-of-lists
+          MNN-idx input-datapoints))
+        (inp-min
+         (min-item inp-MNNs))
+        (inp-max
+         (max-item inp-MNNs))
+        (range-begin (- MNN-min inp-min))
+        (range-end (- MNN-max inp-max))
+        (poss-transpositions
+         (loop for i from range-begin to range-end
+           collect i))
+        (rand-trans
+         (if poss-transpositions
+             (choose-one poss-transpositions)))
+        (trans-vec
+         (if rand-trans
+           (add-to-nth
+            rand-trans (+ MNN-idx 1)
+            (constant-vector
+             0
+             (length (first input-datapoints)))))))
+  (if trans-vec
+    (translation input-datapoints trans-vec)
+    (concatenate 'string
+     "Could not transpose the datapoints given"
+     " range constraints.")))
 
 #|
 \noindent Example:

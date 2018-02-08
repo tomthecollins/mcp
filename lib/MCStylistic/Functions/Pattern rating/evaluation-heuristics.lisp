@@ -3,7 +3,7 @@
 
 These functions implement definitions of coverage,
 compactness, and compression ratio
-\citep{meredith2003,forth2009}. |#
+\citep{meredith2003,forth2009}.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -42,6 +42,7 @@ compactness, and compression ratio
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

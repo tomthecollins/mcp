@@ -7,7 +7,7 @@ those contained in the file markov-analyse.lisp.
 Whereas those functions are designed to analyse
 data according to a Markov-chain model that runs
 forward in time, these functions do the same for going
-backwards in time. |#
+backwards in time.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -39,6 +39,7 @@ backwards in time. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

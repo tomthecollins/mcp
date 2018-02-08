@@ -2,7 +2,7 @@
    Friday 1 October 2010
    Incomplete
 
-\noindent Functions for interpolation. |#
+\noindent Functions for interpolation.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -13,6 +13,7 @@
    :name "list-processing"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

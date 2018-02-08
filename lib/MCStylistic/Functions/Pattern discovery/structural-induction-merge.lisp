@@ -3,7 +3,7 @@
 
 These functions implement SIA (Structural Induction
 Algorithm, \citeauthor{meredith2002},
-\citeyear{meredith2002}) using a merge sort. |#
+\citeyear{meredith2002}) using a merge sort.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -28,6 +28,7 @@ Algorithm, \citeauthor{meredith2002},
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

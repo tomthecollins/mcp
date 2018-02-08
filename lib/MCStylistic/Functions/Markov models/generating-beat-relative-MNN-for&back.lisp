@@ -5,7 +5,7 @@
 The main function here,
 \ref{fun:generate-rel-for-or-back-no-fail}, is an
 MNN-relative version of the function
-\ref{fun:generate-forward-or-back-no-fail}. |#
+\ref{fun:generate-forward-or-back-no-fail}.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -37,6 +37,7 @@ MNN-relative version of the function
    :name "segmentation"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

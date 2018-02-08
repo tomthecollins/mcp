@@ -3,7 +3,7 @@
    Completed Friday 8 August 2008
 
 \noindent The functions in this file culminate in the
-function sort-by. |#
+function sort-by.
 
 
 ; REQUIRED PACKAGES:
@@ -15,6 +15,7 @@ function sort-by. |#
    :name "list-processing"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -275,7 +276,8 @@ $x_2,\ldots$, $x_m$, and that this is the case for
 several such lists, appearing as the first $n$ entries
 in some list of lists. Then this function will return
 the value $n$. If index is empty, then the length of
-the list is returned. This has a bearing on higher-level functions. |#
+the list is returned. This has a bearing on
+higher-level functions. |#
 
 (defun nos-consecutives-with-fixed
        (fixed a-list &optional (i 1))

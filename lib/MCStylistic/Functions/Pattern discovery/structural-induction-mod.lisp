@@ -4,7 +4,7 @@
 The functions below include two early implementations
 of SIA (Structure induction algorithm,
 \citeauthor{meredith2002}, \citeyear{meredith2002}),
-one version working modulo $n$. |#
+one version working modulo $n$.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -12,7 +12,7 @@ one version working modulo $n$. |#
    (merge-pathnames
     (make-pathname
    :directory '(:relative "Third party" "cl-fad")
-   :name "load"
+   :name "fad2"
    :type "lisp")
     *MCStylistic-MonthYear-functions-path*))
 (load
@@ -43,6 +43,7 @@ one version working modulo $n$. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 ; (defvar *pitch-mod* 12)
 
@@ -84,7 +85,7 @@ row is returned. |#
               (pathname-name path&name) " "
               (write-to-string filename-counter))
              :type (pathname-type path&name))
-            (cl-fad:pathname-directory-pathname
+            (pathname-directory-pathname
              path&name))))
         (list-to-probe
          (read-from-file filename))
@@ -393,7 +394,7 @@ be created in the specified location. |#
           (pathname-name path&name) " "
           (write-to-string filename-counter))
          :type (pathname-type path&name))
-        (cl-fad:pathname-directory-pathname
+        (pathname-directory-pathname
          path&name)))
       (identity filename-counter))
     (if (null probe)
@@ -412,7 +413,7 @@ be created in the specified location. |#
               (pathname-name path&name) " "
               (write-to-string filename-counter))
              :type (pathname-type path&name))
-            (cl-fad:pathname-directory-pathname
+            (pathname-directory-pathname
              path&name)))
 	  (SIA-reflected
 	   dataset path&name partition-size
@@ -501,7 +502,7 @@ in the specified location. |#
           (pathname-name path&name) " "
           (write-to-string filename-counter))
          :type (pathname-type path&name))
-        (cl-fad:pathname-directory-pathname
+        (pathname-directory-pathname
          path&name)))
       (identity filename-counter))
     (if (null probe)
@@ -520,7 +521,7 @@ in the specified location. |#
               (pathname-name path&name) " "
               (write-to-string filename-counter))
              :type (pathname-type path&name))
-            (cl-fad:pathname-directory-pathname
+            (pathname-directory-pathname
              path&name)))
 	  (SIA-reflected-mod-2nd-n
 	   dataset n path&name partition-size

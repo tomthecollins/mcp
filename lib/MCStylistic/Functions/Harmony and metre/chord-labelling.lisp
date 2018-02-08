@@ -5,7 +5,7 @@
 \noindent An implementation of the HarmAn algorithm
 as described by \cite{pardo2002}, as well as an
 extension of this algorithm to provide
-functional-harmonic analysis. |#
+functional-harmonic analysis.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -72,6 +72,7 @@ functional-harmonic analysis. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 (defvar
  *chord-templates-pardo&birmingham*
@@ -872,13 +873,16 @@ several adjoining time windows will be returned. |#
           
           ))
         )
-  (if duration-qualifier
-    (loop for int in relevant-time-intervals when
-      ; Was equalp but needs rethinking.
-      (<=
-       (- (second int) (first int)) duration-qualifier)
-      collect int)
-    relevant-time-intervals))
+  (progn
+    question-string ; Just to avoid warning msg.
+    (if duration-qualifier
+        (loop for int in relevant-time-intervals
+          when
+          ; Was equalp but needs rethinking.
+          (<=
+           (- (second int) (first int)) duration-qualifier)
+          collect int)
+        relevant-time-intervals)))
 
 #|
 \noindent Example:

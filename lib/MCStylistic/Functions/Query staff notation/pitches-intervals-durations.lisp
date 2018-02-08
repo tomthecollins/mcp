@@ -3,9 +3,9 @@
    Incomplete
 
 \noindent The functions below will parse a point set
-representation of a piece/excerpt of music and return
-times at which pitches, intervals or durations
-specified by a string argument occur. |#
+representation of a piece/excerpt of music and
+return times at which pitches, intervals or
+durations specified by a string argument occur.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -44,6 +44,7 @@ specified by a string argument occur. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 (defvar
  *pitch-class-MNN-MPN-mod-assoc*
@@ -69,7 +70,8 @@ specified by a string argument occur. |#
 (setq
  artic-set
  '((3/2 59 59 1/2 2 NIL NIL NIL)
-   (2 50 54 1 3 NIL NIL NIL) (2 57 58 1 2 NIL NIL NIL)
+   (2 50 54 1 3 NIL NIL NIL)
+   (2 57 58 1 2 NIL NIL NIL)
    (2 65 63 1 0 (";") NIL NIL)
    (2 66 63 1 1 NIL NIL NIL)))
 (articulation&event-time-intervals
@@ -77,11 +79,12 @@ specified by a string argument occur. |#
 --> ((2 3)).
 \end{verbatim}
 
-\noindent This function looks for expressive markings
-in the articulation dimension of an articulation point
-set and events specified in the question string. It
-returns time intervals corresponding to notes that are
-set to the expressive marking specified in the question
+\noindent This function looks for expressive
+markings in the articulation dimension of an
+articulation point set and events specified in the
+question string. It returns time intervals
+corresponding to notes that are set to the
+expressive marking specified in the question
 string and that instantiate the specified event. |#
 
 (defun articulation&event-time-intervals
@@ -99,7 +102,8 @@ string and that instantiate the specified event. |#
         (relevant-points
          (third q-split&artic-event&rel-points))
         (probe-event
-         (if question-split (second question-split)))
+         (if question-split
+             (second question-split)))
         (rel-intervals
          (if probe-artic
            (remove-duplicates
@@ -123,7 +127,8 @@ string and that instantiate the specified event. |#
                  (nth MNN-idx x)
                  (nth MPN-idx x)
                  (nth duration-idx x)
-                 (nth staff-idx x))) relevant-points)))
+                 (nth staff-idx x)))
+            relevant-points)))
         (ans-dur-pitch
          (if probe-artic
            (duration&pitch-class-time-intervals
@@ -166,7 +171,8 @@ string and that instantiate the specified event. |#
         (relevant-points
          (third q-split&artic-event&rel-points))
         (probe-event
-         (if question-split (second question-split)))
+         (if question-split
+             (second question-split)))
         (rel-intervals
          (if probe-artic
            (remove-duplicates
@@ -190,7 +196,8 @@ string and that instantiate the specified event. |#
                  (nth MNN-idx x)
                  (nth MPN-idx x)
                  (nth duration-idx x)
-                 (nth staff-idx x))) relevant-points)))
+                 (nth staff-idx x)))
+            relevant-points)))
         (ans-dur-pitch
          (if probe-artic
            (duration&pitch-class-time-intervals
@@ -244,7 +251,8 @@ string and that instantiate the specified event. |#
          (cond
           ((search "staccato " question-string) "'")
           ((search "marcato " question-string) "^")
-          ((search "fermata " question-string) ";")))
+          ((search "fermata "
+            question-string) ";")))
         (probe-event
          (if question-split
            (second question-split)))
@@ -328,10 +336,10 @@ pairs of points (notes) that have the duration and
 pitch class specified by the first string argument.
 Durations can be in the format ``dotted minim'' or
 ``dotted half note'', for instance. Pitc classes can
-be in the format  The function does not look for dotted
-notes in the case of the word dotted, but adds one
-half of the value to the corresponding note type and
-looks for the numeric value. |#
+be in the format  The function does not look for
+dotted notes in the case of the word dotted, but
+adds one half of the value to the corresponding note
+type and looks for the numeric value. |#
 
 (defun duration&pitch-class-time-intervals
        (question-string point-set staff&clef-names
@@ -401,7 +409,7 @@ looks for the numeric value. |#
              *pitch-class-MNN-MPN-mod-assoc*
              :test #'string=))
            pair-no-mod))
-        ; Set of ontime, mod MNN & MPN, dur, offtime.
+       ; Set of ontime, mod MNN & MPN, dur, offtime.
         (point-set-mod-n
          (if (null pair-no-mod)
            (mapcar
@@ -428,8 +436,9 @@ looks for the numeric value. |#
             point-set)))
         #| Get the points with the relevant duration
         and pitch. |#
-        #| Comment 28/11/2014. There should probably be
-        a remove-duplicates command in here somewhere. |#
+        #| Comment 28/11/2014. There should probably
+        be a remove-duplicates command in here
+        somewhere. |#
         (relevant-points
          (if (and val pair)
            (restrict-dataset-in-nth-to-xs
@@ -445,7 +454,8 @@ looks for the numeric value. |#
   (if relevant-points
     (mapcar
      #'(lambda (x)
-         (list (first x) (fifth x))) relevant-points)
+         (list (first x) (fifth x)))
+     relevant-points)
     (if (and val pair)
       "val and pair were true")))
 
@@ -465,9 +475,10 @@ looks for the numeric value. |#
 \noindent This function converts a duration
 expressed in string format into a numeric format.
 
-10/12/2015. Made an alteration because `dotted triplet
-quavers' (for example) were being processed as one, say
-`dotted', but not the other `triplet'. |#
+10/12/2015. Made an alteration because `dotted
+triplet quavers' (for example) were being processed
+as one, say `dotted', but not the other
+`triplet'. |#
 
 (defun duration-string2numeric
        (question-string &optional
@@ -525,15 +536,18 @@ quavers' (for example) were being processed as one, say
          (cond
           ((and
             base-dur
-            (search "triple dotted" question-string))
+            (search
+             "triple dotted" question-string))
            (* base-dur 15/8))
           ((and
             base-dur
-            (search "double dotted" question-string))
+            (search
+             "double dotted" question-string))
            (* base-dur 7/4))
           ((and
             base-dur
-            (search "dotted" question-string))
+            (search
+             "dotted" question-string))
            (* base-dur 3/2))
           (t
            base-dur))))
@@ -589,13 +603,13 @@ looks for the numeric value. |#
         (ontime-index 0) (duration-index 3)
         (staff-idx 4)
         #| Check that the question string does not
-        contain strings such as "staccato", "marcato",
-        "fermata", "rest", or a tie symbol. If it does,
-        this is not the function to use. This function
-        might still get called when processing
-        articulation or rests, but it will have had
-        these aspects removed and processed by a
-        different function. |#
+        contain strings such as "staccato",
+        "marcato", "fermata", "rest", or a tie
+        symbol. If it does, this is not the function
+        to use. This function might still get called
+        when processing articulation or rests, but
+        it will have had these aspects removed and
+        processed by a different function. |#
         (artic-lyric-rest-tie-tf
          (cond
           ((search "staccato" question-string) t)
@@ -608,7 +622,8 @@ looks for the numeric value. |#
         ; Convert the duration into numeric format.
         (val
          (if (not artic-lyric-rest-tie-tf)
-           (duration-string2numeric question-string)))
+           (duration-string2numeric
+            question-string)))
         ; modify question by any staff restriction.
         (question-string&staff-idx
          (if val
@@ -657,6 +672,194 @@ looks for the numeric value. |#
 #|
 \noindent Example:
 \begin{verbatim}
+(edit-out-duration-of-question-string
+ "dotted crotchet C4")
+--> "C4"
+(edit-out-duration-of-question-string
+ "C4 dotted crotchet in the oboe")
+--> "C4   in the oboe"
+\end{verbatim}
+
+\noindent This function, new for Stravinsqi-Jun2015,
+removes any mention of a musical duration from an input
+string, returning whatever remains of the string. As the
+second example shows, it could be improved by removing
+extra white spaces, which (might) otherwise lead to
+errors in subsequent processing. |#
+
+(defun edit-out-duration-of-question-string
+       (question-string &optional
+        (question-string
+         (replace-all
+          question-string "triple dotted" ""
+          :test #'string=))        
+        (question-string
+         (replace-all
+          question-string "double dotted" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "dotted" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "triplet" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "quintuplet" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "septuplet" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "hemidemisemiquaver" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "sixty-fourth note" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "demisemiquaver" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "thirty-second note" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "semiquaver" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "sixteenth note" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "quaver" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "eighth note" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "crotchet" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "quarter note" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "minim" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "half note" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "semibreve" ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "whole note" ""
+          :test #'string=)))
+  (string-trim " " question-string))
+
+#| Old version with specific space.
+(defun edit-out-duration-of-question-string
+       (question-string &optional
+        (question-string
+         (replace-all
+          question-string "triple dotted " ""
+          :test #'string=))        
+        (question-string
+         (replace-all
+          question-string "double dotted " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "dotted " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "triplet " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "quintuplet " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "septuplet " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "hemidemisemiquaver " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "sixty-fourth note " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "demisemiquaver " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "thirty-second note " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "semiquaver " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "sixteenth note " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "quaver " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "eighth note " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "crotchet " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "quarter note " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "minim " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "half note " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "semibreve " ""
+          :test #'string=))
+        (question-string
+         (replace-all
+          question-string "whole note " ""
+          :test #'string=)))
+  question-string)
+|#
+
+#|
+\noindent Example:
+\begin{verbatim}
 (harmonic-interval-of-a "third"
  '((0 60 60 3 0) (2 63 62 1 0) (5 63 62 1 0)
    (5 67 64 1/2 0)))
@@ -679,11 +882,11 @@ ontime-offtime pair is $(a, b)$, it should be noted
 that the interval sounds in the interval $[a, b)$.
 
 One of the training questions mentioned simultaneous
-intervals. I will need to write a function that looks
-for the word "simultaneous", splits the string into
-the requested intervals, calculates ontime-offtime
-pairs for each interval, then finds the intersection
-of these. |#
+intervals. I will need to write a function that
+looks for the word "simultaneous", splits the string
+into the requested intervals, calculates
+ontime-offtime pairs for each interval, then finds
+the intersection of these. |#
 
 (defun harmonic-interval-of-a
        (question-string point-set &optional
@@ -740,7 +943,7 @@ of these. |#
              (- (length vectors) 1) append
              (maximal-translatable-pattern
               (nth j vectors)
-              (orthogonal-projection-not-unique-equalp
+           (orthogonal-projection-not-unique-equalp
                (nth i (nth-list-of-lists 1 segs))
                (list 0 1 1 0 0)))))))
   (harmonic-interval-segments2raw-times
@@ -779,7 +982,7 @@ of these. |#
              (- (length vectors) 1) append
              (maximal-translatable-pattern
               (nth j vectors)
-              (orthogonal-projection-not-unique-equalp
+           (orthogonal-projection-not-unique-equalp
                (nth i (nth-list-of-lists 1 segs))
                (list 0 1 1 0 0)))))))
   (harmonic-interval-segments2raw-times
@@ -797,7 +1000,8 @@ of these. |#
            :test #'string=)
           "harmonic " "" :test #'string=))
         (vector
-         (interval-string2MNN-MPN-mod question-string))
+         (interval-string2MNN-MPN-mod
+          question-string))
         ; Segment the point set.
         (segs
          (if (not (null vector))
@@ -826,11 +1030,11 @@ of these. |#
 --> '((1 2) (11/4 3))
 \end{verbatim}
 
-\noindent The first argument is a sequence of ontimes;
-the second is a list of MNN-MPN pairs of the same
-length as the first argument. The function unites
-consecutive windows and returns a list of time windows
-in which there are non-null items. |#
+\noindent The first argument is a sequence of
+ontimes; the second is a list of MNN-MPN pairs of
+the same length as the first argument. The function
+unites consecutive windows and returns a list of
+time windows in which there are non-null items. |#
 
 (defun harmonic-interval-segments2raw-times
        (seg-ons harm-int-lower-points &optional
@@ -872,10 +1076,11 @@ in which there are non-null items. |#
 representation of a harmonic or melodic interval to
 a list of pairs of MIDI note and morphetic pitch
 numbers modulo twelve and seven respectively. For
-instance, a perfect fifth is the interval of 7 MNN and
-5 MPN. |#
+instance, a perfect fifth is the interval of 7 MNN
+and 5 MPN. |#
 
-(defun interval-string2MNN-MPN-mods (interval-string)
+(defun interval-string2MNN-MPN-mods
+       (interval-string)
   (cond
    ((or
      (string= interval-string "unison")
@@ -1156,23 +1361,25 @@ instance, a perfect fifth is the interval of 7 MNN and
 is a point set. The function returns a list of raw
 ontime1-ontime2-offtime2 triples subtended by the
 melodic interval specified by the string. The task
-description suggests that a melodic interval pertains
-from the ontime of the first note to the offtime of the
-second note. This causes problems for identifying
-consecutive melodic intervals, however, because for
-instance, in the melody C-D-E, technically the second
-rising melodic second (D-E) begins before the first
-rising melodic second (C-D) ends. Thus the ontime of
-the second note is output as well, so that this can be
-used to identify consecutive intervals if required.
+description suggests that a melodic interval
+pertains from the ontime of the first note to the
+offtime of the second note. This causes problems for
+identifying consecutive melodic intervals, however,
+because for instance, in the melody C-D-E,
+technically the second rising melodic second (D-E)
+begins before the first rising melodic second (C-D)
+ends. Thus the ontime of the second note is output
+as well, so that this can be used to identify
+consecutive intervals if required.
 
-The training questions mention that melodic intervals
-can only occur `within staff' (unlike harmonic
-intervals), so this is how the function has been
-implemented. It also handles requests to restrict
-returned results to particular staves, whereas
-the function \nameref{fun:harmonic-interval-of-a} does
-not at present. |#
+The training questions mention that melodic
+intervals can only occur `within staff' (unlike
+harmonic intervals), so this is how the function has
+been implemented. It also handles requests to
+restrict returned results to particular staves,
+whereas the function
+\nameref{fun:harmonic-interval-of-a} does not at
+present. |#
 
 (defun melodic-interval-of-a
        (question-string point-set &optional
@@ -1224,8 +1431,8 @@ not at present. |#
           :test #'string=))
         #| Sometimes a melodic interval is expressed
         with leap or fall at the end of the phrase,
-        such as augmented 4th leap. Handle these cases
-        here. |#
+        such as augmented 4th leap. Handle these
+        cases here. |#
         (question-string
          (if (and
               (> (length question-string) 5)
@@ -1264,8 +1471,8 @@ not at present. |#
           :test #'string=))
         #| Sometimes a melodic interval is expressed
         with leap or fall at the end of the phrase,
-        such as augmented 4th fall. Handle these cases
-        here. |#
+        such as augmented 4th fall. Handle these
+        cases here. |#
         (question-string
          (if (and
               (> (length question-string) 5)
@@ -1334,8 +1541,8 @@ not at present. |#
                     :test #'string=)
                    "interval of a melodic " ""
                    :test #'string=)
-                  "melodic rising " "" :test #'string=)
-                 "rising melodic " "" :test #'string=)
+               "melodic rising " "" :test #'string=)
+               "rising melodic " "" :test #'string=)
                 "melodic descending " ""
                 :test #'string=)
                "descending melodic " ""
@@ -1368,7 +1575,8 @@ not at present. |#
            (split-point-set-by-staff
             (if staff-restriction
               (restrict-dataset-in-nth-to-xs
-               point-set staff-idx staff-restriction)
+               point-set staff-idx
+               staff-restriction)
               point-set) staff-idx)))
         (unique-ontimes
          (if (not (null vectors))
@@ -1377,7 +1585,8 @@ not at present. |#
                 (remove-duplicates
                  (sort
                   (nth-list-of-lists
-                   ontime-idx x) #'<) :test #'equalp))
+                   ontime-idx x) #'<)
+                 :test #'equalp))
             point-sets)))
         (list-of-pairs
          (if point-sets
@@ -1385,7 +1594,8 @@ not at present. |#
             (mapcar
              #'(lambda (x y)
                  (pairs-forming-melodic-interval-of
-                  x vectors up-down-either ontime-idx
+                  x vectors up-down-either
+                  ontime-idx
                   MNN-idx MPN-idx y))
              point-sets unique-ontimes)))))
   (mapcar
@@ -1454,10 +1664,10 @@ not at present. |#
                    question-string
                    "melodic interval of a " ""
                    :test #'string=)
-                  "melodic rising " "" :test #'string=)
-                 "rising melodic " "" :test #'string=)
-                "melodic descending " "" :test #'string=)
-               "descending melodic " "" :test #'string=)
+          "melodic rising " "" :test #'string=)
+          "rising melodic " "" :test #'string=)
+          "melodic descending " "" :test #'string=)
+          "descending melodic " "" :test #'string=)
               "rising " "" :test #'string=)
              "descending " "" :test #'string=)
             "melodic " "" :test #'string=)))
@@ -1497,7 +1707,8 @@ not at present. |#
                 (remove-duplicates
                  (sort
                   (nth-list-of-lists
-                   ontime-idx x) #'<) :test #'equalp))
+                   ontime-idx x) #'<)
+                   :test #'equalp))
             point-sets)))
         (list-of-pairs
          (if point-sets
@@ -1523,7 +1734,8 @@ not at present. |#
 \noindent Example:
 \begin{verbatim}
 (setq
- question-string "melodic minor 2nd in the bass clef")
+ question-string
+ "melodic minor 2nd in the bass clef")
 (setq
  staff&clef-names
  '(("piano left hand" "bass clef") 
@@ -1541,7 +1753,8 @@ not at present. |#
 (setq
  staff&clef-names
  '(("Bass" "bass clef") ("Tenor" "tenor clef")
-   ("Alto" "treble clef") ("Soprano II" "treble clef")
+   ("Alto" "treble clef")
+   ("Soprano II" "treble clef")
    ("Soprano I" "treble clef")))
 (modify-question-by-staff-restriction
  question-string staff&clef-names)
@@ -1555,26 +1768,27 @@ not at present. |#
 \noindent This function modifies a question string
 according to the presence of a substring that
 restricts a question to a particular staff or voice.
-The numerical index of the relevant staff or voice is
-identified (recall that the left-most spines in a
+The numerical index of the relevant staff or voice
+is identified (recall that the left-most spines in a
 parsed kern file have the highest staff numbers) and
 returned, along with the modified question string
 (modified to have the substring removed for ease of
 subsequent processing).
 
-12/6/2015. This function doesn't work if the staff names
-are one letter long, and that letter occurs in the other
-bits of the question string. This should be fixed.  |#
+12/6/2015. This function doesn't work if the staff
+names are one letter long, and that letter occurs in
+the other bits of the question string. This should
+be fixed. |#
 
 (defun modify-question-by-staff-restriction
        (question-string staff&clef-names &optional
         (n-stave (- (length staff&clef-names) 1))
-        #| If the question string contains "left hand"
-        or "right hand", then it will be necessary to
-        modify the staff and clef names variable, if
-        it contains just a generic "piano" label for
-        both hands, because this will not be
-        specific enough. |#
+        #| If the question string contains "left
+        hand" or "right hand", then it will be
+        necessary to modify the staff and clef names
+        variable, if it contains just a generic
+        "piano" label for both hands, because this
+        will not be specific enough. |#
         (staff&clef-names
          (if (or
               (search "left hand" question-string)
@@ -1629,7 +1843,8 @@ bits of the question string. This should be fixed.  |#
     (mapcar
      #'(lambda (x)
          (second x))
-     staff-restriction-string&idxs) :test #'equalp)))
+     staff-restriction-string&idxs)
+    :test #'equalp)))
 
 #| First attempt.
 (defun modify-question-by-staff-restriction
@@ -1673,11 +1888,11 @@ bits of the question string. This should be fixed.  |#
                question-string
                (concatenate
                 'string " in the "
-                (first staff-restriction-string&idx))
+              (first staff-restriction-string&idx))
                "" :test #'equalp)
               (concatenate
                'string
-               (first staff-restriction-string&idx) " ")
+          (first staff-restriction-string&idx) " ")
               "" :test #'equalp)
              " part" "" :test #'string=)
             " voice" "" :test #'string=)
@@ -1691,11 +1906,28 @@ bits of the question string. This should be fixed.  |#
 #|
 \noindent Example:
 \begin{verbatim}
+(my-last-string "F#5")
+--> "5"
+(my-last-string "")
+--> ""
+\end{verbatim}
+
+\noindent This function returns the last element of a
+string as a string. |#
+
+(defun my-last-string
+       (a-string &optional (n (length a-string)))
+  (if (zerop (length a-string)) ""
+    (subseq a-string (- n 1))))
+
+#|
+\noindent Example:
+\begin{verbatim}
 (nadir-apex-time-intervals
  "nadir in Soprano I voice"
- '((91 67 64 1 0) (92 66 63 3/2 0) (187/2 64 62 1/2 0)
-   (94 62 61 1 0) (95 62 61 1 0) (96 74 68 1 0)
-   (97 74 68 1 0) (98 75 69 3 0))
+ '((91 67 64 1 0) (92 66 63 3/2 0)
+   (187/2 64 62 1/2 0) (94 62 61 1 0) (95 62 61 1 0)
+   (96 74 68 1 0) (97 74 68 1 0) (98 75 69 3 0))
  '(("Soprano II" "treble clef")
    ("Soprano I" "treble clef")))
 --> ((94 95))
@@ -1707,8 +1939,9 @@ bits of the question string. This should be fixed.  |#
 --> nil
 \end{verbatim}
 
-\noindent This function locates the lowest- or highest-
-sounding note, usually in a specified part or voice. |#
+\noindent This function locates the lowest- or
+highest-sounding note, usually in a specified part
+or voice. |#
 
 (defun nadir-apex-time-intervals
        (question-string point-set &optional
@@ -1763,7 +1996,8 @@ sounding note, usually in a specified part or voice. |#
              (second
               (min-nth-argmin MNN-idx point-set))
              (second
-              (max-nth-argmax MNN-idx point-set))))))
+              (max-nth-argmax
+               MNN-idx point-set))))))
   (if extremum-idx
     (list
      (list
@@ -1813,17 +2047,17 @@ sounding note, usually in a specified part or voice. |#
      ((11/4 69 65 1/2 0) (13/4 68 64 1/2 0)))
 \end{verbatim}
 
-\noindent This function takes a point set as its first
-argument and a list of pairs of MIDI note and morphetic
-pitch numbers (mod twelve and seven respectively) as
-its second argument. It returns pairs of points that
-give the melodic interval (rising or falling)
-specified by the MNN-MPN pairs. The interval between
-the point pair is strictly melodic, meaning that if
-the first point in the pair has ontime $x$ and the
-second point in the pair has ontime $y$, there can be
-no other point with ontime $z < y$ (although $z = y$
-is permissible). |#
+\noindent This function takes a point set as its
+first argument and a list of pairs of MIDI note and
+morphetic pitch numbers (mod twelve and seven
+respectively) as its second argument. It returns
+pairs of points that give the melodic interval
+(rising or falling) specified by the MNN-MPN pairs.
+The interval between the point pair is strictly
+melodic, meaning that if the first point in the pair
+has ontime $x$ and the second point in the pair has
+ontime $y$, there can be no other point with ontime
+$z < y$ (although $z = y$ is permissible). |#
 
 (defun pairs-forming-melodic-interval-of
        (point-set MNN-MPN-mods &optional
@@ -1854,19 +2088,22 @@ is permissible). |#
            (loop for j from 0 to
              (- (length MNN-MPN-mods) 1) append
              (loop for i from 0 to
-               (- (length candidate-points) 1) append
+               (-
+                (length candidate-points) 1) append
                (if (equalp
                     (mapcar
                      #'(lambda (x)
                          (if (string=
-                              up-down-either "either")
+                              up-down-either
+                              "either")
                            (abs x) x))
                      (subtract-two-lists
                       (nth-list
                        (list MNN-idx MPN-idx)
                        (nth i candidate-points))
                       (nth-list
-                       (list MNN-idx MPN-idx) point)))
+                       (list MNN-idx MPN-idx)
+                       point)))
                     (if (string=
                          up-down-either "down")
                       (multiply-list-by-constant
@@ -1979,12 +2216,12 @@ instance. |#
         &optional
         (ontime-index 0) (MNN-index 1) (MPN-index 2)
         (duration-index 3) (staff-idx 4)
-        #| Check the question string does not contain
-        reference to a tie. If it does, set the
-        question string to empty. Events related to
-        ties may still be parsed by this function, but
-        references to a tie will have been removed by
-        another function first. |#
+        #| Check the question string does not
+        contain reference to a tie. If it does, set
+        the question string to empty. Events related
+        to ties may still be parsed by this
+        function, but references to a tie will have
+        been removed by another function first. |#
         (question-string
          (if (cond
               ((search "[" question-string) t)
@@ -2078,7 +2315,8 @@ instance. |#
             MPN-index (list (second pair))))))
   (mapcar
    #'(lambda (x)
-       (list (first x) (fourth x))) relevant-points))
+       (list
+        (first x) (fourth x))) relevant-points))
 
 #|
 \noindent Example:
@@ -2094,17 +2332,19 @@ instance. |#
 --> "perfect fifth"
 \end{verbatim}
 
-\noindent Given a question string that contains one or
-more references to voices, which have been identified
-already and are contained in the variable
-staff-restriction-string\&idxs, this function removes
-those references from the question string, so that it
-can be parsed without error in subsequent analyses.
+\noindent Given a question string that contains one
+or more references to voices, which have been
+identified already and are contained in the variable
+staff-restriction-string\&idxs, this function
+removes those references from the question string,
+so that it can be parsed without error in subsequent
+analyses.
 
-12/6/2015. Added " in" to the list of replace-alls. |#
+12/6/2015. Added " in" to the list of
+replace-alls. |#
 
 (defun remove-staff-restriction-from-q-string
-       (question-string staff-restriction-string&idxs)
+    (question-string staff-restriction-string&idxs)
   (if (null staff-restriction-string&idxs)
     (string-trim '(#\Space) question-string)
     (remove-staff-restriction-from-q-string
@@ -2118,23 +2358,25 @@ can be parsed without error in subsequent analyses.
             (replace-all
              (replace-all
               (replace-all
-               #| Comment 5/12/2014. At the core of the
-               replace-alls is a command to replace the
-               staff restriction with "". This is followed
-               by (outside) a command to replace the staff
-               restriction + " " with "". This doesn't
-               make sense - this outer call can never be
-               invoked. |#
+        #| Comment 5/12/2014. At the core of the
+        replace-alls is a command to replace the
+        staff restriction with "". This is followed
+        by (outside) a command to replace the staff
+        restriction + " " with "". This doesn't
+        make sense - this outer call can never be
+        invoked. |#
                (replace-all
                 (replace-all 
                  question-string
                  (first
-                  (first staff-restriction-string&idxs))
+                  (first
+                   staff-restriction-string&idxs))
                  "" :test #'equalp)
                 (concatenate
                  'string
                  (first
-                  (first staff-restriction-string&idxs))
+                  (first
+                   staff-restriction-string&idxs))
                  " ") "" :test #'equalp)
                " in the" "" :test #'string=)
               ; Subtle addition here in 2015.
@@ -2164,8 +2406,8 @@ can be parsed without error in subsequent analyses.
 \end{verbatim}
 
 \noindent This function looks for ties in the
-corresponding dimension of an unresolved-tie point set.
-It returns time intervals of tied notes that
+corresponding dimension of an unresolved-tie point
+set. It returns time intervals of tied notes that
 also instantiate some other musical event, such as a
 duration or pitch. |#
 
@@ -2219,16 +2461,17 @@ duration or pitch. |#
 --> ((1 3) (1 2))
 \end{verbatim}
 
-\noindent This function looks for words in the lyrics
-dimension of an articulation point set. It returns time
-intervals corresponding to notes that are set to the
-word specified in the question string. The use of the
-functions reverse and \nameref{fun:sort-dataset-asc}
-could be improved. |#
+\noindent This function looks for words in the
+lyrics dimension of an articulation point set. It
+returns time intervals corresponding to notes that
+are set to the word specified in the question
+string. The use of the functions reverse and
+\nameref{fun:sort-dataset-asc} could be improved. |#
 
 (defun word-time-intervals
        (question-string artic-set &optional
-        (ontime-idx 0) (duration-idx 3) (lyrics-idx 7)
+        (ontime-idx 0) (duration-idx 3)
+        (lyrics-idx 7)
         (question-split
          (if (or
               (search "word " question-string)
@@ -2239,16 +2482,17 @@ could be improved. |#
              (string-separated-string2list
               "\"" question-string))))
         (probe-word
-         (if question-split (second question-split))))
+         (if question-split
+             (second question-split))))
   (if probe-word
     #| Use of reverse and sort-dataset-asc here is a
     fairly crude workaround: if there are two time
-    intervals [a, b], [a, c] with b < c, it seems the
-    function cross-check-compound-questions works most
-    effectively if the two intervals are in
-    descending order [a, c], [a, b]. But this needs
-    further checking especially with regards to lyrics
-    queries. |#
+    intervals [a, b], [a, c] with b < c, it seems
+    the function cross-check-compound-questions
+    works most effectively if the two intervals are
+    in descending order [a, c], [a, b]. But this
+    needs further checking especially with regards
+    to lyrics queries. |#
     (reverse
      (sort-dataset-asc
       (remove-duplicates
@@ -2279,30 +2523,35 @@ could be improved. |#
    (4 69 65 1 1 NIL NIL ("-hold"))
    (4 72 67 1 0 NIL NIL ("-hold"))))
 (setq
- question-string "word &quot;Be-&quot; on a B flat")
-(word&event-time-intervals question-string artic-set)
+ question-string
+ "word &quot;Be-&quot; on a B flat")
+(word&event-time-intervals
+ question-string artic-set)
 --> ((3 4))
 (setq
  question-string "word &quot;Ja&quot; on an A flat")
-(word&event-time-intervals question-string artic-set)
+(word&event-time-intervals
+ question-string artic-set)
 --> nil
 (setq
  question-string "Bb on the word &quot;Be-&quot;")
-(word&event-time-intervals question-string artic-set)
+(word&event-time-intervals
+ question-string artic-set)
 --> ((3 4))
 \end{verbatim}
 
-\noindent This function looks for words in the lyrics
-dimension of an articulation point set and events
-specified in the question string. It returns time
-intervals corresponding to notes that are set to the
-word specified in the question string and that
-instantiate the specified event. |#
+\noindent This function looks for words in the
+lyrics dimension of an articulation point set and
+events specified in the question string. It returns
+time intervals corresponding to notes that are set
+to the word specified in the question string and
+that instantiate the specified event. |#
 
 (defun word&event-time-intervals
        (question-string artic-set &optional
         (ontime-idx 0) (MNN-idx 1) (MPN-idx 2)
-        (duration-idx 3) (staff-idx 4) (lyrics-idx 7)
+        (duration-idx 3) (staff-idx 4)
+        (lyrics-idx 7)
         (question-split
          (if (or
               (search "word " question-string)
@@ -2313,7 +2562,8 @@ instantiate the specified event. |#
              (string-separated-string2list
               "\"" question-string))))
         (probe-word
-         (if question-split (second question-split)))
+         (if question-split
+             (second question-split)))
         (probe-event
          (if question-split
            (if (string= (third question-split) "")
@@ -2324,10 +2574,10 @@ instantiate the specified event. |#
               (replace-all
                (third question-split) "on an "
                "") "on a " ""))))
-        #| Analysis should only proceed if there really
-        is an event to accompany the word. So use
-        result of probe-event to set probe-word to nil
-        if there is no event. |#
+    #| Analysis should only proceed if there really
+    is an event to accompany the word. So use
+    result of probe-event to set probe-word to nil
+    if there is no event. |#
         (probe-word
          (if (or
               (string= probe-event "word")

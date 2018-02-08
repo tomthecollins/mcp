@@ -3,10 +3,17 @@
    Incomplete
 
 \noindent The main function here is generate-beat-
-spacing<->pattern-inheritance. |#
+spacing<->pattern-inheritance.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
+(load
+ (merge-pathnames
+  (make-pathname
+   :directory '(:relative "Markov models")
+   :name "generating-beat-relative-MNN-for&back"
+   :type "lisp")
+  *MCStylistic-MonthYear-functions-path*))
 (load
  (merge-pathnames
   (make-pathname
@@ -28,6 +35,7 @@ spacing<->pattern-inheritance. |#
    :name "list-processing"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example: see Stylistic composition with

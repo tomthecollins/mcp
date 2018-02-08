@@ -18,7 +18,7 @@ which the texture label has been assigned.
 
 The functions were coded hastily and require further
 testing. For examples of different textures, see
-below. |#
+below.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -106,6 +106,7 @@ below. |#
    :name "structural-induction-mod"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #| Example of a monophonic point set, by taking the
 top line of the opening 8 bars of Chopin's Mazurka in

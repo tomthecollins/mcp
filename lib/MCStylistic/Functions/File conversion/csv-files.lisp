@@ -6,7 +6,7 @@
 files into lists of lists, and vice versa. Despite
 using terms like dataset below, neither representation
 has to be balanced, that is, rows/lists can contain
-different numbers of elements. |#
+different numbers of elements.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -24,6 +24,7 @@ different numbers of elements. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

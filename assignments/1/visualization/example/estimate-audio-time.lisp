@@ -1,4 +1,4 @@
-#| Copyright Tom Collins 2/9/2017.
+#| Copyright Tom Collins 2/8/2018.
 
 Script for loading a symbolic version of a piece, as
 well as the audio_time_to_symbolic_time information,
@@ -13,7 +13,7 @@ estimated audio time. |#
   :directory
   '(:absolute
      "Users" "tomthecollins" "Shizz" "repos" "mcp"
-     "assignments" "1")))
+     "assignments" "1" "visualization")))
 (setq
  *path&name*
  (merge-pathnames
@@ -36,13 +36,8 @@ audioTime2symbolicTime information. |#
  audioTime2symbolicTime-source
  (merge-pathnames
   (make-pathname
-   :name "silverswan_audio_time_to_symbolic_time"
-   :type "mid") *path&name*))
-(setq
- dataset-destination
- (merge-pathnames
-  (make-pathname
-   :name *synch-name* :type "txt") *path&name*))
+   :name "annotation_layer"
+   :type "txt") *path&name*))
 (setq
  dataset-destination
  (merge-pathnames
@@ -73,14 +68,11 @@ audioTime2symbolicTime information. |#
     dataset))
    "Yes!")
 
-
-#| Needs work from here. |#
-
 #| Read in audioTime2symbolicTime information. |#
 (progn
   (setq
    as-info-raw
-   (load-midi-file audioTime2symbolicTime-source))
+   (read-from-file audioTime2symbolicTime-source))
   "Yes!")
 #| Create a list of knot-value pairs. |#
 (progn
@@ -89,7 +81,7 @@ audioTime2symbolicTime information. |#
    (loop for i from 0 to (- (length as-info-raw) 1)
      collect
      (list
-      (+ i 1) (float (first (nth i as-info-raw))))))
+      (* 4 i) (float (nth i as-info-raw)))))
   "Yes!")
 
 #| Estimate the onsets and offsets. |#
@@ -103,13 +95,23 @@ audioTime2symbolicTime information. |#
    (linearly-interpolate-x-values
     (add-two-lists
      (nth-list-of-lists 0 dataset)
-     (nth-list-of-lists 3 dataset)) knot-value-pairs))
+     (nth-list-of-lists 2 dataset)) knot-value-pairs))
   (setq
    dataset-synch
    (mapcar
     #'(lambda (x y z)
         (append x (list y) (list z)))
     dataset on-est off-est))
+  (setq
+   dataset-synch
+   (mapcar
+    #'(lambda (x)
+        (list
+         (first x) (second x)
+         (guess-morphetic (second x))
+         (third x) (fourth x) (sixth x)
+         (seventh x)))
+    dataset-synch))
   "Yes!")
 
 #| Now write the symbolic-audio synchronised version

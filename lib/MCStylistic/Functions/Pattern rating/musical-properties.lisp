@@ -5,7 +5,7 @@ These functions aid the calculation musical
 attributes, such as the number of intervallic leaps in
 a melody. Some of the attributes are implementations
 of definitions from
-\citet*{pearce2007,vonHippel2000,eerola2000}. |#
+\citet*{pearce2007,vonHippel2000,eerola2000}.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -51,6 +51,7 @@ of definitions from
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

@@ -5,7 +5,7 @@
 \noindent The fundamental functions here are used to
 segment datapoints based on ontime and offtime.
 Subsequent functions do things like computing chord
-spacing and holding types. |#
+spacing and holding types.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -23,6 +23,7 @@ spacing and holding types. |#
    :name "sort-by"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

@@ -4,7 +4,7 @@
 
 \noindent The functions below are for finding summary
 statistics, and for taking random samples from
-data. |#
+data.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -36,6 +36,7 @@ data. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 ;(defvar *rs* (make-random-state t))
 

@@ -3,7 +3,7 @@
    Incomplete
 
 \noindent Top-level functions for the MediaEval 2014
-C@merata task. |#
+C@merata task.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -63,6 +63,14 @@ C@merata task. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+(load
+ (merge-pathnames
+  (make-pathname
+   :directory '(:relative "Query staff notation")
+   :name "texture"
+   :type "lisp")
+  *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -236,7 +244,8 @@ different xml results file. |#
          (mapcar
           #'(lambda (x)
               (articulation&event-time-intervals
-               (first x) artic-set))
+               (first x) artic-set
+               staff&clef-names))
           questions))
         ;|#
         (ans-dur-rest

@@ -11,7 +11,7 @@ as sublists of strings in later elements. The main
 function is
 \nameref{fun:kern-file2points-artic-dynam-lyrics}.
 The functions were coded hastily and require further
-testing. |#
+testing.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -46,13 +46,6 @@ testing. |#
 (load
  (merge-pathnames
   (make-pathname
-   :directory '(:relative "File conversion")
-   :name "text-files"
-   :type "lisp")
-  *MCStylistic-MonthYear-functions-path*))
-(load
- (merge-pathnames
-  (make-pathname
    :directory '(:relative "Maths foundation")
    :name "set-operations"
    :type "lisp")
@@ -71,6 +64,7 @@ testing. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -82,8 +76,8 @@ testing. |#
 
 \noindent This function splits up a string of
 concatenated articulation markings into a list of
-articulation markings, taking care over elements such as
-marcato markings ($^{\prime\prime}$). |#
+articulation markings, taking care over elements such
+as marcato markings ($^{\prime\prime}$). |#
 
 (defun articulation-string2list
        (a-string &optional

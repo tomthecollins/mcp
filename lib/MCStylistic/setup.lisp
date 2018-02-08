@@ -1,8 +1,3 @@
-#|
-(in-package :common-lisp-user)
-|#
-
-  
 (progn
   (setq *print-length* nil)
   (setq *print-pretty* nil)
@@ -11,32 +6,29 @@
     (make-pathname
      :directory
      '(:absolute
-       "Users" "tomthecollins" "Shizz" "repos"
-       "mcp" "lib" "MCStylistic")
-     #|
-     '(:absolute
-     "Users" "Shared")
-     |#
-     ))
-  #| Begin user selection with conditional, so multiple
-  setups are possible with one setup file. |#
+       "Users" "Shared")))
+  #| Begin user selection with conditional, so
+  multiple setups are possible with one setup file. |#
   (setq *user* "tom mac")
-  (defvar
+  (setq
       *MCStylistic-MonthYear-path*
     (cond
+     ((string= *user* "")
+      #| If user uses path above, then no changes
+      necessary here. |#
+      *MCStylistic-MonthYear-path*)
      ((string= *user* "tom mac")
       (make-pathname
        :directory
        '(:absolute
          "Users" "tomthecollins" "Shizz" "repos"
-         "collcodeinit" "private" "core" "lisp"
-         "MCStylistic-curr")))
+         "mcp" "lib" "MCStylistic")))
      ((string= *user* "ak mac")
       (make-pathname
        :directory
        '(:absolute
-         "Users" "ak" "sources" "collcodeinit" "private" "core" "lisp"
-         "MCStylistic-curr")))
+         "Users" "ak" "sources" "collcodeinit"
+         "private" "core" "lisp" "MCStylistic-curr")))
      ((string= *user* "tom linux")   
       (make-pathname
        :directory
@@ -60,9 +52,9 @@
       (make-pathname
        :directory
        '(:absolute
-         "Users" "robin" "directoryname" "subdirectory"
-         "collCodeInit" "private" "core" "lisp"
-         "MCStylistic-curr")))
+         "Users" "robin" "directoryname"
+         "subdirectory" "collCodeInit" "private"
+         "core" "lisp" "MCStylistic-curr")))
      ((string= *user* "katrien mac")
       (make-pathname
        :directory
@@ -70,7 +62,14 @@
          "Users" "tomthecollins" "Shizz" "repos"
          "collcodeinit" "private" "core" "lisp"
          "MCStylistic-curr")))
-     ))
+      ((string= *user* "michael mac")
+       (make-pathname
+        :directory
+        '(:absolute
+          "Users" "michael" "Documents" "repos"
+          "collcodeinit" "private" "core" "lisp"
+          "MCStylistic-curr")))
+    ))
   (defvar
       *MCStylistic-MonthYear-data-path*
     (merge-pathnames
@@ -96,7 +95,7 @@
       :directory '(:relative "Example data"))
      *MCStylistic-MonthYear-example-files-path*))
   (defvar
-      *MCStylistic-MonthYear-example-files-results-path*
+    *MCStylistic-MonthYear-example-files-results-path*
     (merge-pathnames
      (make-pathname
       :directory '(:relative "Example results"))
@@ -197,20 +196,443 @@
    (merge-pathnames
     (make-pathname
    :directory '(:relative "Third party" "cl-fad")
-   :name "load" :type "lisp")
+   :name "fad2" :type "lisp")
     *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "list-processing" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 10\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "locating-indices" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "real-interval-operations" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "set-operations" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 20\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "merge-sort-operations" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "interpolation" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "sort-by" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "vector-operations" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 30\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "geometric-operations" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern rating")
+     :name "projection" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Maths foundation")
+     :name "stats-sampling" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 40\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "text-files" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "midi-import" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "midi-export" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern discovery")
+     :name "structural-induction-mod" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern rating")
+     :name "empirical-preliminaries" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern rating")
+     :name "musical-properties" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 50\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern rating")
+     :name "evaluation-heuristics" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern discovery")
+     :name "structural-induction-merge"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "director-musices"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "kern"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "csv-files"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "hash-tables"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "generating-with-patterns-preliminaries"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "kern-by-col"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 60\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "segmentation"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Query staff notation")
+     :name "artic-dynam-lyrics-utilities"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Query staff notation")
+     :name "pitches-intervals-durations"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Query staff notation")
+     :name "analytic-string-manipulations"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "kern-rests"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "File conversion")
+     :name "kern-articulation"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 70\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "spacing-states" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Harmony and metre")
+     :name "keyscape" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "beat-rel-MNN-states" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "markov-analyse" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "markov-analyse-backwards" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "markov-compose" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 80\%...")
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "realising-states" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "realising-states-backwards" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "generating-beat-MNN-spacing-forwards"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "generating-beat-MNN-spacing-backwards"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "generating-beat-MNN-spacing-for&back"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "generating-beat-relative-MNN"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "generating-beat-relative-MNN-backwards"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "generating-beat-relative-MNN-for&back"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern discovery")
+     :name "evaluation-for-SIACT"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Markov models")
+     :name "pattern-inheritance-preliminaries"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 90\%...")
   (load
    (merge-pathnames
     (make-pathname
      :directory '(:relative "Markov models")
      :name "generating-with-patterns" :type "lisp")
     *MCStylistic-MonthYear-functions-path*))
-  (format t " 5\%...")
-  
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern discovery")
+     :name "evaluation-for-SIA+" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern discovery")
+     :name "superdiagonals" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern discovery")
+     :name "further-structural-induction-algorithms"
+     :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern discovery")
+     :name "compactness-trawl" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Harmony and metre")
+     :name "ontimes-signatures" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Harmony and metre")
+     :name "chord-labelling" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Harmony and metre")
+     :name "inner-metric-analysis" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Harmony and metre")
+     :name "neo-riemannian-operations" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Query staff notation")
+     :name "kern-to-staff-features" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Query staff notation")
+     :name "texture" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Query staff notation")
+     :name "c@merata-processing" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern metrics")
+     :name "matching-score" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern metrics")
+     :name "robust-metrics" :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (load
+   (merge-pathnames
+    (make-pathname
+     :directory '(:relative "Pattern metrics")
+     :name
+     (concatenate
+      'string "evaluate-discovered-versus-"
+      "annotated-patterns") :type "lisp")
+    *MCStylistic-MonthYear-functions-path*))
+  (format t " 100\%~%")
+  (format t "Welcome to MCStylistic-Mar2017.")
+  )
+
+#|
+(in-package :common-lisp-user)
+|#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#| Needs finishing off.
   
   #| This is a temporary load command. I expect it to
-  be replaced by a call to some MNN-relative version of
-  generating-with-patterns. |#
+  be replaced by a call to some MNN-relative version
+  of generating-with-patterns. |#
   (load
    (merge-pathnames
     (make-pathname
@@ -333,7 +755,8 @@
    (merge-pathnames
     (make-pathname
      :directory '(:relative "Query staff notation")
-     :name "analytic-string-manipulations" :type "lisp")
+     :name "analytic-string-manipulations"
+     :type "lisp")
     *MCStylistic-MonthYear-functions-path*))
   (load
    (merge-pathnames
@@ -348,13 +771,7 @@
      :directory '(:relative "Query staff notation")
      :name "kern-to-staff-features" :type "lisp")
     *MCStylistic-MonthYear-functions-path*))
-  (load
-   (merge-pathnames
-    (make-pathname
-     :directory '(:relative "Query staff notation")
-     :name "pitches-intervals-durations"
-     :type "lisp")
-    *MCStylistic-MonthYear-functions-path*))
+  
   (load
    (merge-pathnames
     (make-pathname
@@ -378,4 +795,5 @@
      :type "lisp")
     *MCStylistic-MonthYear-functions-path*))
   (format t " 100\%~%")
-  (format nil "Welcome to MCStylistic-Jun2014."))
+  (format nil "Welcome to MCStylistic-Mar2017."))
+|#

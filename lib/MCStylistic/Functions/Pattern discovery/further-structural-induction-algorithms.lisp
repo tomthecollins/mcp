@@ -6,7 +6,7 @@ Induction Algorithm for Transational Equivalence
 Classes) as described by \citet{meredith2002}, and
 COSIATEC (COvering Strucutral Induction Algorithm for
 Translational Equivalence Classes) as described by 
-\citet{forth2009,meredith2003}. |#
+\citet{forth2009,meredith2003}.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -31,6 +31,7 @@ Translational Equivalence Classes) as described by
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

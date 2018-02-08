@@ -11,7 +11,7 @@ dataset. |#
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
 
-;(defvar *equality-tolerance* 1e-5)
+(defvar *equality-tolerance* 1e-5)
 
 #|
 \noindent Example:

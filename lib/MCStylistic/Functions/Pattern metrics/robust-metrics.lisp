@@ -4,7 +4,7 @@
 
 \noindent The functions below are metrics for
 evaluating the extent to which different ontime-pitch
-pairs have been output by an algorithm. |#
+pairs have been output by an algorithm.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -57,6 +57,7 @@ pairs have been output by an algorithm. |#
    :name "vector-operations"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

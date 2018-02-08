@@ -11,7 +11,7 @@ the variable variable-names points to some actual data
 (note the use of the function symbol-value) which is
 indexed by the variable catalogue. Using the function
 write-to-file, the information can be sent to a text
-file, to avoid the Listener having to display it. |#
+file, to avoid the Listener having to display it.
 
 ; REQUIRED PACKAGES:
 ; (in-package :common-lisp-user)
@@ -25,8 +25,22 @@ file, to avoid the Listener having to display it. |#
 (load
  (merge-pathnames
   (make-pathname
+   :directory '(:relative "File conversion")
+   :name "kern-articulation"
+   :type "lisp")
+  *MCStylistic-MonthYear-functions-path*))
+(load
+ (merge-pathnames
+  (make-pathname
    :directory '(:relative "Maths foundation")
    :name "list-processing"
+   :type "lisp")
+  *MCStylistic-MonthYear-functions-path*))
+(load
+ (merge-pathnames
+  (make-pathname
+   :directory '(:relative "Markov models")
+   :name "segmentation"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
 (load
@@ -43,6 +57,7 @@ file, to avoid the Listener having to display it. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

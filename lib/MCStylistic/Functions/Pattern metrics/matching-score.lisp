@@ -4,7 +4,7 @@
 
 \noindent The functions below implement the
 symbolic fingerprinting process described by
-\cite{arzt2012}. |#
+\cite{arzt2012}.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -36,6 +36,7 @@ symbolic fingerprinting process described by
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

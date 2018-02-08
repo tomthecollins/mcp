@@ -1,10 +1,10 @@
 #| Copyright 2008-2013 Tom Collins
-   Monday 25January 2010
+   Monday 25 January 2010
    Incomplete
 
 \noindent The functions below are for saving, reading,
 displaying and querying hash-tables. I like working
-with lists, each of whose elements is a hash table. |#
+with lists, each of whose elements is a hash table.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -29,6 +29,7 @@ with lists, each of whose elements is a hash table. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:

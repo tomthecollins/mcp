@@ -4,7 +4,7 @@
 
 \noindent The functions below are metrics for
 evaluating the extent to which different ontime-pitch
-pairs have been output by an algorithm. |#
+pairs have been output by an algorithm.
 
 ; REQUIRED PACKAGES
 ; (in-package :common-lisp-user)
@@ -19,7 +19,7 @@ pairs have been output by an algorithm. |#
  (merge-pathnames
   (make-pathname
    :directory '(:relative "Third party" "cl-fad")
-   :name "load"
+   :name "fad2"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
 (load
@@ -36,6 +36,7 @@ pairs have been output by an algorithm. |#
    :name "text-files"
    :type "lisp")
   *MCStylistic-MonthYear-functions-path*))
+|#
 
 #|
 \noindent Example:
@@ -141,11 +142,11 @@ lists. |#
            100))
         (piece-name
          (pathname-name
-          (cl-fad:pathname-as-file piece-path)))
+          (pathname-as-file piece-path)))
         (alg-out-path
          (remove-if-not
           #'directory-pathname-p
-          (cl-fad:list-directory
+          (list-directory
            (merge-pathnames
             (make-pathname
              :directory (list :relative piece-name))
@@ -379,7 +380,7 @@ Similarly for the ground truth. |#
            100))
         (piece-name
          (pathname-name
-          (cl-fad:pathname-as-file piece-path)))
+          (pathname-as-file piece-path)))
         (alg-out-path
          (merge-pathnames
             (make-pathname
@@ -547,7 +548,7 @@ Similarly for the ground truth. |#
  *algorithm-output-paths*
  (firstn
   2
-  (cl-fad:list-directory *algorithms-output-root*)))
+  (list-directory *algorithms-output-root*)))
 ; Save the calculated metrics to this csv file.
 (setq
  *csv-save-path&name*
@@ -596,7 +597,7 @@ Similarly for the ground truth. |#
 (setq
  *algorithm-output-paths*
  (subseq
-  (cl-fad:list-directory *algorithms-output-root*)
+  (list-directory *algorithms-output-root*)
   4 6))
 ; Save the calculated metrics to this csv file.
 (setq
@@ -731,7 +732,7 @@ table. |#
  *pattern-paths*
  (remove-if-not
   #'directory-pathname-p
-  (cl-fad:list-directory *annotation-collection*)))
+  (list-directory *annotation-collection*)))
 (read-patts&occs *pattern-paths*)
 --> ((((1 64) (2 60) (3 65) (4 56) (6 62) (7 59)
        (7 64) (8 60))
@@ -773,7 +774,7 @@ lists. |#
          (if pattern-paths
            (remove-if-not
             #'pathname-typesp
-            (cl-fad:list-directory
+            (list-directory
              (merge-pathnames
               (make-pathname
                :directory
@@ -851,7 +852,7 @@ patterns as nested lists. |#
      (read-patts&occs
       (remove-if-not
        #'directory-pathname-p
-       (cl-fad:list-directory
+       (list-directory
         (first annotation-paths))) file-type)
      (read-ground-truth-for-piece
       (rest annotation-paths)))))
