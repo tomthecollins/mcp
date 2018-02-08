@@ -3,7 +3,7 @@ A repo to support PSYC/COGS 397 Music Computing and Psychology
 
 # Syllabus for Seminar in Music Computing and Psychology
 Meeting time: Thursday 1:10-4:00 pm  
-Location: Coppee Hall, room 101 for discussions; Digital Media Classroom for assignment work  
+Location: Maginnes Hall, room 103 for discussions; Digital Media Classroom for assignment work  
 Instructor: Dr. Tom Collins  
 Office: Chandler-Ullmann 223  
 Phone: 610-758-4209  
@@ -106,7 +106,7 @@ The following list is roughly in the order in which you should read the items. W
 * Ferreri, L., Aucouturier, J. J., Muthalib, M., Bigand, E., & Bugaiska, A. (2013). Music improves verbal memory encoding while decreasing prefrontal cortex activity: an fNIRS study. Frontiers in human neuroscience, 7.
 * Collins, T. (2011). Improved methods for pattern discovery in music, with applications in automated stylistic composition (Doctoral dissertation). Retrieved from http://oro.open.ac.uk/30103/ (Only need to read Appendix B for this course. Appendix A provides helpful mathematical definitions.)
 * Shepard, R. N. (1964). Circularity in judgments of relative pitch. Journal of the Acoustical Society of America, 36, 2346-2353.
-* Conklin, D., & Witten, I. H. (1995). Multiple viewpoint systems for music prediction. Journal of New Music Research, 24, 51-73.
+* Grachten, M., & Widmer, G. (2012). Linear basis models for prediction and analysis of musical expression. Journal of New Music Research, 41(4), 311-322.
 * Collins, T., & Laney, R. (2017). Computer–generated stylistic compositions with long–term repetitive and phrasal structure. Journal of Creative Music Systems, 1(2).
 * Krebs, F. B&ouml;ck, S, & Widmer, G. (2013). Rhythmic pattern modeling for beat and downbeat tracking in musical audio. Proceedings of the International Society for Music Information Retrieval Conference (pp. 227-232). Curitiba, Brazil.
 * Deutsch, D. (1980). The processing of structured and unstructured tonal sequences. Perception and Psychophysics, 28, 381-389.
@@ -117,7 +117,7 @@ The following list is roughly in the order in which you should read the items. W
 * Meredith, D., Lemstr&ouml;m, K., & Wiggins, G. A. (2002). Algorithms for discovering repeated patterns in multidimensional representations of polyphonic music. Journal of New Music Research, 31, 321-345.
 * Collins, T., Arzt, A., Frostel, H., & Widmer, G. (2016). Using geometric symbolic fingerprinting to discover distinctive patterns in polyphonic music corpora. In D. Meredith (Ed.), Computational Music Analysis (pp. 445-474). Berlin: Springer.
 * Deutsch, D., Henthorn, T., and Lapidis, R. (2011). Illusory transformation from speech to song. Journal of the Acoustical Society of America, 129, 2245-2252.
-* M&uuml;llensiefen, D., & Halpern, A. R. (2014). The role of features and context in recognition of novel melodies. Music Perception, 31, 418-435.
+* Barrett, F. S., & Janata, P. (2016). Neural responses to nostalgia-evoking music modeled by elements of dynamic musical structure and individual differences in affective traits. Neuropsychologia, 91, 234-246.
 
 ## Tentative Schedule
 | Class. Date, Leader | Topics | Reading Requirements and Deadlines  |
@@ -126,9 +126,9 @@ The following list is roughly in the order in which you should read the items. W
 | | Coding: HTML, JavaScript, and PHP | |
 | 2. 1/31/17, MB | Audio Representations of Music | Ch. 1 of Deutsch, Collins (2011, pp. 327-340) |
 | | Coding: Signal processing in Matlab and Tone.js; Audacity and Sonic Visualiser | |
-| 3. 2/8/17, AS | Symbolic Representations of Music | Ch. 6 of Deutsch, Collins (2011, pp. 341-366) |
+| 3. 2/8/17, TC | Symbolic Representations of Music | Ch. 6 of Deutsch, Collins (2011, pp. 341-366) |
 | | Coding: MuseScore, MCStylistic, and PattDisc | |
-| 4. 2/15/17, ER | Pitch | Ch. 4 and 5 of Deutsch, Shepard (1964) |
+| 4. 2/15/17, AS | Pitch | Ch. 4 and 5 of Deutsch, Shepard (1964) |
 | | Coding: PatternViewer toward Assignment 1 and/or student-led | |
 | 5. 2/22/17, PDM | Automatic Generation of Music | Ch. 8 of Deutsch, Grachten and Widmer (2012), Collins and Laney (2017) |
 | | Coding: PatternViewer toward Assignment 1 and/or student-led | |
