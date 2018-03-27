@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8"/>
+  <title>Piano keyboard</title>
+	<script type="text/javascript" src="./../../../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="./../../../lib/Tone.min_r11.js"></script>
+	<script type="text/javascript" src="./supporting/keykey.js"></script>
+  <script type="text/javascript" src="./supporting/nexusUI.js"></script>
+</head>
+<body>
+  <div id="Content">
+		<!--This cavnas call will make a NexusUI matrix.-->
+		<canvas nx="matrix" id="matrix1"</canvas>
+	</div>
+	<div>
+		<canvas nx="keyboard" id="keyboard1"></canvas>
+	</div>
+
+	<script type="text/javascript">
+		// Started by making a matrix, which might be handy for displaying stuff...
+		var ncol = 36;
+		var nrow = 8;
+		nx.onload = function(){
+			nx.colorize("#f5871f");
+			
+			matrix1.col = ncol;
+			matrix1.row = nrow;
+			matrix1.init();
+			matrix1.resize($("#Content").width(), 200);
+			matrix1.draw();
+			
+			// Here's the piano keyboard.
+			keyboard1.octaves = 3;
+			keyboard1.init();
+      keyboard1.resize($("#Content").width(), 200);
+		}
+		
+		// This makes it so the matrix and keyboard resize automatically when the
+		// screen is resized.
+		$(function(){
+			$(window).on("resize", function(){
+				matrix1.resize($("#Content").width(), 200);
+				matrix1.draw();
+				keyboard1.resize($("#Content").width());
+			});
+		});
+	</script>
+
+</body>
+</html>

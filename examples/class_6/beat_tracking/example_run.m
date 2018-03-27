@@ -1,4 +1,4 @@
-fpath = fullfile('.', 'Pixies __ Where Is My Mind.wav');
+fpath = fullfile('Kendrick Lamar - HUMBLE.wav');
 x = audioread(fullfile(fpath));
 exist(fpath)
 beatVarDir = fullfile('.', 'variables');
