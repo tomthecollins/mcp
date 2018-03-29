@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Filter game</title>
+    <script type="text/javascript" src="./../../../lib/Tone.min_r11.js"></script>
+</head>
+
+<body>
+    <p>
+        This example is adapted from https://tonejs.github.io/
+    </p>
+    <script>
+        var filter = new Tone.Filter({
+            type : 'bandpass',
+            Q : 12
+        }).toMaster()
+        
+        //schedule a series of frequency changes
+        filter.frequency.setValueAtTime('C5', 0)
+        filter.frequency.setValueAtTime('E5', 0.5)
+        filter.frequency.setValueAtTime('G5', 1)
+        filter.frequency.setValueAtTime('B5', 1.5)
+        filter.frequency.setValueAtTime('C6', 2)
+        filter.frequency.linearRampToValueAtTime('C1', 3)
+        
+        var noise = new Tone.Noise("brown").connect(filter).start(0).stop(3)
+        
+        //schedule an amplitude curve
+        noise.volume.setValueAtTime(-2, 0)
+        noise.volume.linearRampToValueAtTime(20, 0.1)
+        noise.volume.linearRampToValueAtTime(-Infinity, 3)
+        
+        //listen to noise without filtering.
+        noise.start(5).stop(8)
+        noise.volume.setValueAtTime(-2, 5)
+        noise.volume.linearRampToValueAtTime(40, 5.1)
+        noise.volume.linearRampToValueAtTime(-Infinity, 8)
+        
+    </script>
+
+
+
+</body>
+</html>
