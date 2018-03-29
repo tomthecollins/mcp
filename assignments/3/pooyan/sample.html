@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)http://tonejs.org/examples/score.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+	<title>Synth plus sample</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<script type="text/javascript" src="./../../../lib/Tone.min_r11.js"></script>
+	<script type="text/javascript" src="./../../../lib/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="./../../../lib/Notone.GUI.js"></script>-->
+	<!--<link rel="stylesheet" type="text/css" href="./../../../lib/style.css">-->
+	<script type="text/javascript" src="./../../../lib/Interface.js"></script>
+	<link rel="stylesheet" type="text/css" href="./../../../lib/examples.css">
+	<script type="text/javascript">
+		// jshint ignore: start
+	</script>
+
+</head>
+<body>
+	<div id="Content">
+		<script id="ToneCode" type="text/javascript">
+			
+			MNN2pitch_simple = function(MNN){
+				// Tom Collins 6/1/2016.
+				// In
+				// metadata Integer mandatory
+				// Out String
+				// This function converts a MIDI note number into a pitch class and octave.
+				// It does so in a completely naive manner (no consideration of global or
+				// local key), but this is handy for things like Tone.js playback, which tend
+				// to prefer "C" to "B#", "C#" to "Db" (I think), and "G" to "F##".
+		
+				var lookup = [
+						"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
+				];
+				var octave = Math.floor(MNN/12 - 1);
+				var MNN_mod_12 = MNN % 12;
+				return lookup[MNN_mod_12] + octave.toString();
+		}
+			
+			
+			
+			var melody = [4, 3, 3, 2, 2, 1, 4, 3, 3, 2, 2];
+   
+   // Define a sample.
+   var sample_piano = new Tone.Sampler({ "G4": "./067_keyboard_acoustic_000-100.wav"}, function(){
+						console.log('loaded!');													 
+   }
+		).toMaster();
+			
+			melody.map(function(n, idx){
+				var currMnn = 60 + n;
+				var currPitch = MNN2pitch_simple(currMnn);
+				Tone.Transport.schedule(function(time){
+					
+					sample_piano.triggerAttackRelease(currPitch, 0.5, 0)
+				}, idx/2);
+				
+			})
+		
+   
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				//Notone.config({
+				//	"search" : false,
+				//	"expandInDrawer" : true,
+				//	"hideDrawer" : Interface.isMobile,
+				//	"drawer" : true,
+				//	"container" : "body"
+				//});
+				
+				new Interface.Button({
+					key : 32,
+					type : "toggle",
+					text : "Start",
+					activeText : "Stop",
+					start : function(){
+      Tone.Transport.start();
+					},
+					end : function(){
+						Tone.Transport.stop();
+					}
+				});
+			});
+		</script>
+	</div>
+</body>
+</html>
