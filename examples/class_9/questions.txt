@@ -1,0 +1,36 @@
+Questions
+
+1a. Try running probe_db.m from lines 1-52. This chooses a clip of a song at random (currently one of guitar.wav, piano.wav, and strings.wav). If you don't like the choice, rerun lines 40-52 to pick again.
+
+1b. Add some noise by running lines 50-52 (to simulate circumstances under which Shazam is used).
+
+1c. Run lines 54-154. Does the algorithm identify the song correctly from the clip?
+
+1d. Repeat steps 1a-1c a couple times until you are convinced the algorithm works.
+
+
+2a. Alter the amount of signal and noise in line 50. The default values are 0.96 signal and 0.04 noise. Choose any values you like, so long as they add up to 1.
+
+2b. Run lines 51-52. Does it sound noisier/less noisy (depending on your alterations in line 50)?
+
+2c. With more noise added, run lines 54-154. Does the algorithm still identify the song correctly from the clip?
+
+
+3a. Rename dbase.mat. We're going to make the fingerprint database again and don't want to overwrite the one that works!
+
+3b. Open populate_db_q3.m. Scroll down to line 69. This is where a decision is made about whether to make a fingerprint from some pair of landmarks ind1 and ind2. From the discussion part of class and from looking at the definitions of the thresholds in lines 30-33, what 4 logical statements need adding to line 69, so that the appropriate fingerprints are made?
+
+3c. Ask me for help if you're stuck with 3b, or look at lines 69-70 of populate_db.m for the answer.
+
+3d. Once you're satisfied that your logical statements are correct, run the whole of populate_db_q3.m by pressing the play button. A new file, dbase.mat, should appear in the Current Folder window. (If you never get the correct logicals written in line 69, you can always revert to running populate_db.m instead.)
+
+
+4a. Delete dbase.mat again. We're going to include some real songs now and remake the fingerprint database. Alter the comments in lines 9-19 of audPaths so that you include some real songs.
+
+4b. Run the script.
+
+4c. Copy the definition of audPaths and paste it over the definition of audPaths in probe_db.m (beginning line 13). This is so that we chose a clip from one of the songs that is in the database.
+
+4d. Repeat steps 1a-1c from above. Does the algorithm identify the song correctly from the clip?
+
+4e. If not, can you think of reasons this might be?
