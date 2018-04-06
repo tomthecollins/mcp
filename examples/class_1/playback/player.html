@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+	<title>Player</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<script type="text/javascript" src="./../../../lib/Tone.min_r11.js"></script>
+	<script type="text/javascript" src="./../../../lib/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./../../../lib/examples.css">
+
+</head>
+<body>
+	<div id="Content">
+		<div id="Explanation">
+			<button type="button" onclick="player.start();">Start</button>
+			<button type="button" onclick="player.stop();">Stop</button>
+		</div>
+		
+		<div id="Explanation">
+			<button type="button" onclick="player2.start();">Start</button>
+			<button type="button" onclick="player2.stop();">Stop</button>
+		</div>
+		
+		
+		<script type="text/javascript">
+			// Define players.
+			var player = new Tone.Player("067_keyboard_acoustic_000-100.wav", function(){
+				console.log('First player loaded!');
+				player.playbackRate = 1.25;
+				// player.sync().start(0);
+			}).toMaster();
+			
+			var player2 = new Tone.Player("put_another_audio_file_name_here.mp3", function(){
+				console.log('Second player loaded!');
+				player2.playbackRate = 0.9;
+			}).toMaster();
+		</script>
+		
+		<!--<script type="text/javascript">
+			Old start/stop button.
+			$(function(){
+				new Interface.Button({
+					key : 32,
+					type : "toggle",
+					text : "Start",
+					activeText : "Stop",
+					start : function(){
+						Tone.Transport.start();
+					},
+					end : function(){
+						Tone.Transport.stop();
+					}
+				});
+			});
+		</script>-->
+		
+	</div>
+</body>
+</html>
