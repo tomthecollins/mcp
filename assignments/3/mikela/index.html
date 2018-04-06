@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8"/>
+  <title>Piano keyboard</title>
+	<script type="text/javascript" src="./../../../lib/jquery.min.js"></script>
+	<script type="text/javascript" src="./../../../lib/Tone.min_r11.js"></script>
+	<script type="text/javascript" src="./supporting/keykey.js"></script>
+  <script type="text/javascript" src="./supporting/nexusUI.js"></script>
+</head>
+<body>
+  <div id="Content">
+		<!--This cavnas call will make a NexusUI matrix.-->
+		<!--<canvas nx="matrix" id="matrix1"</canvas>-->
+		<canvas id="valaro"</canvas>
+	</div>
+	<div>
+		<canvas nx="keyboard" id="keyboard1"></canvas>
+	</div>
+
+	<script type="text/javascript">
+		
+		
+		
+		var backgroundImage = new Image(); 
+		backgroundImage.src = './220px-Valence-Arousal_Circumplex.jpg'; 
+		var canvas;
+		var context;
+		
+		function init(c) {
+				canvas = document.getElementById(c);
+				context = canvas.getContext("2d");
+				//soundManager.onready(function() {
+						//initSound(clientID, playlistUrl);
+				//});
+				aniloop();
+		}
+		
+		function aniloop() {
+				//requestAnimFrame(aniloop);
+				drawWave();
+		}
+		
+		function drawWave() {
+		
+				var step = 10;
+				var scale = 60;
+		
+				// clear
+				context.drawImage(backgroundImage, 0, 0);
+				
+				context.fillRect(10,120,20,20);
+				
+				//context.fillRect(0, 0, canvas.width, canvas.height);
+		
+				// left wave
+				//context.beginPath();
+				//
+				//for ( var i = 0; i < 256; i++) {
+				//
+				//		var l = (i/(256-step)) * 1000;
+				//		var t = (scale + waveLeft[i] * -scale);
+				//
+				//		if (i == 0) {
+				//		context.moveTo(l,t);
+				//		} else {
+				//		context.lineTo(l,t); //change '128' to vary height of wave, change '256' to move wave up or down.
+				//}
+				//}
+				//
+				//context.stroke();
+		
+		
+				// right wave
+				//context.beginPath();
+				//context.moveTo(0, 256);
+				//for ( var i = 0; i < 256; i++) {
+				//
+				//		context.lineTo(4 * i, 255 + waveRight[i] * 128.);
+				//}
+				//context.lineWidth = 0.5;
+				//context.strokeStyle = "#ff19a7";
+				//context.stroke();
+		}
+		
+		//function updateWave(sound) {
+		//		waveLeft = sound.waveformData.left;
+		//}
+		//
+		//return {
+		//		init : init
+		//};
+		//})();
+		
+		init('valaro');
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// Started by making a matrix, which might be handy for displaying stuff...
+		var ncol = 36;
+		var nrow = 8;
+		nx.onload = function(){
+			nx.colorize("#f5871f");
+			
+			//matrix1.col = ncol;
+			//matrix1.row = nrow;
+			//matrix1.init();
+			//matrix1.resize($("#Content").width(), 200);
+			//matrix1.draw();
+			
+			// Here's the piano keyboard.
+			keyboard1.octaves = 3;
+			keyboard1.init();
+      keyboard1.resize($("#Content").width(), 200);
+		}
+		
+		// This makes it so the matrix and keyboard resize automatically when the
+		// screen is resized.
+		$(function(){
+			$(window).on("resize", function(){
+				matrix1.resize($("#Content").width(), 200);
+				matrix1.draw();
+				keyboard1.resize($("#Content").width());
+			});
+		});
+		
+		Tone.Transport.scheduleRepeat(function(time){
+			
+			// Evaluate some properties of what the user has played in the last x sec.
+			
+			context.fillRect(50 + 10*time,80,20,20);
+		}, 0.25);
+		
+		Tone.Transport.start();
+		
+	</script>
+
+</body>
+</html>
