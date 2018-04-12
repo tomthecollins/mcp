@@ -13,8 +13,9 @@
   <div id="Content">
 		<!--This cavnas call will make a NexusUI matrix.-->
 		<!--<canvas nx="matrix" id="matrix1"</canvas>-->
-		<canvas id="valaro"</canvas>
+		<canvas id="valaro" style="height:250px"</canvas>
 	</div>
+	<br/><br/><br/><br/>
 	<div>
 		<canvas nx="keyboard" id="keyboard1"></canvas>
 	</div>
@@ -50,7 +51,7 @@
 				// clear
 				context.drawImage(backgroundImage, 0, 0);
 				
-				context.fillRect(10,120,20,20);
+				// context.fillRect(10,120,20,20);
 				
 				//context.fillRect(0, 0, canvas.width, canvas.height);
 		
@@ -108,6 +109,7 @@
 		// Started by making a matrix, which might be handy for displaying stuff...
 		var ncol = 36;
 		var nrow = 8;
+		var lastXSec = 2.5;
 		nx.onload = function(){
 			nx.colorize("#f5871f");
 			
@@ -137,8 +139,26 @@
 			
 			// Evaluate some properties of what the user has played in the last x sec.
 			
-			context.fillRect(50 + 10*time,80,20,20);
-		}, 0.25);
+			// console.log('Tone.Transport.seconds:', Tone.Transport.seconds);
+			// var timeWindowClose = Tone.Transport.seconds;
+			var timeWindowOpen = Tone.Transport.seconds - lastXSec;
+			var relevantNoteOns = noteOns.filter(function(n){
+				return n[0] >= timeWindowOpen;
+			})
+			console.log('relevantNoteOns:', relevantNoteOns);
+			
+			var numberNotesPlayed = relevantNoteOns.length;
+			var density;
+			if (numberNotesPlayed >= 10){
+				density = 1;
+			}
+			else {
+				density = numberNotesPlayed/10;
+			}
+			console.log('density:', density);
+			context.drawImage(backgroundImage, 0, 0);
+			context.fillRect(100, 50*(1 - density), 10, 10);
+		}, 1);
 		
 		Tone.Transport.start();
 		

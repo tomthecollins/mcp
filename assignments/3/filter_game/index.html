@@ -11,31 +11,48 @@
         This example is adapted from https://tonejs.github.io/
     </p>
     <script>
-        var filter = new Tone.Filter({
+        var filter1 = new Tone.Filter({
             type : 'bandpass',
-            Q : 12
+            Q: 12, // Seemed to be sharpness, but then what is rolloff?!
+            rolloff: -12
         }).toMaster()
+        var filter2 = new Tone.Filter({
+            type : 'bandpass',
+            Q: 12, // Seemed to be sharpness, but then what is rolloff?!
+            rolloff: -12
+        }).toMaster()
+        console.log('filter2:', filter2.gain.value);
+        
+        var noise1 = new Tone.Noise("brown").connect(filter1).start(0).stop(4)
+        var noise2 = new Tone.Noise("brown").connect(filter2).start(0).stop(4)
+        
         
         //schedule a series of frequency changes
-        filter.frequency.setValueAtTime('C5', 0)
-        filter.frequency.setValueAtTime('E5', 0.5)
-        filter.frequency.setValueAtTime('G5', 1)
-        filter.frequency.setValueAtTime('B5', 1.5)
-        filter.frequency.setValueAtTime('C6', 2)
-        filter.frequency.linearRampToValueAtTime('C1', 3)
+        filter1.frequency.setValueAtTime('C5', 0)
+        // filter1.gain.setValueAtTime(-50000, 2)
+        noise1.volume.setValueAtTime(-100, 2)
+        noise2.volume.setValueAtTime(-100, 0)
+        filter2.frequency.setValueAtTime('G4', 2)
+        noise2.volume.setValueAtTime(0, 2)
+        // filter2.gain.linearRampToValueAtTime(-500, 1)
+        // filter2.gain.setValueAtTime(0, 2)
         
-        var noise = new Tone.Noise("brown").connect(filter).start(0).stop(3)
+        // filter.frequency.setValueAtTime('E5', 0.5)
+        // filter.frequency.setValueAtTime('G5', 1)
+        // filter.frequency.setValueAtTime('B5', 1.5)
+        // filter.frequency.setValueAtTime('C6', 2)
+        // filter.frequency.linearRampToValueAtTime('C1', 3)
         
         //schedule an amplitude curve
-        noise.volume.setValueAtTime(-2, 0)
-        noise.volume.linearRampToValueAtTime(20, 0.1)
-        noise.volume.linearRampToValueAtTime(-Infinity, 3)
+        // noise.volume.setValueAtTime(-2, 0)
+        // noise.volume.linearRampToValueAtTime(20, 0.1)
+        // noise.volume.linearRampToValueAtTime(-Infinity, 4)
         
         //listen to noise without filtering.
-        noise.start(5).stop(8)
-        noise.volume.setValueAtTime(-2, 5)
-        noise.volume.linearRampToValueAtTime(40, 5.1)
-        noise.volume.linearRampToValueAtTime(-Infinity, 8)
+        // noise.start(5).stop(8)
+        // noise.volume.setValueAtTime(-2, 5)
+        // noise.volume.linearRampToValueAtTime(40, 5.1)
+        // noise.volume.linearRampToValueAtTime(-Infinity, 8)
         
     </script>
 

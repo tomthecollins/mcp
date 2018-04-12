@@ -1,1 +1,4 @@
 assignments/3/david/node_modules/
+*.wav
+*.mp3
+*/.DS_Store
