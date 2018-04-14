@@ -4,6 +4,11 @@
 <head>
     <title>Page Title</title>
     <script type="text/javascript" src="./Tone.min_r11.js"></script>
+    <script type="text/javascript" src="./jquery.min.js"></script>
+    <script type="text/javascript">
+        // Script to prevent link behavior of image map.
+        
+    </script>
 </head>
 
 <body>
@@ -27,17 +32,63 @@
     </ol>
     
     <div>
-        <input type="button" onclick="Tone.Transport.start();" value="Start"></input>
-        <input type="button" onclick="Tone.Transport.stop();" value="Stop"></input>
+        <input type="button" onclick="(changeKey('whole tone'));" value="Whole tone!"></input>
     </div>
     
-    <dvi>
-        <input type="button" onclick="changeKey('C');" value="C"></input>
-        <input type="button" onclick="changeKey('E');" value="E"></input>
-        <input type="button" onclick="changeKey('G');" value="G"></input>
-    </dvi>
+    <div>
+        <img src="./colourWheel.png" width="500" alt="Planets" usemap="#planetmap">
+        <map name="planetmap">
+          <area class="C" shape="rect" coords="240,40,260,60" href="">
+          <area class="G" shape="rect" coords="340,60,360,80" href="">
+          
+          <area class="B" shape="rect" coords="340,420,360,440" href="">
+          
+          <area class="F" shape="rect" coords="135,60,155,80" href="">
+          
+          <area class="c" shape="rect" coords="115,240,135,260" href="">
+          
+          <area class="play" shape="circle" coords="250,250,50" href="">
+        </map>
+    </div>
     
     <script>
+        // Image map.
+        // Solution from http://jsfiddle.net/bL5rgstg/871/
+        $(".C").on("click", function(e){
+            e.preventDefault();
+            changeKey('C'); 
+        });
+        $(".G").on("click", function(e){
+            e.preventDefault();
+            changeKey('G'); 
+        });
+        
+        $(".B").on("click", function(e){
+            e.preventDefault();
+            changeKey('B'); 
+        });
+        
+        $(".F").on("click", function(e){
+            e.preventDefault();
+            changeKey('F'); 
+        });
+        
+        $(".c").on("click", function(e){
+            e.preventDefault();
+            changeKey('c'); 
+        });
+        
+        $(".play").on("click", function(e){
+            e.preventDefault();
+            if (Tone.Transport.state == "started"){
+                Tone.Transport.stop();
+            }
+            else {
+                Tone.Transport.start();
+            }
+        });
+        
+        // Helper functions.
         normalize = function(arr){
             var tot = arr.reduce(function(a, b){
                 return a + b;
@@ -89,9 +140,10 @@
             var arr2 = JSON.parse(JSON.stringify(arr));
             return arr2;
         }
-        
+        // End helper functions.
     </script>
    
+    
     
     <script type="text/javascript">
         // Parameters.
@@ -124,57 +176,114 @@
             5.19,
             0,
             3.66,
-            ,
+            0,
             2.28, // Prob of getting B.
         ];
+        var ptp_min = [
+            6.35, // Prob of getting C.
+            0, // Prob of getting C#. Put non-key notes to zero.
+            3.48, // Prob of getting D.
+            4.38, // ...
+            0,
+            4.09,
+            0,
+            5.19,
+            3.66,
+            0,
+            0,
+            2.28, // Prob of getting B.
+        ];
+        var whole_tone = [
+            6.35, // Prob of getting C.
+            0, // Prob of getting C#.
+            6.35, // Prob of getting D.
+            0, // ...
+            6.35,
+            0,
+            6.35,
+            0,
+            6.35,
+            0,
+            6.35,
+            0, // Prob of getting B.
+        ];
+        var whole_tone_state = false;
         var pcs = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
         
+        
         changeKey = function(str){
-            var idx = pcs.indexOf(str);
-            console.log('idx:', idx);
-            weights = copy_array_object(ptp);
-            weights = cyclically_permute_array_by(weights, -idx);
-            console.log('permuted weights:', weights);
-            weights = normalize(weights);
-            console.log('weights:', weights);
-            
+            if (str === "whole tone"){
+                console.log("Hello!")
+                whole_tone_state = true;
+                weights = normalize(whole_tone);
+            }
+            else {
+                whole_tone_state = false;
+                if (str[0].toUpperCase() === str[0]){
+                    // Major key.
+                    var curr_ptp = ptp;
+                    var idx = pcs.indexOf(str);
+                }
+                else {
+                    // Minor key.
+                    var curr_ptp = ptp_min;
+                    var idx = pcs.indexOf(str.toUpperCase());
+                }
+                console.log('idx:', idx);
+                weights = copy_array_object(curr_ptp);
+                weights = cyclically_permute_array_by(weights, -idx);
+                console.log('permuted weights:', weights);
+                weights = normalize(weights);
+                console.log('weights:', weights);
+            }
         }
         
         // Defining an instrument.
-        var piano = new Tone.Sampler({
-            "C4": "./acoustic_grand_piano/060_keyboard_acoustic_000-100.wav",
-            "E4": "./acoustic_grand_piano/064_keyboard_acoustic_000-100.wav"
+        var guitar = new Tone.Sampler({
+            "C3": "./acoustic_guitar_nylon/048_guitar_acoustic_034-100.wav",
+            "E3": "./acoustic_guitar_nylon/052_guitar_acoustic_034-100.wav",
+            "G#3": "./acoustic_guitar_nylon/056_guitar_acoustic_034-100.wav",
+            "C4": "./acoustic_guitar_nylon/060_guitar_acoustic_034-100.wav",
+            "E4": "./acoustic_guitar_nylon/064_guitar_acoustic_034-100.wav",
+            "G#4": "./acoustic_guitar_nylon/068_guitar_acoustic_034-100.wav",
+            "C5": "./acoustic_guitar_nylon/072_guitar_acoustic_034-100.wav",
+            "E5": "./acoustic_guitar_nylon/076_guitar_acoustic_034-100.wav",
+            "G#5": "./acoustic_guitar_nylon/080_guitar_acoustic_034-100.wav",
+            "C6": "./acoustic_guitar_nylon/084_guitar_acoustic_034-100.wav",
         }, function(){
-            console.log('Piano loaded!');
+            console.log('Guitar loaded!');
         });
-        piano.toMaster();
-        piano.volume.value = -10;
+        guitar.toMaster();
+        guitar.volume.value = -10;
         
         // Start generating some sounds.
         Tone.Transport.scheduleRepeat(function(time){
             // Make some sounds.
-            var nosNotes = Math.floor(3*Math.random());
+            var nosNotes = Math.floor(4*Math.random());
             var notesHolder = [];
             for (i = 0; i < nosNotes; i++){
                 notesHolder.push(i);
             }
             console.log('notesHolder:', notesHolder);
             notesHolder.map(function(n){
-                Tone.Transport.schedule(function(time2){
-                    var pitch_class = weightedRand2(weights);
-                    console.log('pitch_class', pitch_class);
-                    var octave_no = 4;
-                    var pitch = pitch_class + octave_no.toString();
-                    console.log('pitch:', pitch);
-                    piano.triggerAttackRelease(pitch, 2, time2 + 0.05, 0.9);
-                }, time);
+                console.log('Hi!');
+                var pitch_class = weightedRand2(weights);
+                console.log('pitch_class', pitch_class);
+                var octave_no;
+                if (Math.random() > 0.25){
+                    octave_no = 4;
+                }
+                else {
+                    octave_no = 3;
+                }
+                var pitch = pitch_class + octave_no.toString();
+                console.log('pitch:', pitch);
+                guitar.triggerAttackRelease(pitch, 2, time + 0.05 + 0.04*Math.random(), 0.5 + 0.4*Math.random());
             });
         }, 1/generationFrequency);
         
         // Initialize key to C.
         changeKey("C");
-        
-        
     </script>
 
 

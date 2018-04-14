@@ -1,0 +1,275 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Disson-ometer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+  <script type="text/javascript" src="./lib/Tone.js"></script>
+  <script type="text/javascript" src="./lib/jquery.min.js"></script>
+  <script type="text/javascript" src="./lib/Interface.js"></script>
+  <script type="text/javascript" src="./lib/Logo.js"></script>
+  <style type="text/css">@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);</style><style type="text/css">#TonejsLogo{background-color:#000;cursor:pointer}#TonejsLogo,#TonejsLogo #Border,#TonejsLogo #Canvas,#TonejsLogo #Title{position:absolute}#TonejsLogo #TextContainer{position:absolute;width:auto;-webkit-transform:translate(-50%, 0px);-ms-transform:translate(-50%, 0px);transform:translate(-50%, 0px);left:50%;height:100%}#TonejsLogo #TextContainer #Title{position:relative;display:inline-block;font-family:Roboto Mono,monospace;color:#fff;text-align:center;height:100%;top:0;width:100%;font-weight:400}#TonejsLogo #TextContainer #Title .Closer{margin:-3%}#TonejsLogo #TextContainer #Canvas{position:absolute;height:100%;top:0;border-radius:2%;z-index:0;right:0;width:10px;background-color:#f734d7}</style>
+  <script type="text/javascript" src="./lib/math.min.js"></script>
+  <script type="text/javascript" src="./supporting/fb_256_to_82.js"></script>
+		<script type="text/javascript" src="./supporting/Zfb.js"></script>
+		<script type="text/javascript" src="./supporting/plomp_levelt_curve.js"></script>
+		
+		<script type="text/javascript" src="./lib/fft/twiddle.js"></script>
+		<script type="text/javascript" src="./lib/fft/complex.js"></script>
+		<script type="text/javascript" src="./lib/fft/fftutil.js"></script>
+		<script type="text/javascript" src="./lib/fft/fft.js"></script>
+		
+		<script type="text/javascript" src="./lib/nexusUI.js"></script>
+		<script type="text/javascript" src="./supporting/FileSaver.min.js"></script>
+		<script type="text/javascript" src="./lib/StartAudioContext.js"></script>
+		<script type="text/javascript" src="./supporting/math_util.js"></script>
+		<link rel="stylesheet" type="text/css" href="./lib/examples.css">
+ </head>
+ <body>
+  <style type="text/css" id="hello">
+   canvas {
+    width: 100%;
+    height: 200px;
+    background-color: black;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+   }
+  </style>
+  <div id="Content" class="FullScreen">
+   <div id="Title">Disson-ometer</div>
+   <div id="Explanation">
+    <form action="start.php" method="post" id="varForm">
+					<p><strong>Audio selection. </strong>Listen to mic input or pick a pre-existing recording:
+					 <select id="micRecSelect">
+							<option value="guitar.wav">Guitar</option>
+							<option value="piano.wav">Piano</option>
+							<option value="strings.wav">Strings</option>
+							<option value="fmpiano.mp3">Organ</option>
+							<option value="mic">Mic</option>
+						</select>
+					</p>
+					
+					<p>
+						<br/>
+						<button type="button" id="goToggle" onclick="go();">Start</button>
+					</p>
+				</form>
+   </div>
+			
+			
+			
+			<script type="text/javascript">
+				// Some parameters.
+				var flag = true; // Start/stop flag.
+				var dur_sec = 30; // Listen to the mic for a maximum of 30 sec.
+				
+				function go(){
+					if(flag) {
+						flag = false;
+						document.getElementById("goToggle").innerHTML = "Stop";
+						calcDissonance(document.getElementById("micRecSelect").value);
+					}
+					else {
+						Tone.Transport.stop();
+						flag = true;
+						document.getElementById("goToggle").innerHTML = "Start";
+					}
+				}
+				
+			</script>
+			
+			
+			<div id="Explanation">
+				<p>
+					The spectrum of what is playing is displayed here:
+				</p>
+				<div id="wavezone"></div>
+				
+			</div>
+			
+			<script>
+				console.log('Got to 122.')
+				var canvas = $("<canvas>").appendTo("#wavezone");
+				
+				function calcDissonance(wavString){
+				// For creating times at which to analyse signal.
+				var nfft = 1024;
+				var frame_rate = 4; // So this is 1000 ms, or hop of 44100 at sampling rate of 44100.
+				var tinc = 1/frame_rate;
+				var toff = 0.01; // Wait 0.25 s into sound before analyzing, to avoid inharmonic onset.
+				var c = 0.1; // Threshold for ignoring small-amplitude components.
+				var diss = []; // Store the calculated dissonance values.
+				var values4; // For plotting the incoming spectra.
+				var X = [];
+				var Y = [];
+				
+				// Argument can be used to determine whether mic input should be analyzed
+				// or if we use a pre-existing recording.
+				console.log('wavString:', wavString);
+				
+				// Need to introduce logic here, depending on whether we're really
+				// listening to mic input or loading one of the example files.
+				if (wavString === "mic"){
+					// We are really listening to the mic.
+					var mic = new Tone.UserMedia();
+					var analyser = new Tone.Analyser({
+						"type" : "waveform",
+						"size" : nfft
+					});
+					mic.connect(analyser);
+					var Fs = mic.context.sampleRate;
+					var nsamp = Fs*dur_sec;
+					// console.log('Fs:', Fs);
+					// console.log('dur_sec: ', dur_sec);
+					// console.log('nsamp:', nsamp);
+					// This next variable holds the analysis times.
+					var ts = [];
+					for (i = 1; i < frame_rate*(dur_sec - nfft/Fs); i++){
+							ts.push(tinc*i + toff);
+					}
+					
+					for (i = 0; i < ts.length; i++){
+						Tone.Transport.schedule(function(time){
+							var values2 = analyser.analyse();
+							console.log('values2:', values2);
+							values2 = [].slice.call(values2);	
+							// console.log('values2 post slice call:', values2);
+							var values3 = fft(values2);
+							values3 = values3.slice(1, nfft/2 + 1);
+							values4 = values3.map(function(x){return complex.magnitude(x);});
+							// console.log('values4:', values4);
+							X.push(values3);
+						}, ts[i]);
+					}
+						
+					// Show the stored info:
+					Tone.Transport.schedule(function(time){
+						// Do something with diss.
+					}, dur_sec);
+					
+					Tone.Transport.start();
+     mic.open();
+					
+				}
+				else {
+					// We are listening to a pre-existing audio file.
+					var mic = new Tone.Player(wavString).toMaster();
+					// var mic = new Tone.Player('./../20171127/ground_truth/' + idxStr + '.wav').toMaster();
+					mic.sync(0);
+					var analyser = new Tone.Analyser({
+						"type" : "waveform",
+						"size" : nfft
+					});
+					mic.connect(analyser);
+					
+					Tone.Buffer.on('load', function(){
+						// Create some times at which to analyse signal.
+						var Fs = mic.buffer._buffer.sampleRate;
+						var fspace = Fs/2/nfft;
+						console.log('fspace:', fspace);
+						var nsamp = mic.buffer._buffer.length;
+						dur_sec = nsamp/Fs;
+						// console.log('Fs:', Fs);
+						// console.log('nsamp:', nsamp);
+						// console.log('dur_sec: ', dur_sec);
+						// This next variable holds the analysis times.
+						var ts = [];
+						for (i = 1; i < frame_rate*(dur_sec - nfft/Fs); i++){
+								ts.push(tinc*i + toff);
+						}
+						
+						// Analyse the signal at these times.
+						for (i = 0; i < ts.length; i++){
+							Tone.Transport.schedule(function(time){
+								var values2 = analyser.analyse();
+								// console.log('values2:', values2);
+								values2 = [].slice.call(values2);	
+								// console.log('values2 post slice call:', values2);
+								var values3 = fft(values2);
+								values3 = values3.slice(1, nfft/2 + 1);
+								values4 = values3.map(function(x){return complex.magnitude(x);});
+								// console.log('values4:', values4);
+								X.push(values4);
+								
+								// Pick peaks.
+								var peaks_and_idx = pick_peaks(values4);
+								
+								// y is loud enough values from peak-picked values4.
+								var y = [];
+								for (i = 0; i < peaks_and_idx.length; i++){
+									if (peaks_and_idx[i][0] > c){
+										y.push(peaks_and_idx[i]);
+									}
+								}
+								Y.push(y);
+								// console.log('y:', y);
+								
+								// Calculate contribution to sensory dissonance.
+								var diss_contrib = sensory_dissonance(y, fspace);
+								console.log('diss_contrib:', diss_contrib);
+								var curr_diss = diss_contrib.map(function(d){
+									return d.diss;
+								})
+								.reduce(function(a, b){
+									return a + b;
+								});
+								console.log('curr_diss:', curr_diss);
+								diss.push(curr_diss);
+								
+							}, ts[i]);
+						}
+							
+						// Show the stored info:
+						Tone.Transport.schedule(function(time){
+							// Do something with diss.
+							
+						}, dur_sec);
+						
+						Tone.Transport.start();
+						mic.start();
+						
+					});
+					
+				}
+				
+				// Draw portions of the signal for funzies.
+				var context = canvas.get(0).getContext("2d");
+				context.canvas.width = canvas.width();
+				context.canvas.height = canvas.height();
+				function drawLoop(){
+					var canvasWidth = context.canvas.width;
+					var canvasHeight = context.canvas.height;
+					requestAnimationFrame(drawLoop);
+					//draw the waveform
+					context.clearRect(0, 0, canvasWidth, canvasHeight);
+					// var values = analyser.analyse();
+					context.beginPath();
+					//context.lineJoin = "round";
+					context.lineWidth = 6;
+					context.strokeStyle = "white";
+					for (var i = 1, len = values4.length; i < len; i++){
+						var val = values4[i] / (nfft/16);
+						var y = canvasHeight*(1 - val);
+						var x = canvasWidth * i / (nfft/4);
+						context.lineTo(x, y);
+					}
+					context.stroke();
+				}
+				drawLoop();
+				
+				
+			}
+      
+			
+			
+		</script>
+  <div id="Explanation">
+			<p>
+				Credits: thanks to
+				Tone.js,
+				fft-js
+			</p>
+		</div>
+		</div>
+ </body>
+</html>

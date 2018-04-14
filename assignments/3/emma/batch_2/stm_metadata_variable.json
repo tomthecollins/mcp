@@ -1,0 +1,702 @@
+[
+  {
+    "artist": "Key West",
+    "song": "Party",
+    "id": "16767.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "D'Agostino, Gigi",
+    "song": "Cuba Libre",
+    "id": "16816.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Van Dyk, Paul",
+    "song": "We Are Alive",
+    "id": "17033.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Sasha",
+    "song": "Calling Your Name",
+    "id": "17071.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Picotto, Mauro",
+    "song": "Proximus",
+    "id": "17155.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Balloon",
+    "song": "Monstersound",
+    "id": "17158.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Johnny O",
+    "song": "Fantasy Girl",
+    "id": "17197.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "French Affair",
+    "song": "I Want Your Love",
+    "id": "17230.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Blank & Jones",
+    "song": "Heartbeat",
+    "id": "17258.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Aquagen",
+    "song": "Lovemachine",
+    "id": "17375.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Daddy DJ",
+    "song": "Daddy DJ",
+    "id": "17572.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Oxide & Neutrino :Megaman",
+    "song": "No Good 4 Me",
+    "id": "17582.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "RMB",
+    "song": "Redemption",
+    "id": "17599.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Storm",
+    "song": "Storm Animal",
+    "id": "17640.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Hancock, Herbie",
+    "song": "Rock It",
+    "id": "17652.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Barcode Brothers",
+    "song": "Dooh Dooh",
+    "id": "17677.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Dr. Sohmer",
+    "song": "Lass mich deine Zunge spüren",
+    "id": "17713.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Shamen",
+    "song": "Ebeneezer Goode",
+    "id": "1774.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Public Domain",
+    "song": "Operation Blade",
+    "id": "17820.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "More, Billy",
+    "song": "Up & Down (Don't Fall In Love)",
+    "id": "17821.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Azzido Da Bass",
+    "song": "Dooms Night",
+    "id": "17825.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Dr. Sohmer",
+    "song": "Pack ihn ein-Pack in aus",
+    "id": "17909.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Cosmic Gate",
+    "song": "Exploration Of Space",
+    "id": "17991.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "Fox, Diana",
+    "song": "Running On Empty",
+    "id": "18075.00",
+    "startsOnBeat": "3",
+    "remarks": ""
+  },
+  {
+    "artist": "RMB",
+    "song": "Deep Down Below",
+    "id": "18264.00",
+    "startsOnBeat": 2,
+    "remarks": 1
+  },
+  {
+    "artist": "DJ Tomcraft",
+    "song": "Prosac",
+    "id": "18272.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Sylver",
+    "song": "Turn The Tide",
+    "id": "18302.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Paffendorf",
+    "song": "Rhythm and Sex (Video Mix)",
+    "id": "18349.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "CJ Stone",
+    "song": "Shining Star (CJ Stone Club Mix)",
+    "id": "18357.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Lexy & K-Paul",
+    "song": "You're The One",
+    "id": "18478.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "2 Unlimited",
+    "song": "Get Ready For This",
+    "id": "1849.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Elektrochemie LK",
+    "song": "When I Rock (original mix)",
+    "id": "18551.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Balloon",
+    "song": "Techno Rocker",
+    "id": "18682.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "D-Devils",
+    "song": "The 6th Gate",
+    "id": "18696.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Floorfilla",
+    "song": "Italodancer",
+    "id": "18878.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Daft Punk",
+    "song": "Aerodynamic",
+    "id": "18941.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Blank & Jones",
+    "song": "DJs, Fans & Freaks",
+    "id": "19161.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Vangelis",
+    "song": "To The Unkown Man (ext. vers.)",
+    "id": "19209.00",
+    "startsOnBeat": 11,
+    "remarks": "No that is not a mistake it is beat 11"
+  },
+  {
+    "artist": "Scooter",
+    "song": "Posse (I Need You On The Floor)",
+    "id": "19341.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Prodigy",
+    "song": "Out Of Space",
+    "id": "1944.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Pulsedriver",
+    "song": "Cambodia",
+    "id": "19545.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Antique",
+    "song": "Die For You",
+    "id": "19548.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Visage",
+    "song": "Rock that sound",
+    "id": "19565.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "Plaything",
+    "song": "Into Space",
+    "id": "19644.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Eiffel 65",
+    "song": "Lucky (In My Life)",
+    "id": "19687.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Wreckz-N-Effect",
+    "song": "Rump Shaker",
+    "id": "1976.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Essential DJ Team",
+    "song": "We Hate To Rock",
+    "id": "19772.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Love Commitee",
+    "song": "You Can't Stop Us",
+    "id": "19868.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Klubbheads",
+    "song": "Hiphopping",
+    "id": "19878.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Sasha",
+    "song": "Xpander",
+    "id": "20757.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "ATB",
+    "song": "Hold You",
+    "id": "21278.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "French Affair",
+    "song": "Sexy",
+    "id": "21407.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Scooter",
+    "song": "Ramp (The Logical Song!)",
+    "id": "21453.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Lasgo",
+    "song": "Heaven",
+    "id": "21468.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Schaffhaeuser, Mathias",
+    "song": "Hey Little Girl",
+    "id": "21521.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Kissogram",
+    "song": "If I Had Known This Before",
+    "id": "21542.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Blank & Jones",
+    "song": "Desire",
+    "id": "21885.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Starsplash",
+    "song": "Free",
+    "id": "21906.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Aquagen",
+    "song": "Hard To Say I'm Sorry",
+    "id": "21922.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Mad'House",
+    "song": "Like A Prayer",
+    "id": "22037.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "Iglesias, Enrique",
+    "song": "Hero (Dance Remix)",
+    "id": "22050.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Scooter",
+    "song": "Nessaja",
+    "id": "22131.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Members Of Mayday",
+    "song": "Culture Flash 2002",
+    "id": "22381.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Wayne, Jan",
+    "song": "Addicted To Trance",
+    "id": "22642.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Elvis Vs Jxl",
+    "song": "A Little Less Conversation",
+    "id": "22658.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Jones, Howard",
+    "song": "Hide And Seek",
+    "id": "22807.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Sash!",
+    "song": "Ganbareh",
+    "id": "22865.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Brooklyn Bounce",
+    "song": "Loud & Proud",
+    "id": "22866.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Mad'House",
+    "song": "La Isla Bonita",
+    "id": "22895.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "Mad'House",
+    "song": "Into The Groove",
+    "id": "22902.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Mad'House",
+    "song": "Frozen",
+    "id": "22936.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "J.C.A.",
+    "song": "I Begin To Wonder",
+    "id": "22958.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "Aquagen",
+    "song": "Summer Is Calling",
+    "id": "22980.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Captain Jack",
+    "song": "Give It Up",
+    "id": "23004.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Monkey Circus",
+    "song": "La Bamba",
+    "id": "23015.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Mark'Oh",
+    "song": "Because I Love You",
+    "id": "23091.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Bobo",
+    "song": "Chihuahua",
+    "id": "23127.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Novaspace",
+    "song": "To France",
+    "id": "23187.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Dance United",
+    "song": "Reach Out",
+    "id": "23290.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Leila K.",
+    "song": "Open Sesame",
+    "id": "2333.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Blank & Jones :Anne Clark",
+    "song": "The Hardest Heart",
+    "id": "23559.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Right Said Fred",
+    "song": "I Love You (But I Don't Like You)",
+    "id": "23618.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Baracuda",
+    "song": "Damn!",
+    "id": "23765.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Tomcraft",
+    "song": "Loneliness",
+    "id": "23817.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Wayne, Jan",
+    "song": "More Than A Feeling",
+    "id": "23836.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Tracid, Kai",
+    "song": "4 Just 1 Day",
+    "id": "23853.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Master Blaster",
+    "song": "Hypnotic Tango",
+    "id": "23890.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "DJ Sammy :Loona",
+    "song": "Boys Of Summer",
+    "id": "23906.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Snap :CJ Stone",
+    "song": "Rhythm is a Dancer (2003)",
+    "id": "23970.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Sylver",
+    "song": "Livin' My Life",
+    "id": "24061.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "2 Unlimited",
+    "song": "Tribal Dance",
+    "id": "2408.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "Scooter",
+    "song": "Weekend!",
+    "id": "24091.00",
+    "startsOnBeat": 1,
+    "remarks": ""
+  },
+  {
+    "artist": "U96",
+    "song": "Love Sees No Colour",
+    "id": "2416.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "Jarre, Jean Michel",
+    "song": "Rendezvous Part II",
+    "id": "2418.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Gus Gus",
+    "song": "David",
+    "id": "24182.00",
+    "startsOnBeat": 3,
+    "remarks": ""
+  },
+  {
+    "artist": "Kid Q",
+    "song": "This Feeling",
+    "id": "24188.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Jarre, Jean Michel",
+    "song": "Zoolook",
+    "id": "2419.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "ATB",
+    "song": "I Don't Wanna Stop",
+    "id": "24239.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  },
+  {
+    "artist": "Groove Coverage",
+    "song": "The End",
+    "id": "24255.00",
+    "startsOnBeat": 4,
+    "remarks": ""
+  },
+  {
+    "artist": "Chicane",
+    "song": "Love On The Run",
+    "id": "24257.00",
+    "startsOnBeat": 2,
+    "remarks": ""
+  }
+]
