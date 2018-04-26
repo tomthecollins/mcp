@@ -85,6 +85,7 @@
 					The spectrum of what is playing is displayed here:
 				</p>
 				<div id="wavezone"></div>
+				<div id="dissozone"></div>
 				<div id="meterzone"></div>
 				
 			</div>
@@ -92,16 +93,18 @@
 			<script>
 				console.log('Got to 122.')
 				var canvas = $("<canvas>").appendTo("#wavezone");
+				var canvas3 = $("<canvas>").appendTo("#dissozone");
 				var canvas2 = $("<canvas>").appendTo("#meterzone");
 				
 				function calcDissonance(wavString){
 					// For creating times at which to analyse signal.
 					var nfft = 1024;
-					var frame_rate = 4; // So this is 1000 ms, or hop of 44100 at sampling rate of 44100.
+					var frame_rate = 10; // So this is 100 ms, or hop of 4410 at sampling rate of 44100.
 					var tinc = 1/frame_rate;
 					var toff = 0.01; // Wait 0.25 s into sound before analyzing, to avoid inharmonic onset.
 					var c = 0.1; // Threshold for ignoring small-amplitude components.
 					var diss = []; // Store the calculated dissonance values.
+					var curr_diss = 0;
 					var values4; // For plotting the incoming spectra.
 					var X = [];
 					var Y = [];
@@ -155,6 +158,7 @@
 					
 				}
 				else {
+					var diss_meter = new Tone.Meter();
 					var meter = new Tone.Meter();
 					// We are listening to a pre-existing audio file.
 					var mic = new Tone.Player(wavString).connect(meter).toMaster();
@@ -212,7 +216,7 @@
 								var diss_contrib = sensory_dissonance(y, fspace);
 								// console.log('diss_contrib:', diss_contrib);
 								if (diss_contrib.length > 0){
-								 var curr_diss = diss_contrib.map(function(d){
+								 curr_diss = diss_contrib.map(function(d){
 									return d.diss;
 								})
 								.reduce(function(a, b){
@@ -222,6 +226,7 @@
 								
 								console.log('curr_diss:', curr_diss);
 								diss.push(curr_diss);
+								// diss_meter
 								
 							}, ts[i]);
 						}
@@ -272,6 +277,7 @@
 				
 				
 				var meterContext = canvas2.get(0).getContext("2d");
+				var meterContext3 = canvas3.get(0).getContext("2d");
 				var meterGraident;
 				function drawMeter(){
 					// console.log('Meter', meter)
@@ -283,6 +289,12 @@
 					meterContext.fillRect(0, 0, canvasWidth, canvasHeight);
 					meterContext.fillStyle = "white";
 					meterContext.fillRect(canvasWidth * level, 0, canvasWidth, canvasHeight);
+					
+					meterContext3.clearRect(0, 0, canvasWidth, canvasHeight);
+					meterContext3.fillStyle = meterGraident;
+					meterContext3.fillRect(0, 0, canvasWidth, canvasHeight);
+					meterContext3.fillStyle = "white";
+					meterContext3.fillRect(canvasWidth * curr_diss/7000, 0, canvasWidth, canvasHeight);
 				}
 				//size the canvase
 				var canvasWidth, canvasHeight;
@@ -291,6 +303,8 @@
 					canvasHeight = $("#meterzone").height();
 					meterContext.canvas.width = canvasWidth;
 					meterContext.canvas.height = canvasHeight;
+					meterContext3.canvas.width = canvasWidth;
+					meterContext3.canvas.height = canvasHeight;
 					//make the gradient
 					meterGraident = meterContext.createLinearGradient(0, 0, canvasWidth, canvasHeight);
 					meterGraident.addColorStop(0, "#BFFF02");
