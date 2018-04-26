@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Page Title</title>
+    <script type="text/javascript" src="./Tone.min_r11.js"></script>
+    <script type="text/javascript" src="./batch_1/stm_metadata_variable.js"></script>
     <script type="text/javascript">
         function dynamicallyLoadScript(url){
             var script = document.createElement("script"); // Make a script DOM node
@@ -10,40 +12,203 @@
             document.head.appendChild(script); // Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
         }
         
-        dynamicallyLoadScript('./batch_1/js_from_lisp/1145.00.js')
-        dynamicallyLoadScript('./batch_2/js_from_lisp/1774.00.js');
-        dynamicallyLoadScript('./batch_2/js_from_lisp/1849.00.js');
+        var song_dir = './batch_1/js_from_lisp/';
+        var song_ids = [
+            "1285",
+            "1310",
+            "1499",
+            "1520"
+        ];
+        song_ids.map(function(id){
+            dynamicallyLoadScript(song_dir + id + '.00.js');
+        });
         
+        MNN2pitch_simple = function(MNN){
+            // Tom Collins 6/1/2016.
+            // In
+            // metadata Integer mandatory
+            // Out String
+            // This function converts a MIDI note number into a pitch class and octave.
+            // It does so in a completely naive manner (no consideration of global or
+            // local key), but this is handy for things like Tone.js playback, which tend
+            // to prefer "C" to "B#", "C#" to "Db" (I think), and "G" to "F##".
+          
+            var lookup = [
+                          "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
+            ];
+            var octave = Math.floor(MNN/12 - 1);
+            var MNN_mod_12 = MNN % 12;
+            return lookup[MNN_mod_12] + octave.toString();
+        }
     </script>
     
 </head>
 
 <body>
-    <input type="button" onclick="beatHistogram();"></input>
+    <select id="songSelect" onchange="updateSongSelection();">
+        <!--<option value="saab">Saab</option>-->
+        <!--<option value="mercedes">Mercedes</option>-->
+    </select>
+    
+    <input type="button" onclick="assembleHistograms();" value="LOOCV hist"/>
+    <input type="button" onclick="beatHistogram(ps);" value="Beat hist"/>
+    <input type="button" onclick="start();" value="Start"/>
+    <input type="button" onclick="Tone.Transport.stop();" value="Stop"/>
+    <p id="beatDisplay"></p>
+    
     <script type="text/javascript">
         var granularity = 4;
-        function beatHistogram(){
-            var ps = s1145;
-            var hist = [];
-            ps.map(function(p, idx){
-                var intPart = parseInt(p[0]);
-                var decPart = p[0] - intPart;
-                var beat = intPart % 4 + decPart;
-                var histIdx = Math.floor(granularity*beat);
-                if (hist[histIdx] !== undefined){
-                    hist[histIdx]++;
-                }
-                else {
-                    hist[histIdx] = 1;
-                }
-                if (idx >= 5 && idx < 10){
-                    console.log('intPart:', intPart);
-                    console.log('decPart:', decPart);
-                    console.log('beat:', beat);
-                }
-            });
-            console.log('hist:', hist);
+        var beatsInMeasure = 4;
+        var ps, newSelection;
+        var tempo = 130;
+        Tone.Transport.bpm.value = tempo;
+        
+        // Populate songSelect menu.
+        var ssm = document.getElementById("songSelect");
+        var inhtml = '';
+        song_ids.map(function(id){
+            console.log('id:', id);
+            inhtml = inhtml + '<option value="' + id + '">' + id + '</option>';
+        });
+        ssm.innerHTML = inhtml;
+        // ps = eval('s' + song_ids[0]);
+        
+        function updateSongSelection(){
+            newSelection = document.getElementById("songSelect").value;
+            console.log('newSelection:', newSelection);
+            ps = eval('s' + newSelection);
         }
+        
+        function beatHistogram(aPointSet){
+            if (aPointSet == undefined){
+                alert('Select a song before clicking Beat Histogram.')
+            }
+            else {
+                var hist = [];
+                aPointSet.map(function(p, idx){
+                    var intPart = parseInt(p[0]);
+                    var decPart = p[0] - intPart;
+                    var beat = intPart % beatsInMeasure + decPart;
+                    var histIdx = Math.floor(granularity*beat);
+                    if (hist[histIdx] !== undefined){
+                        hist[histIdx]++;
+                    }
+                    else {
+                        hist[histIdx] = 1;
+                    }
+                    //if (idx >= 5 && idx < 10){
+                    //    console.log('p:', p);
+                    //    console.log('intPart:', intPart);
+                    //    console.log('decPart:', decPart);
+                    //    console.log('beat:', beat);
+                    //}
+                });
+                // console.log('hist:', hist);
+                return hist;
+            }
+        }
+        
+        function assembleHistograms(){
+            // In keeping with LOOCV, remove selected song from song_ids.
+            var songs2analyse = song_ids.filter(function(id){
+                return id !== newSelection;
+            });
+            
+            // Make beat histogram for each remaining song.
+            var hists = [];
+            songs2analyse.map(function(id){
+                // Get startsOnBeat from metadata.
+                var relEl = md.find(function(d){
+                    return id + '.00' === d.id;
+                });
+                var startsOnBeat = relEl.startsOnBeat
+                console.log('id:', id, 'relEl:', relEl, 'startsOnBeat:', startsOnBeat);
+                // Use startsOnBeat to correct the point set.
+                var currPs = eval('s' + id);
+                currPs = currPs.map(function(p){
+                   p[0] = p[0] + beatsInMeasure - startsOnBeat + 1;
+                   return p;
+                });
+                var hist = beatHistogram(currPs);
+                // Normalize and push to hists.
+                var sum = 200;
+                var sum = hist.reduce(function(a, b){
+                    return a + b;
+                });
+                hist = hist.map(function(h){
+                    return h/sum;
+                })
+                console.log('normalized hist:', hist);
+                hists.push(hist);
+            });
+            // Calculate averages.
+            var avgHist = [];
+            for (i = 0; i < beatsInMeasure*granularity; i++){
+                avgHist[i] = 0;
+                for (j = 0; j < songs2analyse.length; j++){
+                    avgHist[i] = avgHist[i] + hists[j][i];
+                }
+            }
+            console.log('avgHist:', avgHist);
+            return avgHist;
+        }
+        
+        function start(){
+            if (ps == undefined){
+                alert('Select a song before clicking Start.')
+            }
+            else {
+                Tone.Transport.cancel(0);
+                ps.map(function(p){
+                    Tone.Transport.schedule(function(time){
+                        // console.log('Waaa!');
+                        drums.triggerAttackRelease(
+                            MNN2pitch_simple(p[1]),
+                            1,
+                            time,
+                            0.9*p[4]/127
+                        )
+                    }, p[0]*60/tempo);
+                });
+                Tone.Transport.start();
+                
+                // Display beat times.
+                // var lastOn = Math.ceil(ps[ps.length - 1][0]);
+                var j = 0;
+                Tone.Transport.scheduleRepeat(function(time){
+                    document.getElementById("beatDisplay").innerHTML = 'Beat according to MIDI: ' + (j % 4 + 1);
+                    j++;
+                }, 60/tempo);
+            }
+        }
+        
+        // Make an instrument.
+        var drums = new Tone.Sampler({
+            "C2": "edm_drum_kit/036_kick_1.wav",
+            "C#2": "edm_drum_kit/037_click.wav",
+            "D2": "edm_drum_kit/038_snare_1.wav",
+            "D#2": "edm_drum_kit/039_clap_1.wav",
+            "E2": "edm_drum_kit/040_snare_2.wav",
+            "F2": "edm_drum_kit/041_tom_1.wav",
+            "F#2": "edm_drum_kit/042_hi-hat_1.wav",
+            "G2": "edm_drum_kit/043_tom_2.wav",
+            "G#2": "edm_drum_kit/044_hi-hat_2.wav",
+            "A2": "edm_drum_kit/045_tom_3.wav",
+            "A#2": "edm_drum_kit/046_hi-hat_open.wav",
+            "B2": "edm_drum_kit/047_perc.wav",
+            "C3": "edm_drum_kit/048_plate.wav",
+            "C#3": "edm_drum_kit/049_crash.wav",
+            "D3": "edm_drum_kit/050_shaker_2.wav",
+            "D#3": "edm_drum_kit/051_ride.wav",
+            "E3": "edm_drum_kit/052_snare_3.wav",
+            "F3": "edm_drum_kit/053_clap_2.wav",
+            "F#3": "edm_drum_kit/054_shaker_1.wav",
+            "G3": "edm_drum_kit/055_scoop.wav",
+            "G#3": "edm_drum_kit/056_jump.wav"
+        }, function(){
+            console.log('Loaded!');
+            
+        }).toMaster();
     </script>
 </body>
 </html>

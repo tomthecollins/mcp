@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Page Title</title>
+    <script type="text/javascript">
+        function dynamicallyLoadScript(url){
+            var script = document.createElement("script"); // Make a script DOM node
+            script.src = url; // Set it's src to the provided URL
+            document.head.appendChild(script); // Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+        }
+        
+        dynamicallyLoadScript('./batch_1/js_from_lisp/1145.00.js')
+        dynamicallyLoadScript('./batch_2/js_from_lisp/1774.00.js');
+        dynamicallyLoadScript('./batch_2/js_from_lisp/1849.00.js');
+        
+    </script>
+    
+</head>
+
+<body>
+    <input type="button" onclick="beatHistogram();"></input>
+    <script type="text/javascript">
+        var granularity = 4;
+        function beatHistogram(){
+            var ps = s1145;
+            var hist = [];
+            ps.map(function(p, idx){
+                var intPart = parseInt(p[0]);
+                var decPart = p[0] - intPart;
+                var beat = intPart % 4 + decPart;
+                var histIdx = Math.floor(granularity*beat);
+                if (hist[histIdx] !== undefined){
+                    hist[histIdx]++;
+                }
+                else {
+                    hist[histIdx] = 1;
+                }
+                if (idx >= 5 && idx < 10){
+                    console.log('intPart:', intPart);
+                    console.log('decPart:', decPart);
+                    console.log('beat:', beat);
+                }
+            });
+            console.log('hist:', hist);
+        }
+    </script>
+</body>
+</html>

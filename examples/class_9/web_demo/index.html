@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Explaining Shazam</title>
+	<script type="text/javascript" src="./jquery.min.js"></script>
+	<script type="text/javascript" src="./Tone.min_r11.js"></script>
+	<script type="text/javascript" src="./Interface.js"></script>
+	<link rel="stylesheet" type="text/css" href="./examples.css">
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+</head>
+<body>
+  <div id="Content">
+			<div id="Title">
+				tomcollinsresearch.net | 04/2018 | Explaining Shazam
+			</div>
+			<div id="Explanation">
+				<p>
+					<b>Use case.</b>
+					The Shazam use case is as follows: audio is playing somewhere in a user's
+					environment (e.g., shopping mall, bar, web streaming), they like what they
+					hear but they don't know what the song's called or who it's by.
+				</p>
+				<p>
+					The user opens the Shazam app, the app records their audio environment (which
+					may be noisy), sends this audio query, e.g.
+				</p>
+				<ul>
+					<li>
+						Audio query
+						<input type="button" value="Play" onclick="probe.start();"/>
+						<input type="button" value="Stop" onclick="probe.stop();"/>
+					</li>
+				</ul>
+				<p>
+					to a Shazam server, which 'magically' returns the song name/artist within
+					seconds, e.g.
+				</p>
+				<ul>
+					<li>
+						Identification result: 'strings.wav'
+					</li>
+				</ul>
+				<p>
+					Let's look at how the audio query is analyzed &ndash; let's uncover the magic!
+				</p>
+			</div>
+			<div id="Explanation">
+				<p>
+					<b>Scenario.</b>
+					Imagine that all the songs in the world consist of the following three short clips:
+				</p>
+				<ul>
+					<li>
+						Ascending scale on guitar &nbsp;
+						<input type="button" value="Play" onclick="guitar.start();"/>
+						<input type="button" value="Stop" onclick="guitar.stop();"/>
+					</li>
+					<li>
+						Some random chords on piano
+						<input type="button" value="Play" onclick="piano.start();"/>
+						<input type="button" value="Stop" onclick="piano.stop();"/>
+					</li>
+					<li>
+						Descending scale on strings
+						<input type="button" value="Play" onclick="strings.start();"/>
+						<input type="button" value="Stop" onclick="strings.stop();"/>
+					</li>
+				</ul>
+				<p>
+					Temporarily, we will ignore how Shazam analyzes this audio and stores it in a
+					database, and focus instead on the use case and the analysis of the audio query.
+				</p>
+			</div>
+			<div id="Explanation">
+				<p>
+					<b>Query analysis.</b>
+					A fast Fourier transform for the incoming audio query is calculated to determine how the frequency
+					content of the sound varies as a function of time. This is what is shown in shades of
+					gray in the plot below, and is called a <b>spectrogram</b>. The darker the blob in the spectrogram,
+					the greater the amount of energy at this time and frequency.
+				</p>
+				<div>
+					<input type="button" value="Play audio query" onclick="probe.start();"/>
+					<input type="button" value="Stop audio query" onclick="probe.stop();"/>&nbsp;
+					<input type="button" value="Create fingerprints" onclick="createFP(V);"/>
+					<input type="button" value="Clear fingerprints" onclick="clearFP();"/>
+					<br/>
+					<canvas id="fp"</canvas>
+				</div>
+				<p>
+					Next, peaks are detected using a 2D peak picker. These are shown as red crosses in the
+					spectrogram above.
+				</p>
+			</div>
+			
+			<div id="Explanation">
+				<p>
+					<b>Fingerprinting.</b>
+					The Shazam analysis algorithm then computes time and frequency differences between
+					<b>locally constrained pairs of peaks</b>. For instance, letting
+					\(\mathbf{v}_1 = (x_1, y_1)\) and \(\mathbf{v}_2 = (x_2, y_2)\) be two peaks with
+					\(x_2 \geq x_1\), the algorithm retains
+					the pair \((\mathbf{v}_1, \mathbf{v}_2)\) iff
+				</p>
+				<ol>
+					<li>
+						\(x_2 - x_1 > {\tt timeThresMin}\)
+					</li>
+					<li>
+							\(x_2 - x_1 < {\tt timeThresMax}\)
+					</li>
+					<li>
+						\(|y_2 - y_1| > {\tt fIdxThresMin}\)
+					</li>
+					<li>
+						\(|y_2 - y_1| < {\tt fIdxThresMax}\)
+					</li>
+				</ol>
+				<p>
+					where timeThresMin and timeThresMax are thresholds for the minimum and maximum
+					permissble time differences (in seconds) between two peaks, and fIdxThresMin and
+					fIdxThresMax are thresholds for the minimum and maximum permissble frequency
+					differences (in bins/indices) between two peaks. (See lines 14-17 of the JavaScript for their definitions.)
+					<!--307-310-->
+				</p>
+				<p>
+					The retained pairs are referred to as <b>fingerprints</b>.
+				</p>
+			</div>
+			
+			<div id="Explanation">
+				<p>
+					<b>Hashing and querying the database.</b>
+					Each fingerprint is converted to a hash for fast querying of the database.
+					For example, the fingerprint
+					\((\mathbf{v}_1, \mathbf{v}_2) = \big((3, 104),	(12,	164)\big)\),
+					which corresponds to a time difference of
+					0.209 sec and a frequency bin/index difference of 60 and should be the first
+					fingerprint created for the current query, is converted to a hash '20960'.
+				</p>
+				<p>
+					So far I did not explain how the database of all the songs in the world is created:
+					<b>database creation follows the exact same steps as we have just performed for the audio query</b>
+					(calculate spectral peaks for each song, then fingerprints and hashes).
+				</p>
+				<p>
+					Associated with each hash is the time (in samples) in the audio query (or database song) and an associated ID
+					(e.g., 'query' or 'db song 2'). For example, for the query hash '20960', the database may have
+					a matching hashkey with contents
+					<table>
+						<thead>
+							<td>
+								Time sample &nbsp;
+							</td>
+							<td>
+								ID
+							</td>
+						</thead>
+						<tr>
+							<td>
+								630576
+							</td>
+							<td>
+								'strings.wav'
+							</td>
+						</tr>
+						<tr>
+							<td>
+								586470
+							</td>
+							<td>
+								'strings.wav'
+							</td>
+						</tr>
+						<tr>
+							<td>
+								32768
+							</td>
+							<td>
+								'guitar.wav'
+							</td>
+						</tr>
+					</table>
+					<br/>
+					which would mean that two fingerprints in the 'strings.wav' song
+					(occurring at cumulative time samples 630576 and 586470)
+					and one fingerprint in the 'guitar.wav' song
+					(occurring at cumulative time sample 32768) also contain this same
+					time and frequency difference.
+				</p>
+			</div>
+			<div id="Explanation">
+				<p>
+					<b>Song identification.</b>
+					For a given audio query, the time-sample pairs \((z_i, w_i\)) from matching
+					query and database hashes are plotted as a scatterplot (see below), where the
+					dashed lines indicate the three database songs (guitar.wav, piano.wav, and
+					strings.wav).
+					</p>
+					<div>
+						<img src="./img/timestamps.png"/>
+					</div>
+					<p>
+						Here is a zoomed-in version of the plot, which acts as a hint for what
+						true-positive identifications look like.
+					</p>
+					<div>
+						<img src="./img/timestamps_zoom.png"/>
+					</div>
+					<p>
+						A simple transformation is applied so that a histogram can be calculated and
+						the ID of the song with the maximum count returned by Shazam as the estimated
+						song name/artist. Such a histogram is shown below, and the maximum count
+						occurring in the third song suggests the audio query is from strings.wav,
+						which is correct.
+					</p>
+					<div>
+						<img src="./img/hist.png"/>
+					</div>
+			</div>
+			
+			<div id="Explanation">
+				<p>
+					<b>Questions.</b>
+					See https://jsfiddle.net/tomthecollins/3L0u8ung/ for an interactive version of these materials.
+					<br/><br/>
+					Based on the explanation above about how the famous music-technological innovation Shazam works,
+					please answer the following.
+				</p>
+				<ol>
+					<li>
+						Write two sentences in your own words to describe the Shazam use case.
+					</li>
+					<br/>
+					<li>
+						In the plot under 'Query analysis', focus on the frequency bin range 50-100.
+						<ol type="a">
+							<li>
+								Does the audio content look like it's going up or down?
+							</li>
+							<li>
+								How does this relate to what you hear when you play the audio query?
+							</li>
+							<li>
+								Why is there energy in the spectrogram above bin 100?
+							</li>
+						</ol>
+					</li>
+					<br/>
+					<li>
+						In line 39 of the JavaScript, edit the logical statement so that the code will select the correct peak pairs from which to construct fingerprints.
+						<!--332-->
+						<br/><br/>
+						<b>Hint.</b> Click Run in JSFiddle and then the
+						'Create fingerprints' button just above the spectrogram
+						to see the effect of editing your logical (lines indicating fingerprints should
+						appear in the spectrogram).
+					</li>
+					<br/>
+					<li>
+						In a scatterplot of time-sample pairs of matching query and database hashes,
+						what does a true-positive identification look like?
+						
+					</li>
+					<br/>
+					<li>
+						<b>Advanced!</b> How would you modify the definition of a fingerprint in order to
+						identify queries that are played at different speeds and/or in different keys (transposed
+						frequencies)?
+					</li>
+				</ol>
+			</div>
+			<div id="Explanation">
+				<p>
+					<b>References</b>
+					<br/><br/>
+					Wang, A. L.-C., & Smith III, J. O. (2006). US Patent No. 6,990,453. Washington, DC: U.S. Patent and Trademark Office. (Filed July 31, 2000.)
+					<br/><br/>
+					Arzt, A., Böck, S, & Widmer, G. (2012). Fast identification of piece and score position via symbolic fingerprinting. Proceedings of the International Society for Music Information Retrieval Conference (pp. 433-438). Porto, Portugal.
+					<br/><br/>
+					<a href="https://tonejs.github.io/" target="_blank">Tone.js</a> for styling and rendering of the fingerprints.
+				</p>
+			</div>
+			
+		</div>
+		
+		<script type="text/javascript">
+			// Plot of peaks.
+			var canvas = document.getElementById("fp");
+			canvas.width = 800;
+			canvas.height = 600;
+			var ctx = canvas.getContext("2d");
+			
+			var backgroundImage = new Image(); 
+			backgroundImage.src = './img/peaks.png'; 
+			backgroundImage.onload = function(){
+				ctx.drawImage(backgroundImage, 0, 0);
+			}
+			
+			// Define instruments and probe.
+			var guitar = new Tone.Player("./audio/guitar.wav").toMaster();
+			var piano = new Tone.Player("./audio/piano.wav").toMaster();
+			var strings = new Tone.Player("./audio/strings.wav").toMaster();
+			var probe = new Tone.Player("./audio/probe.wav").toMaster();
+			
+			// Define parameters for fingerprint construction.
+			var timeThresMin = 0.1;
+			var timeThresMax = 1;
+			var fIdxThresMin = 0;
+			var fIdxThresMax = 150;
+			var step = 1024;
+			var Fs = 44100;
+			
+			// Locations of red crosses expressed as [x,y] pairs.
+			var V = [[3,104],[3,368],[4,277],[4,371],[4,461],[5,92],[6,104],[6,184],[12,164],[12,492],[14,415],[15,247],[15,328],[15,410],[17,82],[18,164],[25,234],[25,386],[26,156],[26,461],[27,78],[27,311],[27,467],[35,77],[36,70],[36,209],[36,485],[37,344],[37,411],[38,139],[38,417],[39,70],[39,276],[44,186],[45,62],[47,124],[47,307],[47,428],[48,367],[49,183],[55,176],[56,59],[57,117],[57,289],[57,408],[58,404],[66,103],[68,155],[68,461],[69,53],[69,309],[69,312],[71,104],[77,105],[79,92],[79,138],[80,47],[80,231],[90,164],[91,42],[91,82],[91,123],[91,206]];
+			
+			// Create fingerprints.
+			function createFP(md_arr){
+				var fp = [];
+				var npeak = md_arr.length;
+				console.log('npeak:', npeak)
+				// Iterate over the first peak of a pair.
+				for (ii = 0; ii < npeak; ii++){
+					var ind1 = md_arr[ii];
+					// Iterate over the second peak of a pair.
+					var jj = ii + 1;
+					while (jj < npeak){
+						var ind2 = md_arr[jj];
+						var time_diff = (ind2[0] - ind1[0])*step/Fs;
+						var fidx_diff = Math.abs(ind2[1] - ind1[1]);
+						// Decide whether to make a fingerprint.
+						if (Math.random() > 0.9){
+							fp.push(md_arr[ii].concat(md_arr[jj]));
+						}
+						if (time_diff >= timeThresMax){
+							jj = npeak - 1;
+						}
+						jj++;
+					}
+				}
+				var nfp = fp.length;
+				console.log('nfp:', nfp);
+				
+				// Draw them.
+				ctx.drawImage(backgroundImage, 0, 0);
+				Tone.Transport.cancel(0);
+				fp.map(function(ind12, idx){
+					Tone.Transport.schedule(function(time){
+						Tone.Draw.schedule(function(){
+							//
+							ctx.beginPath();
+							var x1 = 100 + 6.2*ind12[0];
+							var y1 = 537 - 0.98*ind12[1];
+							var x2 = 100 + 6.2*ind12[2];
+							var y2 = 537 - 0.98*ind12[3];
+							ctx.moveTo(x1, y1);
+							ctx.lineTo(x2, y2);
+							ctx.lineWidth = 0.25;
+							ctx.strokeStyle="blue";
+							ctx.stroke();
+						}, time)
+					}, 0.01*idx)
+				});
+				Tone.Transport.start();
+				// Stop the Transport.
+				Tone.Transport.schedule(function(time){
+					Tone.Transport.stop();
+				}, 0.01*fp.length + 1);
+				
+				console.log('fp:', fp);
+				return fp;
+			}
+			
+			function clearFP(){
+				// Tone.Transport.cancel(0);
+				Tone.Transport.stop();
+				ctx.drawImage(backgroundImage, 0, 0);
+			}
+	</script>
+
+</body>
+</html>

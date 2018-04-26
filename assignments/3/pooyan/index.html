@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Page Title</title>
+    <script type="text/javascript" src="./Tone.min_r11.js"></script>
+</head>
+
+<body>
+    <script>
+        var tempo = 120;
+        var stim_string = '1001010001';
+        
+        var piano = new Tone.Sampler({
+            "G4": "./067_keyboard_acoustic_000-100.wav"
+        }, function(){
+            // Can put something here once resources have loaded if you like.
+            for (i = 0; i < stim_string.length; i++){
+                Tone.Transport.schedule(function(time){
+                    console.log('time:', time)
+                    if (true){
+                        piano.triggerAttackRelease("C4", 60/tempo, time, 0.8)
+                    }
+                    else {
+                        piano.triggerAttackRelease("C5", 60/tempo, time, 0.8)
+                    }
+                    
+                }, i*60/tempo);
+            }
+        }).toMaster();
+        // Sounds fade out smoothly (takes 0.5 sec).
+        piano.release = 0.5;
+        Tone.Transport.start();
+    </script>
+
+
+</body>
+</html>

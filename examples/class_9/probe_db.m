@@ -1,7 +1,7 @@
 % Copyright Tom Collins 3/25/2018
 
 % Probe db for a randomly selected and noisy audio clip.
-clipLength = 2;
+clipLength = 2.5;
 
 % Load dbase.
 load('dbase');
@@ -37,10 +37,11 @@ pidxThresMin = 0;
 pidxThresMax = 150;
 
 % Choose an audio file at random.
-audPath = audPaths{randi(naud)};
+% Comments indicate values for replicating Lafayette demo.
+audPath = audPaths{randi(naud)}; % = './audio/strings.wav'
 % Choose a clip of it at random.
 [sig, Fs] = audioread(audPath);
-startIdx = randi(size(sig, 1) - Fs*clipLength);
+startIdx = randi(size(sig, 1) - Fs*clipLength); % 44656
 sig = sig(startIdx:startIdx + Fs*clipLength - 1, 1);
 nsamp = size(sig, 1);
 player = audioplayer(sig, Fs);
@@ -50,6 +51,7 @@ play(player);
 signoise = 0.96*sig + 0.04*2*(rand(nsamp, 1) - 0.5);
 player2 = audioplayer(signoise, Fs);
 play(player2);
+% audiowrite('./audio/probe.wav', signoise, Fs);
 
 % Spectrogram and peak pick.
 [s, w, t] = spectrogram(signoise, win, overlap, nfft);
@@ -63,6 +65,7 @@ thres = quantile(s(:), 0.95);
 IJ = FastPeakFind(s, thres);
 I = IJ(2:2:end);
 J = IJ(1:2:end);
+% V = jsonencode([J I]);
 hold on; plot(J, I, 'r+'); hold off;
   
 % Create fingerprints.
@@ -139,6 +142,7 @@ for i = 1:naud
        [0 max([matches.pbts] + 1000)],...
        'Color', 'k', 'LineStyle', '--');
 end
+% xlim([5.6e5 6.5e5])
 % Histogram.
 figure;
 hist([matches.dbts] - [matches.pbts], 100)
@@ -146,6 +150,12 @@ xlabel('Transformed Time in Database (Samples)', 'FontSize', 18);
 ylabel('Number of Matches', 'FontSize', 18);
 [counts, centers] = hist([matches.dbts] - [matches.pbts], 100);
 [C, I] = max(counts);
+for i = 1:naud
+  line([dbase.songs(i).cumuSamp + 1 ...
+        dbase.songs(i).cumuSamp + 1],...
+       [0 C],...
+       'Color', 'k', 'LineStyle', '--');
+end
 
 % Determine name of winning song from max in histogram.
 winningSample = centers(I);

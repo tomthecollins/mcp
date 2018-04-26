@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Filter game</title>
+    <script type="text/javascript" src="./Tone.min_r11.js"></script>
+    <script type="text/javascript" src="./NexusUI.min.js"></script>
+</head>
+
+<body>
+    <p>
+        This example is adapted from https://tonejs.github.io/
+    </p>
+    <p>
+      Hi
+    </p>
+    <p>
+      Hello
+    </p>
+    <div>
+      <input type="button" onclick="Tone.Transport.start();" value="Start"></input>
+      <input type="button" onclick="Tone.Transport.stop();" value="Stop"></input>
+    </div>
+    <div id="multislider1"></div>
+    
+    
+    <script>
+        // Filters at C1, G1, D2, A2, E3, B3, F#4, C#5, G#5, D#6, A#6, F7, C8
+        var filter0 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter0.frequency.setValueAtTime('C1', 0);
+        var filter1 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter1.frequency.setValueAtTime('G1', 0);
+        var filter2 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter2.frequency.setValueAtTime('D2', 0);
+        var filter3 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter3.frequency.setValueAtTime('A2', 0);
+        var filter4 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter4.frequency.setValueAtTime('E3', 0);
+        var filter5 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter5.frequency.setValueAtTime('B3', 0);
+        var filter6 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter6.frequency.setValueAtTime('F#4', 0);
+        var filter7 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter7.frequency.setValueAtTime('C#5', 0);
+        var filter8 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter8.frequency.setValueAtTime('G#5', 0);
+        var filter9 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter9.frequency.setValueAtTime('D#6', 0);
+        var filter10 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter10.frequency.setValueAtTime('A#6', 0);
+        var filter11 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter11.frequency.setValueAtTime('F7', 0);
+        var filter12 = new Tone.Filter({
+              type : 'bandpass',
+              Q: 12,
+              rolloff: -12
+        }).toMaster();
+        filter12.frequency.setValueAtTime('C8', 0);
+        
+        // Players.
+        var song_name = "./12 La Vie En Rose excerpt.mp3";
+        var song0 = new Tone.Player(song_name, function(){
+          console.log("Song 0 loaded!");
+          song0.toMaster();
+          song0.sync().start(0);
+          song0.volume.value = -25;
+          song0.connect(filter0);
+        });
+        var song1 = new Tone.Player(song_name, function(){
+          console.log("Song 1 loaded!");
+          song1.toMaster();
+          song1.sync().start(0);
+          song1.volume.value = -25;
+          song1.connect(filter1);
+        });
+        var song2 = new Tone.Player(song_name, function(){
+          console.log("Song 2 loaded!");
+          song2.toMaster();
+          song2.sync().start(0);
+          song2.volume.value = -25;
+          song2.connect(filter2);
+        });
+        var song3 = new Tone.Player(song_name, function(){
+          console.log("Song 3 loaded!");
+          song3.toMaster();
+          song3.sync().start(0);
+          song3.volume.value = -25;
+          song3.connect(filter3);
+        });
+        var song4 = new Tone.Player(song_name, function(){
+          console.log("Song 4 loaded!");
+          song4.toMaster();
+          song4.sync().start(0);
+          song4.volume.value = -25;
+          song4.connect(filter4);
+        });
+        var song5 = new Tone.Player(song_name, function(){
+          console.log("Song 5 loaded!");
+          song5.toMaster();
+          song5.sync().start(0);
+          song5.volume.value = -25;
+          song5.connect(filter5);
+        });
+        var song6 = new Tone.Player(song_name, function(){
+          console.log("Song 6 loaded!");
+          song6.toMaster();
+          song6.sync().start(0);
+          song6.volume.value = -25;
+          song6.connect(filter6);
+        });
+        var song7 = new Tone.Player(song_name, function(){
+          console.log("Song 7 loaded!");
+          song7.toMaster();
+          song7.sync().start(0);
+          song7.volume.value = -25;
+          song7.connect(filter7);
+        });
+        var song8 = new Tone.Player(song_name, function(){
+          console.log("Song 8 loaded!");
+          song8.toMaster();
+          song8.sync().start(0);
+          song8.volume.value = -25;
+          song8.connect(filter8);
+        });
+        var song9 = new Tone.Player(song_name, function(){
+          console.log("Song 9 loaded!");
+          song9.toMaster();
+          song9.sync().start(0);
+          song9.volume.value = -25;
+          song9.connect(filter9);
+        });
+        var song10 = new Tone.Player(song_name, function(){
+          console.log("Song 10 loaded!");
+          song10.toMaster();
+          song10.sync().start(0);
+          song10.volume.value = -25;
+          song10.connect(filter10);
+        });
+        var song11 = new Tone.Player(song_name, function(){
+          console.log("Song 11 loaded!");
+          song11.toMaster();
+          song11.sync().start(0);
+          song11.volume.value = -25;
+          song11.connect(filter11);
+        });
+        var song12 = new Tone.Player(song_name, function(){
+          console.log("Song 12 loaded!");
+          song12.toMaster();
+          song12.sync().start(0);
+          song12.volume.value = -25;
+          song12.connect(filter12);
+        });
+        
+        // Define multislider.
+        var multislider1 = new Nexus.Multislider('#multislider1',{
+            'size': [350,150],
+            'numberOfSliders': 13,
+            'min': -200,
+            'max': -25,
+            'step': 0,
+            'values': [-25,-25,-25,-25,-25,-25,-25,-25,-25,-25,-25,-25,-25]
+        });
+        // Adjustment of volume of particular bandwidth-filtered song.
+        multislider1.on('change',function(v) {
+            console.log(v);
+            switch (v.index){
+                case 0:
+                    song0.volume.value = v.value;
+                    break;
+                case 1:
+                    song1.volume.value = v.value;
+                    break;
+                case 2:
+                    song2.volume.value = v.value;
+                    break;
+                case 3:
+                    song3.volume.value = v.value;
+                    break;
+                case 4:
+                    song4.volume.value = v.value;
+                    break;
+                case 5:
+                    song5.volume.value = v.value;
+                    break;
+                case 6:
+                    song6.volume.value = v.value;
+                    break;
+                case 7:
+                    song7.volume.value = v.value;
+                    break;
+                case 8:
+                    song8.volume.value = v.value;
+                    break;
+                case 9:
+                    song9.volume.value = v.value;
+                    break;
+                case 10:
+                    song10.volume.value = v.value;
+                    break;
+                case 11:
+                    song11.volume.value = v.value;
+                    break;
+                default:
+                    song12.volume.value = v.value;
+                    break;
+            }
+        })      
+        
+        
+        //
+        ////schedule a series of frequency changes
+        //filter.frequency.setValueAtTime('C5', 0)
+        //filter.frequency.setValueAtTime('E5', 0.5)
+        //filter.frequency.setValueAtTime('G5', 1)
+        //filter.frequency.setValueAtTime('B5', 1.5)
+        //filter.frequency.setValueAtTime('C6', 2)
+        //filter.frequency.linearRampToValueAtTime('C1', 3)
+        //
+        //var noise = new Tone.Noise("brown").connect(filter).start(0).stop(3)
+        //
+        ////schedule an amplitude curve
+        //noise.volume.setValueAtTime(-2, 0)
+        //noise.volume.linearRampToValueAtTime(20, 0.1)
+        //noise.volume.linearRampToValueAtTime(-Infinity, 3)
+        //
+        ////listen to noise without filtering.
+        //noise.start(5).stop(8)
+        //noise.volume.setValueAtTime(-2, 5)
+        //noise.volume.linearRampToValueAtTime(40, 5.1)
+        //noise.volume.linearRampToValueAtTime(-Infinity, 8)
+        
+    </script>
+
+
+
+</body>
+</html>

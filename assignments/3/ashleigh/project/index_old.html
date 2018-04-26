@@ -4,7 +4,7 @@
   <title>Disson-ometer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	
-  <script type="text/javascript" src="./lib/Tone.min_r11.js"></script>
+  <script type="text/javascript" src="./lib/Tone.js"></script>
   <script type="text/javascript" src="./lib/jquery.min.js"></script>
   <script type="text/javascript" src="./lib/Interface.js"></script>
   <script type="text/javascript" src="./lib/Logo.js"></script>
@@ -38,7 +38,6 @@
   <div id="Content" class="FullScreen">
    <div id="Title">Disson-ometer</div>
    <div id="Explanation">
-    <p>Hello</p>
     <form action="start.php" method="post" id="varForm">
 					<p><strong>Audio selection. </strong>Listen to mic input or pick a pre-existing recording:
 					 <select id="micRecSelect">
@@ -60,7 +59,7 @@
 			
 			
 			<script type="text/javascript">
-			 // Some parameters.
+				// Some parameters.
 				var flag = true; // Start/stop flag.
 				var dur_sec = 30; // Listen to the mic for a maximum of 30 sec.
 				
@@ -85,33 +84,31 @@
 					The spectrum of what is playing is displayed here:
 				</p>
 				<div id="wavezone"></div>
-				<div id="meterzone"></div>
 				
 			</div>
 			
 			<script>
 				console.log('Got to 122.')
 				var canvas = $("<canvas>").appendTo("#wavezone");
-				var canvas2 = $("<canvas>").appendTo("#meterzone");
 				
 				function calcDissonance(wavString){
-					// For creating times at which to analyse signal.
-					var nfft = 1024;
-					var frame_rate = 4; // So this is 1000 ms, or hop of 44100 at sampling rate of 44100.
-					var tinc = 1/frame_rate;
-					var toff = 0.01; // Wait 0.25 s into sound before analyzing, to avoid inharmonic onset.
-					var c = 0.1; // Threshold for ignoring small-amplitude components.
-					var diss = []; // Store the calculated dissonance values.
-					var values4; // For plotting the incoming spectra.
-					var X = [];
-					var Y = [];
-					
-					// Argument can be used to determine whether mic input should be analyzed
-					// or if we use a pre-existing recording.
-					console.log('wavString:', wavString);
+				// For creating times at which to analyse signal.
+				var nfft = 1024;
+				var frame_rate = 4; // So this is 1000 ms, or hop of 44100 at sampling rate of 44100.
+				var tinc = 1/frame_rate;
+				var toff = 0.01; // Wait 0.25 s into sound before analyzing, to avoid inharmonic onset.
+				var c = 0.1; // Threshold for ignoring small-amplitude components.
+				var diss = []; // Store the calculated dissonance values.
+				var values4; // For plotting the incoming spectra.
+				var X = [];
+				var Y = [];
 				
-					// Need to introduce logic here, depending on whether we're really
-					// listening to mic input or loading one of the example files.
+				// Argument can be used to determine whether mic input should be analyzed
+				// or if we use a pre-existing recording.
+				console.log('wavString:', wavString);
+				
+				// Need to introduce logic here, depending on whether we're really
+				// listening to mic input or loading one of the example files.
 				if (wavString === "mic"){
 					// We are really listening to the mic.
 					var mic = new Tone.UserMedia();
@@ -133,9 +130,9 @@
 					
 					for (i = 0; i < ts.length; i++){
 						Tone.Transport.schedule(function(time){
-							var values2 = analyser.getValue();
-							// console.log('values2:', values2);
-							// values2 = [].slice.call(values2);	
+							var values2 = analyser.analyse();
+							console.log('values2:', values2);
+							values2 = [].slice.call(values2);	
 							// console.log('values2 post slice call:', values2);
 							var values3 = fft(values2);
 							values3 = values3.slice(1, nfft/2 + 1);
@@ -155,9 +152,8 @@
 					
 				}
 				else {
-					var meter = new Tone.Meter();
 					// We are listening to a pre-existing audio file.
-					var mic = new Tone.Player(wavString).connect(meter).toMaster();
+					var mic = new Tone.Player(wavString).toMaster();
 					// var mic = new Tone.Player('./../20171127/ground_truth/' + idxStr + '.wav').toMaster();
 					mic.sync(0);
 					var analyser = new Tone.Analyser({
@@ -185,9 +181,9 @@
 						// Analyse the signal at these times.
 						for (i = 0; i < ts.length; i++){
 							Tone.Transport.schedule(function(time){
-								var values2 = analyser.getValue();
+								var values2 = analyser.analyse();
 								// console.log('values2:', values2);
-								// values2 = [].slice.call(values2);	
+								values2 = [].slice.call(values2);	
 								// console.log('values2 post slice call:', values2);
 								var values3 = fft(values2);
 								values3 = values3.slice(1, nfft/2 + 1);
@@ -210,27 +206,24 @@
 								
 								// Calculate contribution to sensory dissonance.
 								var diss_contrib = sensory_dissonance(y, fspace);
-								// console.log('diss_contrib:', diss_contrib);
-								if (diss_contrib.length > 0){
-								 var curr_diss = diss_contrib.map(function(d){
+								console.log('diss_contrib:', diss_contrib);
+								var curr_diss = diss_contrib.map(function(d){
 									return d.diss;
 								})
 								.reduce(function(a, b){
 									return a + b;
 								});
-								}
-								
 								console.log('curr_diss:', curr_diss);
 								diss.push(curr_diss);
 								
 							}, ts[i]);
 						}
 							
-						// Testing the meter:
-						//Tone.Transport.schedule(function(time){
-						//	meter.toMaster();
-						//	console.log('meter', meter.getLevel());
-						//}, 2);
+						// Show the stored info:
+						Tone.Transport.schedule(function(time){
+							// Do something with diss.
+							
+						}, dur_sec);
 						
 						Tone.Transport.start();
 						mic.start();
@@ -238,7 +231,6 @@
 					});
 					
 				}
-				
 				
 				// Draw portions of the signal for funzies.
 				var context = canvas.get(0).getContext("2d");
@@ -255,61 +247,15 @@
 					//context.lineJoin = "round";
 					context.lineWidth = 6;
 					context.strokeStyle = "white";
-					if (values4 !== undefined){
-						for (var i = 1, len = values4.length; i < len; i++){
-							var val = values4[i] / (nfft/16);
-							var y = canvasHeight*(1 - val);
-							var x = canvasWidth * i / (nfft/4);
-							context.lineTo(x, y);
-						}
-						context.stroke();
+					for (var i = 1, len = values4.length; i < len; i++){
+						var val = values4[i] / (nfft/16);
+						var y = canvasHeight*(1 - val);
+						var x = canvasWidth * i / (nfft/4);
+						context.lineTo(x, y);
 					}
-					
+					context.stroke();
 				}
 				drawLoop();
-				
-				console.log('We got to the meter!')
-				
-				
-				var meterContext = canvas2.get(0).getContext("2d");
-				var meterGraident;
-				function drawMeter(){
-					// console.log('Meter', meter)
-					var level = meter.getLevel();
-					level = Tone.dbToGain(level); //scale it between 0 - 1
-					// var level = Math.random();
-					meterContext.clearRect(0, 0, canvasWidth, canvasHeight);
-					meterContext.fillStyle = meterGraident;
-					meterContext.fillRect(0, 0, canvasWidth, canvasHeight);
-					meterContext.fillStyle = "white";
-					meterContext.fillRect(canvasWidth * level, 0, canvasWidth, canvasHeight);
-				}
-				//size the canvase
-				var canvasWidth, canvasHeight;
-				function sizeCanvases(){
-					canvasWidth = $("#meterzone").width();
-					canvasHeight = $("#meterzone").height();
-					meterContext.canvas.width = canvasWidth;
-					meterContext.canvas.height = canvasHeight;
-					//make the gradient
-					meterGraident = meterContext.createLinearGradient(0, 0, canvasWidth, canvasHeight);
-					meterGraident.addColorStop(0, "#BFFF02");
-					meterGraident.addColorStop(0.8, "#02FF24");
-					meterGraident.addColorStop(1, "#FF0202");
-				}
-				sizeCanvases();
-				$(window).resize(sizeCanvases);
-				function loop(){
-					requestAnimationFrame(loop);
-					//draw the meter level
-					drawMeter();
-				}
-				loop();
-				
-				
-				
-				
-				
 				
 				
 			}

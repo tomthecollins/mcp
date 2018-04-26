@@ -1,0 +1,227 @@
+<div id="Content">
+  <div id="Title">Explaining Shazam</div>
+  <div id="Explanation">
+    <p>
+      <b>Use case.</b> The Shazam use case is as follows: audio is playing somewhere in a user's environment (e.g., shopping mall, bar, web streaming), they like what they hear but they don't know what the song's called or who it's by.
+    </p>
+    <p>
+      The user opens the Shazam app, the app records their audio environment (which may be noisy), sends this audio query, e.g.
+    </p>
+    <ul>
+      <li>
+        Audio query
+        <audio id="audio" src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/audio/probe.wav" preload="auto"></audio>
+		<button id="playProbe">Play</button>
+		<button id="stopProbe">Pause</button>
+      </li>
+    </ul>
+    <p>
+      to a Shazam server, which 'magically' returns the song name/artist within seconds, e.g.
+    </p>
+    <ul>
+      <li>
+        Identification result: 'strings.wav'
+      </li>
+    </ul>
+    <p>
+      Let's look at how the audio query is analyzed &ndash; let's uncover the magic!
+    </p>
+  </div>
+  <div id="Explanation">
+    <p>
+      <b>Scenario.</b> Imagine that all the songs in the world consist of the following three short clips:
+    </p>
+    <ul>
+      <li>
+        Ascending scale on guitar &nbsp;
+        <audio id="audio1" src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/audio/guitar.wav" preload="auto"></audio>
+		<button id="playGuitar">Play</button>
+		<button id="stopGuitar">Pause</button>
+      </li>
+      <li>
+        Some random chords on piano
+        <audio id="audio2" src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/audio/piano.wav" preload="auto"></audio>
+		<button id="playPiano">Play</button>
+		<button id="stopPiano">Pause</button>
+      </li>
+      <li>
+        Descending scale on strings
+        <audio id="audio3" src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/audio/strings.wav" preload="auto"></audio>
+		<button id="playStrings">Play</button>
+		<button id="stopStrings">Pause</button>
+      </li>
+    </ul>
+    <p>
+      Temporarily, we will ignore how Shazam analyzes this audio and stores it in a database, and focus instead on the use case and the analysis of the audio query.
+    </p>
+  </div>
+  <div id="Explanation">
+    <p>
+      <b>Query analysis.</b> A fast Fourier transform for the incoming audio query is calculated to determine how the frequency content of the sound varies as a function of time. This is what is shown in shades of gray in the plot below, and is called
+      a <b>spectrogram</b>. The darker the blob in the spectrogram, the greater the amount of energy at this time and frequency.
+    </p>
+    <div>
+      <audio id="audio4" src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/audio/probe.wav" preload="auto"></audio>
+		<button id="playProbe2">Play audio query</button>
+		<button id="stopProbe2">Pause audio query</button>&nbsp;
+      <input type="button" value="Create fingerprints" onclick="createFP(V);" />
+      <input type="button" value="Clear fingerprints" onclick="clearFP();" />
+      <br/>
+      <canvas id="fp" </canvas>
+    </div>
+    <p>
+      Next, peaks are detected using a 2D peak picker. These are shown as red crosses in the spectrogram above.
+    </p>
+  </div>
+
+  <div id="Explanation">
+    <p>
+      <b>Fingerprinting.</b> The Shazam analysis algorithm then computes time and frequency differences between
+      <b>locally constrained pairs of peaks</b>. For instance, letting \(\mathbf{v}_1 = (x_1, y_1)\) and \(\mathbf{v}_2 = (x_2, y_2)\) be two peaks with \(x_2 \geq x_1\), the algorithm retains the pair \((\mathbf{v}_1, \mathbf{v}_2)\) iff
+    </p>
+    <ol>
+      <li>
+        \(x_2 - x_1 > {\tt timeThresMin}\)
+      </li>
+      <li>
+        \(x_2 - x_1
+        < {\tt timeThresMax}\) </li>
+          <li>
+            \(|y_2 - y_1| > {\tt fIdxThresMin}\)
+          </li>
+          <li>
+            \(|y_2 - y_1|
+            < {\tt fIdxThresMax}\) </li>
+    </ol>
+    <p>
+      where timeThresMin and timeThresMax are thresholds for the minimum and maximum permissble time differences (in seconds) between two peaks, and fIdxThresMin and fIdxThresMax are thresholds for the minimum and maximum permissble frequency differences (in
+      bins/indices) between two peaks. (See lines ???-??? of the JavaScript for their definitions.)
+    </p>
+    <p>
+      The retained pairs are referred to as <b>fingerprints</b>.
+    </p>
+  </div>
+
+  <div id="Explanation">
+    <p>
+      <b>Hashing and querying the database.</b> Each fingerprint is converted to a hash for fast querying of the database. For example, the fingerprint \((\mathbf{v}_1, \mathbf{v}_2) = \big((3, 104), (12, 164)\big)\), which corresponds to a time difference
+      of 0.209 sec and a frequency bin/index difference of 60 and should be the first fingerprint created for the current query, is converted to a hash '20960'.
+    </p>
+    <p>
+      So far I did not explain how the database of all the songs in the world is created:
+      <b>database creation follows the exact same steps as we have just performed for the audio query</b> (calculate spectral peaks for each song, then fingerprints and hashes).
+    </p>
+    <p>
+      Associated with each hash is the time (in samples) in the audio query (or database song) and an associated ID (e.g., 'query' or 'db song 2'). For example, for the query hash '20960', the database may have a matching hashkey with contents
+      <table>
+        <thead>
+          <td>
+            Time sample &nbsp;
+          </td>
+          <td>
+            ID
+          </td>
+        </thead>
+        <tr>
+          <td>
+            630576
+          </td>
+          <td>
+            'strings.wav'
+          </td>
+        </tr>
+        <tr>
+          <td>
+            586470
+          </td>
+          <td>
+            'strings.wav'
+          </td>
+        </tr>
+        <tr>
+          <td>
+            32768
+          </td>
+          <td>
+            'guitar.wav'
+          </td>
+        </tr>
+      </table>
+      <br/> which would mean that two fingerprints in the 'strings.wav' song (occurring at cumulative time samples 630576 and 586470) one fingerprint in the 'guitar.wav' song (occurring at cumulative time sample 32768) also contain this same time and
+      frequency difference.
+    </p>
+  </div>
+  <div id="Explanation">
+    <p>
+      <b>Song identification.</b> For a given audio query, the time-sample pairs \((z_i, w_i\)) from matching query and database hashes are plotted as a scatterplot (see below), where the dashed lines indicate the three database songs (guitar.wav, piano.wav,
+      and strings.wav).
+    </p>
+    <div>
+      <img src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/img/timestamps.png" />
+    </div>
+    <p>
+      Here is a zoomed-in version of the plot, which acts as a hint for what true-positive identifications look like.
+    </p>
+    <div>
+      <img src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/img/timestamps_zoom.png" />
+    </div>
+    <p>
+      A simple transformation is applied so that a histogram can be calculated and the ID of the song with the maximum count returned by Shazam as the estimated song name/artist. Such a histogram is shown below, and the maximum count occurring in the third
+      song suggests the audio query is from strings.wav, which is correct.
+    </p>
+    <div>
+      <img src="http://tomcollinsresearch.net/mcpc/spring2018/shazam/img/hist.png" />
+    </div>
+  </div>
+
+  <div id="Explanation">
+    <p>
+      <b>Questions.</b> Based on the explanation above about how the famous music-technological innovation Shazam works, please answer the following.
+    </p>
+    <ol>
+      <li>
+        Write two sentences in your own words to describe the Shazam use case.
+      </li>
+      <br/>
+      <li>
+        In the plot under 'Query analysis', focus on the frequency bin range 50-100.
+        <ol type="a">
+          <li>
+            Does the audio content look like it's going up or down?
+          </li>
+          <li>
+            How does this relate to what you hear when you play the audio query?
+          </li>
+          <li>
+            Why is there energy in the spectrogram above bin 100?
+          </li>
+        </ol>
+      </li>
+      <br/>
+      <li>
+        In line ??? of the JavaScript, edit the logical statement so that the code will select the correct peak pairs from which to construct fingerprints.
+        <br/><br/>
+        <b>Hint.</b> Click Run in JSFiddle and then the 'Create fingerprints' button just above the spectrogram to see the effect of editing your logical (lines indicating fingerprints should appear in the spectrogram).
+      </li>
+      <br/>
+      <li>
+        In a scatterplot of time-sample pairs of matching query and database hashes, what does a true-positive identification look like?
+
+      </li>
+      <br/>
+      <li>
+        <b>Advanced!</b> How would you modify the definition of a fingerprint in order to identify queries that are played at different speeds and/or in different keys (transposed frequencies)?
+      </li>
+    </ol>
+  </div>
+  <div id="Explanation">
+    <p>
+      <b>References</b>
+      <br/><br/> Wang, A. L.-C., & Smith III, J. O. (2006). US Patent No. 6,990,453. Washington, DC: U.S. Patent and Trademark Office. (Filed July 31, 2000.)
+      <br/><br/> Arzt, A., Böck, S, & Widmer, G. (2012). Fast identification of piece and score position via symbolic fingerprinting. Proceedings of the International Society for Music Information Retrieval Conference (pp. 433-438). Porto, Portugal.
+      <br/><br/>
+      <a href="https://tonejs.github.io/" target="_blank">Tone.js</a> for styling and rendering of the fingerprints.
+    </p>
+  </div>
+
+</div>
