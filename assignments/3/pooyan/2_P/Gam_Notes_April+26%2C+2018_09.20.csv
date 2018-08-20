@@ -1,0 +1,75 @@
+StartDate,EndDate,Status,IPAddress,Progress,Duration (in seconds),Finished,RecordedDate,ResponseId,RecipientLastName,RecipientFirstName,RecipientEmail,ExternalReference,LocationLatitude,LocationLongitude,DistributionChannel,UserLanguage,Q96_First Click,Q96_Last Click,Q96_Page Submit,Q96_Click Count,Q71_First Click,Q71_Last Click,Q71_Page Submit,Q71_Click Count,Train_N,Train_B_1,Q5_First Click,Q5_Last Click,Q5_Page Submit,Q5_Click Count,01_N,01_B_1,Q8_First Click,Q8_Last Click,Q8_Page Submit,Q8_Click Count,02_N,02_B_1,Q13_First Click,Q13_Last Click,Q13_Page Submit,Q13_Click Count,03_N,03_B_1,Q18_First Click,Q18_Last Click,Q18_Page Submit,Q18_Click Count,04_N,04_B_1,Q23_First Click,Q23_Last Click,Q23_Page Submit,Q23_Click Count,05_N,05_B_1,Q28_First Click,Q28_Last Click,Q28_Page Submit,Q28_Click Count,06_N,06_B_1,Q33_First Click,Q33_Last Click,Q33_Page Submit,Q33_Click Count,07_N,07_B_1,Q38_First Click,Q38_Last Click,Q38_Page Submit,Q38_Click Count,08_N,08_B_1,Q43_First Click,Q43_Last Click,Q43_Page Submit,Q43_Click Count,09_N,09_B_1,Q48_First Click,Q48_Last Click,Q48_Page Submit,Q48_Click Count,10_N,10_B_1,Year_Born,Race,Interruption_1,Musical_Skill_1,Prob&Math_1,Gambling_Experience_1,Internet_1,FL_18_DO
+Start Date,End Date,Response Type,IP Address,Progress,Duration (in seconds),Finished,Recorded Date,Response ID,Recipient Last Name,Recipient First Name,Recipient Email,External Data Reference,Location Latitude,Location Longitude,Distribution Channel,User Language,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following notes do you think is the next note of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,Timing - First Click,Timing - Last Click,Timing - Page Submit,Timing - Click Count,Which of the following tones do you think is the next tone of the piece that you just heard?,Place your bet of your choice on the scale below. - Your bet:,What year were you born?,What race would you identify yourself with? (you can choose multiple options),"During the experiment, did you recognize an interruption in the playing of any pieces of music before it was finished?",How much would you rate your musical skill and knowledge?,How much would you rate your knowledge in probability theory and math?,Have you ever gambled before? Please rate your gambling experience.,How would you judge the speed and stability of the Internet that you are currently using?,FL_18 - Block Randomizer - Display Order
+"{""ImportId"":""startDate"",""timeZone"":""America/New_York""}","{""ImportId"":""endDate"",""timeZone"":""America/New_York""}","{""ImportId"":""status""}","{""ImportId"":""ipAddress""}","{""ImportId"":""progress""}","{""ImportId"":""duration""}","{""ImportId"":""finished""}","{""ImportId"":""recordedDate"",""timeZone"":""America/New_York""}","{""ImportId"":""_recordId""}","{""ImportId"":""recipientLastName""}","{""ImportId"":""recipientFirstName""}","{""ImportId"":""recipientEmail""}","{""ImportId"":""externalDataReference""}","{""ImportId"":""locationLatitude""}","{""ImportId"":""locationLongitude""}","{""ImportId"":""distributionChannel""}","{""ImportId"":""userLanguage""}","{""ImportId"":""QID106_FIRST_CLICK""}","{""ImportId"":""QID106_LAST_CLICK""}","{""ImportId"":""QID106_PAGE_SUBMIT""}","{""ImportId"":""QID106_CLICK_COUNT""}","{""ImportId"":""QID71_FIRST_CLICK""}","{""ImportId"":""QID71_LAST_CLICK""}","{""ImportId"":""QID71_PAGE_SUBMIT""}","{""ImportId"":""QID71_CLICK_COUNT""}","{""ImportId"":""QID73""}","{""ImportId"":""QID74_1""}","{""ImportId"":""QID5_FIRST_CLICK""}","{""ImportId"":""QID5_LAST_CLICK""}","{""ImportId"":""QID5_PAGE_SUBMIT""}","{""ImportId"":""QID5_CLICK_COUNT""}","{""ImportId"":""QID4""}","{""ImportId"":""QID6_1""}","{""ImportId"":""QID8_FIRST_CLICK""}","{""ImportId"":""QID8_LAST_CLICK""}","{""ImportId"":""QID8_PAGE_SUBMIT""}","{""ImportId"":""QID8_CLICK_COUNT""}","{""ImportId"":""QID10""}","{""ImportId"":""QID11_1""}","{""ImportId"":""QID13_FIRST_CLICK""}","{""ImportId"":""QID13_LAST_CLICK""}","{""ImportId"":""QID13_PAGE_SUBMIT""}","{""ImportId"":""QID13_CLICK_COUNT""}","{""ImportId"":""QID15""}","{""ImportId"":""QID16_1""}","{""ImportId"":""QID18_FIRST_CLICK""}","{""ImportId"":""QID18_LAST_CLICK""}","{""ImportId"":""QID18_PAGE_SUBMIT""}","{""ImportId"":""QID18_CLICK_COUNT""}","{""ImportId"":""QID20""}","{""ImportId"":""QID21_1""}","{""ImportId"":""QID23_FIRST_CLICK""}","{""ImportId"":""QID23_LAST_CLICK""}","{""ImportId"":""QID23_PAGE_SUBMIT""}","{""ImportId"":""QID23_CLICK_COUNT""}","{""ImportId"":""QID25""}","{""ImportId"":""QID26_1""}","{""ImportId"":""QID28_FIRST_CLICK""}","{""ImportId"":""QID28_LAST_CLICK""}","{""ImportId"":""QID28_PAGE_SUBMIT""}","{""ImportId"":""QID28_CLICK_COUNT""}","{""ImportId"":""QID30""}","{""ImportId"":""QID31_1""}","{""ImportId"":""QID33_FIRST_CLICK""}","{""ImportId"":""QID33_LAST_CLICK""}","{""ImportId"":""QID33_PAGE_SUBMIT""}","{""ImportId"":""QID33_CLICK_COUNT""}","{""ImportId"":""QID35""}","{""ImportId"":""QID36_1""}","{""ImportId"":""QID38_FIRST_CLICK""}","{""ImportId"":""QID38_LAST_CLICK""}","{""ImportId"":""QID38_PAGE_SUBMIT""}","{""ImportId"":""QID38_CLICK_COUNT""}","{""ImportId"":""QID40""}","{""ImportId"":""QID41_1""}","{""ImportId"":""QID43_FIRST_CLICK""}","{""ImportId"":""QID43_LAST_CLICK""}","{""ImportId"":""QID43_PAGE_SUBMIT""}","{""ImportId"":""QID43_CLICK_COUNT""}","{""ImportId"":""QID45""}","{""ImportId"":""QID46_1""}","{""ImportId"":""QID48_FIRST_CLICK""}","{""ImportId"":""QID48_LAST_CLICK""}","{""ImportId"":""QID48_PAGE_SUBMIT""}","{""ImportId"":""QID48_CLICK_COUNT""}","{""ImportId"":""QID50""}","{""ImportId"":""QID51_1""}","{""ImportId"":""QID99_TEXT""}","{""ImportId"":""QID100""}","{""ImportId"":""QID107_1""}","{""ImportId"":""QID101_1""}","{""ImportId"":""QID102_1""}","{""ImportId"":""QID112_1""}","{""ImportId"":""QID109_1""}","{""ImportId"":""FL_18_DO""}"
+4/24/2018 22:42,4/24/2018 22:48,IP Address,128.180.151.105,100,376,TRUE,4/24/2018 22:48,R_2CBwo76Wd6bkF2E,,,,,40.5901947,-75.35469818,anonymous,EN,0,0,61.104,0,0,0,11.109,0,"C4 
+   ",10,0,0,11.089,0,"C5  
+   ",10,0,0,11.086,0,"C4
+   ",10,0,0,11.008,0,"C5
+   ",4,0,0,11.099,0,"C4
+   ",1,0,0,11.101,0,"C5
+   ",8,0,0,11.092,0,"C5
+   ",10,0,0,11.088,0,"C4
+   ",10,0,0,11.018,0,"C4
+   ",10,0,0,11.107,0,"C5
+   ",6,0,0,11.092,0,"C5
+   ",6,1997,"White (Middle Eastern, North African, European, North American, Oceanian)",,5,3,6,8,Block9|Block5|Block6|Block2|Block1|Block8|Block7|Block3|Block10|Block4
+4/24/2018 22:56,4/24/2018 23:03,IP Address,64.121.97.133,100,373,TRUE,4/24/2018 23:03,R_2dgyqu6seuxuyYW,,,,,40.5677948,-75.48280334,anonymous,EN,0,0,83.925,0,0,0,11.059,0,"C5 
+   ",6,0,0,11.031,0,"C5  
+   ",9,0,0,11.057,0,"C4
+   ",3,0,0,11.064,0,"C4
+   ",7,0,0,11.041,0,"C5
+   ",8,0,0,11.051,0,"C5
+   ",5,0,0,11.03,0,"C5
+   ",10,0,0,11.028,0,"C4
+   ",7,0,0,11.062,0,"C4
+   ",10,0,0,11.055,0,"C5
+   ",8,0,0,11.065,0,"C4
+   ",8,1996,"White (Middle Eastern, North African, European, North American, Oceanian)",,6,6,4,8,Block3|Block10|Block6|Block5|Block2|Block1|Block7|Block8|Block9|Block4
+4/24/2018 23:20,4/24/2018 23:28,IP Address,209.122.13.129,100,444,TRUE,4/24/2018 23:28,R_3EsrcDs77MYdvIR,,,,,40.71369934,-75.47930145,anonymous,EN,0,0,116.814,0,0,0,11.078,0,"C5 
+   ",7,0,0,11.056,0,"C5  
+   ",4,0,0,11.046,0,"C5
+   ",4,0,0,11.006,0,"C4
+   ",5,0,0,11.066,0,"C5
+   ",10,0,0,11.106,0,"C5
+   ",7,0,0,11.098,0,"C5
+   ",7,0,0,11.021,0,"C4
+   ",10,0,0,11.048,0,"C4
+   ",10,0,0,11.026,0,"C4
+   ",1,0,0,11.049,0,"C4
+   ",9,1984,"White (Middle Eastern, North African, European, North American, Oceanian)",1,8,8,2,9,Block8|Block1|Block4|Block6|Block10|Block3|Block2|Block9|Block5|Block7
+4/25/2018 10:13,4/25/2018 10:19,IP Address,128.180.119.109,100,327,TRUE,4/25/2018 10:19,R_2VdUWTG3YOcXIS5,,,,,40.5901947,-75.35469818,anonymous,EN,33.548,33.548,36.58,1,0,0,11.05,0,"C4 
+   ",10,0,0,11.092,0,"C5  
+   ",10,0,0,11.068,0,"C5
+   ",7,0,0,11.05,0,"C4
+   ",5,0,0,11.02,0,"C5
+   ",7,0,0,11.022,0,"C5
+   ",8,0,0,11.096,0,"C4  
+   ",5,0,0,11.066,0,"C4
+   ",10,0,0,11.07,0,"C4
+   ",10,0,0,11.05,0,"C5
+   ",10,0,0,11.078,0,"C4
+   ",10,1997,"White (Middle Eastern, North African, European, North American, Oceanian)",6,8,8,4,8,Block7|Block2|Block8|Block10|Block1|Block9|Block4|Block6|Block3|Block5
+4/25/2018 10:53,4/25/2018 10:58,IP Address,128.180.163.38,100,322,TRUE,4/25/2018 10:58,R_1q4FijaWgPOKzUp,,,,,40.5901947,-75.35469818,anonymous,EN,0,0,38.943,0,0,0,11.041,0,"C4 
+   ",8,0,0,11.023,0,"C4 
+   ",7,0,0,11.061,0,"C4
+   ",4,0,0,11.111,0,"C4
+   ",3,0,0,11.059,0,"C5
+   ",5,0,0,11.1,0,"C5
+   ",6,0,0,11.016,0,"C5
+   ",10,0,0,11.022,0,"C4
+   ",10,0,0,11.018,0,"C4
+   ",10,0,0,11.078,0,"C5
+   ",7,0,0,11.087,0,"C4
+   ",6,1997,"White (Middle Eastern, North African, European, North American, Oceanian)",6,3,2,2,10,Block6|Block2|Block5|Block8|Block10|Block9|Block1|Block7|Block3|Block4
+4/25/2018 11:35,4/25/2018 11:44,IP Address,64.121.118.159,100,515,TRUE,4/25/2018 11:44,R_2Y4dHkRkNKaMnQa,,,,,40.5901947,-75.35469818,anonymous,EN,53.843,53.843,119.115,1,0,0,11.097,0,"C4 
+   ",7,9.472,10.66,11.092,2,"C4 
+   ",8,8.4,10.034,11.057,3,"C5
+   ",6,9.957,9.957,11.055,1,"C5
+   ",7,9.814,9.814,11.02,1,"C4
+   ",9,8.551,9.559,11.101,2,"C5
+   ",6,8.883,11.042,11.068,4,"C5
+   ",6,8.439,8.439,11.026,1,"C4
+   ",5,10.047,10.929,11.086,2,"C4
+   ",5,8.631,10.512,11.09,3,"C5
+   ",6,8.452,10.847,11.037,3,"C5
+   ",7,1996,"White (Middle Eastern, North African, European, North American, Oceanian)",2,3,1,1,6,Block3|Block4|Block1|Block9|Block2|Block10|Block7|Block8|Block6|Block5

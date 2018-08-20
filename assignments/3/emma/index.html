@@ -2,6 +2,7 @@
 
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Page Title</title>
     <script type="text/javascript" src="./Tone.min_r11.js"></script>
     <script type="text/javascript" src="./batch_1/stm_metadata_variable.js"></script>
@@ -19,9 +20,20 @@
             "1499",
             "1520"
         ];
+        
         song_ids.map(function(id){
             dynamicallyLoadScript(song_dir + id + '.00.js');
         });
+        
+        // Trying to use promise and then.
+        //var promise1 = new Promise(function(resolve, reject) {
+        //    
+        //    song_ids.map(function(id){
+        //        dynamicallyLoadScript(song_dir + id + '.00.js');
+        //    });
+        //    
+        //    resolve('Success!');
+        //});
         
         MNN2pitch_simple = function(MNN){
             // Tom Collins 6/1/2016.
@@ -40,6 +52,98 @@
             var MNN_mod_12 = MNN % 12;
             return lookup[MNN_mod_12] + octave.toString();
         }
+        
+        function cyclically_permute_array_by(arr, m){
+            // Tom Collins 6/11/2015.
+            // In
+            // arr Array mandatory
+            // m Non-negative integer mandatory
+            // Out Array
+            // This function moves the ith element of an array (counting from
+            // zero) to the zeroth element in the output array, where i is the
+            // second argument. The (i - 1)th element is moved to the last
+            // element in the output array, the (i - 2)th element is moved to
+            // the penultimate element in the output array, etc.
+            
+            m = m % arr.length;
+            var arr2 = JSON.parse(JSON.stringify(arr));
+            var arr3 = arr2.slice(0, m);
+            var arr4 = arr2.slice(m).concat(arr3);
+            return arr4;
+        }
+        
+        function corr(x, y){
+            // Tom Collins 8/11/2015.
+            // In
+            // x Array mandatory
+            // y Array mandatory
+            // Out Number
+            // This function calculates the Pearson product-moment
+            // correlation coefficient between the input arrays x and y. It
+            // checks that the arrays are of the same length, but does not
+            // check that they each consist of numbers, nor for zero divisors
+            // (output NaN in both cases).
+            
+            var n = x.length;
+            if (n !== y.length){
+                throw "Error in call to corr: input arrays must be of the same length.";
+            }
+            else {
+                var x_bar = mean(x);
+                var y_bar = mean(y);
+                var x2 = 0;
+                var y2 = 0;
+                var xy = 0;
+                for (var i = 0; i < x.length; i++){
+                    x2 += Math.pow(x[i], 2);
+                    y2 += Math.pow(y[i], 2);
+                    xy += x[i] * y[i];
+                }
+                var r = (xy - n * x_bar * y_bar) / (Math.sqrt(x2 - n * Math.pow(x_bar, 2)) * Math.sqrt(y2 - n * Math.pow(y_bar, 2)));
+                return r;
+            }
+        }
+        
+        function mean(arr){
+            // Christian Coulon and Tom Collins 17/10/2014.
+            // In
+            // arr Array mandatory
+            // Out Number
+            // This function returns the mean of an input numeric array.
+          
+            if (!arr.length) {
+                return 0;
+            }
+            else {
+                var sum = 0;
+                for (var i = 0; i < arr.length; i++) {
+                    sum += arr[i];
+                }
+                return sum / arr.length;
+            }
+        }
+        
+        function max_argmax(arr) {
+            // Tom Collins 21/10/2014.
+            // In
+            // arr Array mandatory
+            // Out Array
+            // Returns the maximum element in an array and its index (argument).
+          
+            var max = arr[0];
+            var maxIndex = 0;
+            for (var i = 1; i < arr.length; i++) {
+                if (arr[i] > max) {
+                    maxIndex = i;
+                    max = arr[i];
+                }
+            }
+            return [max, maxIndex];
+          
+            // CDC said the following is the same, but it does not retain the index of
+            // the maximum element:
+            // return arr.reduce(function(a, b){ return a > b?a:b; }, arr[0]);
+        }
     </script>
     
 </head>
@@ -50,8 +154,8 @@
         <!--<option value="mercedes">Mercedes</option>-->
     </select>
     
-    <input type="button" onclick="assembleHistograms();" value="LOOCV hist"/>
-    <input type="button" onclick="beatHistogram(ps);" value="Beat hist"/>
+    <input type="button" onclick="loocv(newSelection, ps, song_ids);" value="LOOCV hist"/>
+    <input type="button" onclick="beatHistogram(ps, true);" value="Beat hist"/>
     <input type="button" onclick="start();" value="Start"/>
     <input type="button" onclick="Tone.Transport.stop();" value="Stop"/>
     <p id="beatDisplay"></p>
@@ -59,15 +163,15 @@
     <script type="text/javascript">
         var granularity = 4;
         var beatsInMeasure = 4;
-        var ps, newSelection;
+        var ps;
         var tempo = 130;
         Tone.Transport.bpm.value = tempo;
         
         // Populate songSelect menu.
-        var ssm = document.getElementById("songSelect");
+        var ssm = document.getElementById("songSelect"); // ssm stands for song select menu.
         var inhtml = '';
         song_ids.map(function(id){
-            console.log('id:', id);
+            // console.log('id:', id);
             inhtml = inhtml + '<option value="' + id + '">' + id + '</option>';
         });
         ssm.innerHTML = inhtml;
@@ -78,8 +182,18 @@
             console.log('newSelection:', newSelection);
             ps = eval('s' + newSelection);
         }
+        setTimeout(function(){
+            updateSongSelection();
+        }, 2000)
         
-        function beatHistogram(aPointSet){
+        // Trying to use promise and then.
+        //promise1.then(function(value) {
+        //    console.log(value);
+        //    // expected output: "Success!"
+        //    updateSongSelection();
+        //});
+        
+        function beatHistogram(aPointSet, plotTf){
             if (aPointSet == undefined){
                 alert('Select a song before clicking Beat Histogram.')
             }
@@ -103,42 +217,44 @@
                     //    console.log('beat:', beat);
                     //}
                 });
-                // console.log('hist:', hist);
+                if (plotTf){
+                    console.log('hist:', hist);
+                }
                 return hist;
             }
         }
         
-        function assembleHistograms(){
-            // In keeping with LOOCV, remove selected song from song_ids.
-            var songs2analyse = song_ids.filter(function(id){
-                return id !== newSelection;
+        function averageBeatHistogram(id, ids){
+            // In keeping with LOOCV, remove selected song from ids.
+            var songs2analyse = ids.filter(function(curr_id){
+                return curr_id !== id;
             });
             
             // Make beat histogram for each remaining song.
             var hists = [];
-            songs2analyse.map(function(id){
+            songs2analyse.map(function(curr_id){
                 // Get startsOnBeat from metadata.
                 var relEl = md.find(function(d){
-                    return id + '.00' === d.id;
+                    return curr_id + '.00' === d.id;
                 });
                 var startsOnBeat = relEl.startsOnBeat
-                console.log('id:', id, 'relEl:', relEl, 'startsOnBeat:', startsOnBeat);
+                // console.log('id:', id, 'relEl:', relEl, 'startsOnBeat:', startsOnBeat);
                 // Use startsOnBeat to correct the point set.
-                var currPs = eval('s' + id);
+                var currPs = eval('s' + curr_id);
                 currPs = currPs.map(function(p){
                    p[0] = p[0] + beatsInMeasure - startsOnBeat + 1;
                    return p;
                 });
                 var hist = beatHistogram(currPs);
                 // Normalize and push to hists.
-                var sum = 200;
+                // var sum = 200;
                 var sum = hist.reduce(function(a, b){
                     return a + b;
                 });
                 hist = hist.map(function(h){
                     return h/sum;
                 })
-                console.log('normalized hist:', hist);
+                // console.log('normalized hist:', hist);
                 hists.push(hist);
             });
             // Calculate averages.
@@ -149,8 +265,40 @@
                     avgHist[i] = avgHist[i] + hists[j][i];
                 }
             }
-            console.log('avgHist:', avgHist);
+            // console.log('avgHist:', avgHist);
             return avgHist;
+        }
+        
+        function loocv(id, ps, ids){
+            // Calculate average histogram for all songs that aren't the
+            // selected song.
+            var avgHist = averageBeatHistogram(id, ids);
+            console.log('avgHist:', avgHist);
+            
+            // Correlate the histogram of the selected song at all possible
+            // cyclic permutations with the average histogram.
+            var currHist = beatHistogram(ps);
+            var corrs = [];
+            for (i = 0; i < beatsInMeasure*granularity; i++){
+                corrs[i] =
+                    corr(cyclically_permute_array_by(currHist, i), avgHist);
+            }
+            // console.log('corrs:', corrs);
+            
+            var ma = max_argmax(corrs);
+            // console.log('ma:', ma);
+            
+            // Get estimate of startsOnBeat.
+            var startsOnBeatEst = ma[1]/granularity + 1;
+            var confidence = ma[0];
+            // Compare to ground truth.
+            var relEl = md.find(function(d){
+                return newSelection + '.00' === d.id;
+            });
+            console.log('startsOnBeatEst:', startsOnBeatEst,
+                        'confidence:', confidence,
+                        'startsOnBeat:',relEl.startsOnBeat);
+            return;
         }
         
         function start(){
@@ -209,6 +357,7 @@
             console.log('Loaded!');
             
         }).toMaster();
+    
     </script>
 </body>
 </html>

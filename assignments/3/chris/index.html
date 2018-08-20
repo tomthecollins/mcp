@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Inverse Replay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Import JS Files -->
+    <script type="text/javascript" src="./supporting/Tone.min_r11.js"></script>
+    <script type="text/javascript" src="./supporting/jquery.min.js"></script>
+    <script type="text/javascript" src="./supporting/Interface.js"></script>
+    <script type="text/javascript" src="./supporting/Logo.js"></script>
+
+    <!-- Style Sheet -->
+    <style type="text/css">
+        @import url(https://fonts.googleapis.com/css?family=Roboto+Mono);
+    </style>
+
+    <style type="text/css">
+        #TonejsLogo {
+            background-color: #000;
+            cursor: pointer
+        }
+
+        #TonejsLogo,
+        #TonejsLogo #Border,
+        #TonejsLogo #Canvas,
+        #TonejsLogo #Title {
+            position: absolute
+        }
+
+        #TonejsLogo #TextContainer {
+            position: absolute;
+            width: auto;
+            -webkit-transform: translate(-50%, 0px);
+            -ms-transform: translate(-50%, 0px);
+            transform: translate(-50%, 0px);
+            left: 50%;
+            height: 100%
+        }
+
+        #TonejsLogo #TextContainer #Title {
+            position: relative;
+            display: inline-block;
+            font-family: Roboto Mono, monospace;
+            color: #fff;
+            text-align: center;
+            height: 100%;
+            top: 0;
+            width: 100%;
+            font-weight: 400
+        }
+
+        #TonejsLogo #TextContainer #Title .Closer {
+            margin: -3%
+        }
+
+        #TonejsLogo #TextContainer #Canvas {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            border-radius: 2%;
+            z-index: 0;
+            right: 0;
+            width: 10px;
+            background-color: #f734d7
+        }
+    </style>
+
+
+    <!-- Imports -->
+    <script type="text/javascript" src="./supporting/fb_256_to_82.js"></script>
+    <script type="text/javascript" src="./supporting/nexusUI.js"></script>
+    <link rel="stylesheet" type="text/css" href="./supporting/examples.css">
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script type="text/javascript" src="./supporting/jquery.min.js"></script>
+
+</head>
+
+<!-- Header for Logo -->
+<header id="header" class="alt">
+    <center>
+        <h1 id="h1Top">Inverse Replay</h1>
+    </center>
+</header>
+
+<!-- Description header -->
+<header id="descriptionHead" class="desc">
+    <p style="text-indent: 20px">
+        Inverse Replay is an algorithm designed to record simulated keyboard input and create the inverse sequence (by pitch)
+        <br> of the originally played sequence.
+        
+    </p>
+
+
+    <ul>
+        A sequence recording may be started by pressing the green start button found below:
+        <br>
+        <li>
+            If the start button is neon green, the recording is in progress.
+            <br>
+            <li>
+                Once the recording is to its desired length, pressing the stop button will end the recording process.
+                <br>
+            </li>
+        </li>
+        <li>
+            Now that a sample has been properly recorded and stored, presseing the "Play Inverse" button will
+            <br> play the inverse of the sequence while graphing it to the inverse matrix.
+        </li>
+    </ul>
+    <p style="text-indent: 20px">
+        The two matrices below have a row length proportionate to the notes being played.
+        <br> From bottom to top, the rows equate to the notes:
+        <br>
+        <p style="text-indent: 80px">
+            C, C#, D, D#, E, F, F#, G, G#, A4, A#, B, C [1 octave up]
+        </p>
+    </p>
+    
+<p style="text-indent: 40px">
+    How the keyboard functions: 
+ <p style="text-indent: 100px">
+    <img src="coolBlackPixelBecauseHTMLisHardToFormat.png" width="1" height="1" style="float:left" />
+    <img src="keyboardNotes.png" width="230" height="70"  style="margin-right:40px"/>
+    <img src="keyboardKeys.png" width="230" height="70"/></center>
+</p>
+</p>
+
+</header>
+
+<p id="not" style="text-indent: 40px">
+    After recording, press the "Notate" button to recieve data on both sequences
+    <br>
+    
+</p>
+
+
+<!-- BODY -->
+<body background="https://topbackgroundwallpaper.com/wp-content/uploads/2018/01/free-wallpaper-for-website-free-wallpaper-for-website-backgrounds-8.jpg">
+
+    <!-- Matrix declarations -->
+    <div id="Content">
+        <center>
+            <h2>As Played:</h2>
+        </center>
+        <!--This cavnas call will make a NexusUI matrix.-->
+        <center>
+            <canvas nx="matrix" id="matrix1"></canvas>
+        </center>
+        <center>
+            <h2>Inverse:</h2>
+        </center>
+        <!--This cavnas call will make a NexusUI matrix.-->
+        <center>
+            <canvas nx="matrix" id="matrix2"></canvas>
+        </center>
+    </div>
+
+
+    <!-- BUTTONS -->
+    <center>
+        <button onclick="Tone.Transport.start();" class="startButton">
+            <h3>Start</h3>
+        </button>
+
+        <button onclick="Tone.Transport.stop();" class="stopButton">
+            <h4>Stop ~TODO</h4>
+        </button>
+
+        <button onclick="playInverse();">
+            <h5>Play Inverse</h5>
+        </button>
+
+        <button onclick="makeNotation();">
+            <h5>Notate!</h5>
+        </button>
+    </center>
+
+    <!-- Keyboard declaration -->
+    <div>
+        <center>
+            <canvas nx="keyboard" id="keyboard1"></canvas>
+        </center>
+    </div>
+
+    <!-- MATRIX/KEYBOARD INITIALIZATION -->
+    <script type="text/javascript">
+        var ncol = 36;
+        var nrow = 13;
+
+        nx.onload = function () {
+            nx.colorize("#f5871f");
+
+            //First matrix
+            matrix1.col = ncol;
+            matrix1.row = nrow;
+            matrix1.init();
+            matrix1.resize(900, 200);
+            matrix1.draw();
+
+            //Second matrix
+            matrix2.col = ncol;
+            matrix2.row = nrow;
+            matrix2.init();
+            matrix2.resize(900, 200);
+            matrix2.draw();
+
+            //Piano keyboard
+            keyboard1.octaves = 1;
+            keyboard1.init();
+            keyboard1.resize(700, 200);
+        }
+
+    </script>
+
+    <!-- keyboard input/note processing js imports -->
+    <script type="text/javascript" src="./supporting/keykey.js"></script>
+    <script type="text/javascript" src="./supporting/procedural.js"></script>
+
+</body>
+
+<footer>
+    <center><p id = "footer">Created by Chris Demas with the help of Professor Tom Collins - PSYC-397, spring of 2018 at Lehigh University</p></center>
+</footer>
+
+</html>

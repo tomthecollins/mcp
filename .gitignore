@@ -1,4 +1,8 @@
 assignments/3/david/node_modules/
 *.wav
 *.mp3
-*/.DS_Store
+*.caf
+*.jpg
+*.jpeg
+.DS_Store
+_DS_Store

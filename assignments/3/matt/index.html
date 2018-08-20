@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="./Tone.min_r11.js"></script>
+        <script src="./NexusUI.js"></script>
+        <title>Noise Generator</title>
+
+        <style>
+            .center {
+                position: absolute;
+                margin: auto;
+                top: 0;
+                right: 0;
+                bottom: 250px;
+                left: 0;
+            }
+
+            #h1{
+                text-align: center;
+            }
+
+            #h3 {
+                text-align: center;
+            }
+
+            #buttonLabels {
+                margin-top: 250px;
+                width: 500px;
+                margin-left: 38.5%;
+                margin-bottom: 0px;
+            }
+
+            #buttonLabelsNew {
+                position: absolute;
+                margin: auto;
+                top: 310px;
+                right: 0;
+                bottom: 0px;
+                left: 532px;
+            }
+
+            h4 {
+                width: 100px;
+                text-align: center;
+                float: left;
+                margin-top:0px;
+                margin-bottom: 0px;
+            }           
+
+            #spectrogram {
+                position: absolute;
+                margin: auto;
+                top: 450px;
+                right: 0;
+                bottom: 0px;
+                left: 0px;
+            }
+
+            #dial {
+                position: absolute;
+                margin: auto;
+                top: 50px;
+                right: 0;
+                bottom: 0px;
+                left: 0;
+            }
+
+            #freq {
+                position: absolute;
+                margin: auto;
+                top: 460px;
+                right: 0;
+                bottom: 0px;
+                left: 633px;
+            }
+
+            #explanation {
+                text-align: center;
+            }
+
+
+        </style>
+    </head>
+    <body>
+    <div id="container">
+        <div id="h1"><h1>Noise Generator</h1></div>
+        <div id="h3"><h3>By Matt Brown for COGS 397</h3></div>
+        <div id="colorControl" class="center"></div>
+            <div id="buttonLabelsNew">
+                <h4>Pink</h4>
+                <h4>White</h4>
+                <h4>Brown</h4>
+            </div>
+        <div id="dial"></div>
+        <div id="freq"><h4>Frequency Control</h4></div>
+        <div id="spectrogram" nexus-ui="spectrogram"></div>
+        <p id="explanation">Noise is an auditory phenomenon where many different sounds of all frequencies are played, creating the sound
+                             of static, or the sound an old TV might play if connected to a non-operating channel.  Many people find it
+                             soothing to fall to sleep to, or while studying.  There are many different "colors" of noise, which correspond
+                             to different mixes of frequencies, and each having unique sound profiles.  On this website, there are three kinds
+                             displayed: white, pink, and brown.  White noise is the most "aggressive" of the three, having more of the higher
+                             frequency tones. Pink noise is slightly more relaxed, having more of the lower or bass tones. Finally, brown
+                             noise sounds like a low rumble, or like the roar of the ocean, having mostly low bass tones and few high frequency tones.
+        </p>
+    </div>
+        <script>
+            Nexus.context = Tone.context;
+            var color = "none";
+            var noise;
+            var autoFilter;
+            var multislider;
+            var oct = 0;
+
+            var radiobutton = new Nexus.RadioButton('#colorControl',{
+                'size': [300,60],
+                'numberOfButtons': 3,
+                'active': -1                        //this tells which button is active
+            })
+
+            var dial = new Nexus.Dial('#dial',{
+                'size': [80,80],
+                'interaction': 'radial', 
+                'mode': 'relative', 
+                'min': 0,
+                'max': 4,
+                'step': 1,
+                'value': 0
+            })
+
+            dial.on('change',function(v) {
+                oct = v;
+                if (color != "none")
+                {
+                    noise.stop();
+                    autoFilter.stop();
+
+                    noise = new Tone.Noise(color).start();        
+                    autoFilter = new Tone.AutoFilter({
+                        "frequency" : "8m", 
+                        "min" : 800, 
+                        "max" : 15000,
+                        "octaves" : 0 + oct
+                    }).connect(Tone.Master);
+                    noise.connect(autoFilter);
+                    autoFilter.start()
+                }
+            })
+
+            radiobutton.on('change', function(v)
+            {
+                
+                if (color != "none") { 
+                    noise.stop(); 
+                    autoFilter.stop();
+                }
+                if (v == 0) { color = "pink"; }
+                else if (v == 1) { color = "white"; }
+                else { color = "brown"; }
+
+                 // Noise Element
+                if (color != "none")
+                {
+                    noise = new Tone.Noise(color).start();
+                    
+                    
+                    autoFilter = new Tone.AutoFilter({
+                        "frequency" : "8m", 
+                        "min" : 800, 
+                        "max" : 15000,
+                        "octaves" : 0 + oct
+                    }).connect(Tone.Master);
+                    noise.connect(autoFilter);
+                    autoFilter.start()
+                    
+            }
+            })
+            var spectrogram = new Nexus.Spectrogram('#spectrogram').connect(Tone.Master);
+                        
+        </script>
+    </body>
+</html>
