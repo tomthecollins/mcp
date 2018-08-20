@@ -193,7 +193,7 @@
         //    updateSongSelection();
         //});
         
-        function beatHistogram(aPointSet, plotTf){
+        function beatHistogram(aPointSet, showTf){
             if (aPointSet == undefined){
                 alert('Select a song before clicking Beat Histogram.')
             }
@@ -217,7 +217,7 @@
                     //    console.log('beat:', beat);
                     //}
                 });
-                if (plotTf){
+                if (showTf){
                     console.log('hist:', hist);
                 }
                 return hist;
@@ -269,7 +269,7 @@
             return avgHist;
         }
         
-        function loocv(id, ps, ids){
+        function loocv(id, aPointSet, ids){
             // Calculate average histogram for all songs that aren't the
             // selected song.
             var avgHist = averageBeatHistogram(id, ids);
@@ -277,7 +277,7 @@
             
             // Correlate the histogram of the selected song at all possible
             // cyclic permutations with the average histogram.
-            var currHist = beatHistogram(ps);
+            var currHist = beatHistogram(aPointSet);
             var corrs = [];
             for (i = 0; i < beatsInMeasure*granularity; i++){
                 corrs[i] =
@@ -293,12 +293,16 @@
             var confidence = ma[0];
             // Compare to ground truth.
             var relEl = md.find(function(d){
-                return newSelection + '.00' === d.id;
+                return id + '.00' === d.id;
             });
             console.log('startsOnBeatEst:', startsOnBeatEst,
                         'confidence:', confidence,
-                        'startsOnBeat:',relEl.startsOnBeat);
-            return;
+                        'startsOnBeat:', relEl.startsOnBeat);
+            return {
+                startsOnBeatEst: startsOnBeatEst,
+                confidence: confidence,
+                startsOnBeat: relEl.startsOnBeat
+            };
         }
         
         function start(){
