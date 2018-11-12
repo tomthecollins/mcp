@@ -2,7 +2,10 @@
 
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Page Title</title>
+    <script type="text/javascript" src="./Tone.min_r11.js"></script>
+    <script type="text/javascript" src="./batch_1/stm_metadata_variable.js"></script>
     <script type="text/javascript">
         function dynamicallyLoadScript(url){
             var script = document.createElement("script"); // Make a script DOM node
@@ -10,40 +13,355 @@
             document.head.appendChild(script); // Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
         }
         
-        dynamicallyLoadScript('./batch_1/js_from_lisp/1145.00.js')
-        dynamicallyLoadScript('./batch_2/js_from_lisp/1774.00.js');
-        dynamicallyLoadScript('./batch_2/js_from_lisp/1849.00.js');
+        var song_dir = './batch_1/js_from_lisp/';
+        var song_ids = [
+            "1285",
+            "1310",
+            "1499",
+            "1520"
+        ];
         
+        song_ids.map(function(id){
+            dynamicallyLoadScript(song_dir + id + '.00.js');
+        });
+        
+        // Trying to use promise and then.
+        //var promise1 = new Promise(function(resolve, reject) {
+        //    
+        //    song_ids.map(function(id){
+        //        dynamicallyLoadScript(song_dir + id + '.00.js');
+        //    });
+        //    
+        //    resolve('Success!');
+        //});
+        
+        MNN2pitch_simple = function(MNN){
+            // Tom Collins 6/1/2016.
+            // In
+            // metadata Integer mandatory
+            // Out String
+            // This function converts a MIDI note number into a pitch class and octave.
+            // It does so in a completely naive manner (no consideration of global or
+            // local key), but this is handy for things like Tone.js playback, which tend
+            // to prefer "C" to "B#", "C#" to "Db" (I think), and "G" to "F##".
+          
+            var lookup = [
+                          "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
+            ];
+            var octave = Math.floor(MNN/12 - 1);
+            var MNN_mod_12 = MNN % 12;
+            return lookup[MNN_mod_12] + octave.toString();
+        }
+        
+        function cyclically_permute_array_by(arr, m){
+            // Tom Collins 6/11/2015.
+            // In
+            // arr Array mandatory
+            // m Non-negative integer mandatory
+            // Out Array
+            // This function moves the ith element of an array (counting from
+            // zero) to the zeroth element in the output array, where i is the
+            // second argument. The (i - 1)th element is moved to the last
+            // element in the output array, the (i - 2)th element is moved to
+            // the penultimate element in the output array, etc.
+            
+            m = m % arr.length;
+            var arr2 = JSON.parse(JSON.stringify(arr));
+            var arr3 = arr2.slice(0, m);
+            var arr4 = arr2.slice(m).concat(arr3);
+            return arr4;
+        }
+        
+        function corr(x, y){
+            // Tom Collins 8/11/2015.
+            // In
+            // x Array mandatory
+            // y Array mandatory
+            // Out Number
+            // This function calculates the Pearson product-moment
+            // correlation coefficient between the input arrays x and y. It
+            // checks that the arrays are of the same length, but does not
+            // check that they each consist of numbers, nor for zero divisors
+            // (output NaN in both cases).
+            
+            var n = x.length;
+            if (n !== y.length){
+                throw "Error in call to corr: input arrays must be of the same length.";
+            }
+            else {
+                var x_bar = mean(x);
+                var y_bar = mean(y);
+                var x2 = 0;
+                var y2 = 0;
+                var xy = 0;
+                for (var i = 0; i < x.length; i++){
+                    x2 += Math.pow(x[i], 2);
+                    y2 += Math.pow(y[i], 2);
+                    xy += x[i] * y[i];
+                }
+                var r = (xy - n * x_bar * y_bar) / (Math.sqrt(x2 - n * Math.pow(x_bar, 2)) * Math.sqrt(y2 - n * Math.pow(y_bar, 2)));
+                return r;
+            }
+        }
+        
+        function mean(arr){
+            // Christian Coulon and Tom Collins 17/10/2014.
+            // In
+            // arr Array mandatory
+            // Out Number
+            // This function returns the mean of an input numeric array.
+          
+            if (!arr.length) {
+                return 0;
+            }
+            else {
+                var sum = 0;
+                for (var i = 0; i < arr.length; i++) {
+                    sum += arr[i];
+                }
+                return sum / arr.length;
+            }
+        }
+        
+        function max_argmax(arr) {
+            // Tom Collins 21/10/2014.
+            // In
+            // arr Array mandatory
+            // Out Array
+            // Returns the maximum element in an array and its index (argument).
+          
+            var max = arr[0];
+            var maxIndex = 0;
+            for (var i = 1; i < arr.length; i++) {
+                if (arr[i] > max) {
+                    maxIndex = i;
+                    max = arr[i];
+                }
+            }
+            return [max, maxIndex];
+          
+            // CDC said the following is the same, but it does not retain the index of
+            // the maximum element:
+            // return arr.reduce(function(a, b){ return a > b?a:b; }, arr[0]);
+        }
     </script>
     
 </head>
 
 <body>
-    <input type="button" onclick="beatHistogram();"></input>
+    <select id="songSelect" onchange="updateSongSelection();">
+        <!--<option value="saab">Saab</option>-->
+        <!--<option value="mercedes">Mercedes</option>-->
+    </select>
+    
+    <input type="button" onclick="loocv(newSelection, ps, song_ids);" value="LOOCV hist"/>
+    <input type="button" onclick="beatHistogram(ps, true);" value="Beat hist"/>
+    <input type="button" onclick="start();" value="Start"/>
+    <input type="button" onclick="Tone.Transport.stop();" value="Stop"/>
+    <p id="beatDisplay"></p>
+    
     <script type="text/javascript">
         var granularity = 4;
-        function beatHistogram(){
-            var ps = s1145;
-            var hist = [];
-            ps.map(function(p, idx){
-                var intPart = parseInt(p[0]);
-                var decPart = p[0] - intPart;
-                var beat = intPart % 4 + decPart;
-                var histIdx = Math.floor(granularity*beat);
-                if (hist[histIdx] !== undefined){
-                    hist[histIdx]++;
-                }
-                else {
-                    hist[histIdx] = 1;
-                }
-                if (idx >= 5 && idx < 10){
-                    console.log('intPart:', intPart);
-                    console.log('decPart:', decPart);
-                    console.log('beat:', beat);
-                }
-            });
-            console.log('hist:', hist);
+        var beatsInMeasure = 4;
+        var ps;
+        var tempo = 130;
+        Tone.Transport.bpm.value = tempo;
+        
+        // Populate songSelect menu.
+        var ssm = document.getElementById("songSelect"); // ssm stands for song select menu.
+        var inhtml = '';
+        song_ids.map(function(id){
+            // console.log('id:', id);
+            inhtml = inhtml + '<option value="' + id + '">' + id + '</option>';
+        });
+        ssm.innerHTML = inhtml;
+        // ps = eval('s' + song_ids[0]);
+        
+        function updateSongSelection(){
+            newSelection = document.getElementById("songSelect").value;
+            console.log('newSelection:', newSelection);
+            ps = eval('s' + newSelection);
         }
+        setTimeout(function(){
+            updateSongSelection();
+        }, 2000)
+        
+        // Trying to use promise and then.
+        //promise1.then(function(value) {
+        //    console.log(value);
+        //    // expected output: "Success!"
+        //    updateSongSelection();
+        //});
+        
+        function beatHistogram(aPointSet, showTf){
+            if (aPointSet == undefined){
+                alert('Select a song before clicking Beat Histogram.')
+            }
+            else {
+                var hist = [];
+                aPointSet.map(function(p, idx){
+                    var intPart = parseInt(p[0]);
+                    var decPart = p[0] - intPart;
+                    var beat = intPart % beatsInMeasure + decPart;
+                    var histIdx = Math.floor(granularity*beat);
+                    if (hist[histIdx] !== undefined){
+                        hist[histIdx]++;
+                    }
+                    else {
+                        hist[histIdx] = 1;
+                    }
+                    //if (idx >= 5 && idx < 10){
+                    //    console.log('p:', p);
+                    //    console.log('intPart:', intPart);
+                    //    console.log('decPart:', decPart);
+                    //    console.log('beat:', beat);
+                    //}
+                });
+                if (showTf){
+                    console.log('hist:', hist);
+                }
+                return hist;
+            }
+        }
+        
+        function averageBeatHistogram(id, ids){
+            // In keeping with LOOCV, remove selected song from ids.
+            var songs2analyse = ids.filter(function(curr_id){
+                return curr_id !== id;
+            });
+            
+            // Make beat histogram for each remaining song.
+            var hists = [];
+            songs2analyse.map(function(curr_id){
+                // Get startsOnBeat from metadata.
+                var relEl = md.find(function(d){
+                    return curr_id + '.00' === d.id;
+                });
+                var startsOnBeat = relEl.startsOnBeat
+                // console.log('id:', id, 'relEl:', relEl, 'startsOnBeat:', startsOnBeat);
+                // Use startsOnBeat to correct the point set.
+                var currPs = eval('s' + curr_id);
+                currPs = currPs.map(function(p){
+                   p[0] = p[0] + beatsInMeasure - startsOnBeat + 1;
+                   return p;
+                });
+                var hist = beatHistogram(currPs);
+                // Normalize and push to hists.
+                // var sum = 200;
+                var sum = hist.reduce(function(a, b){
+                    return a + b;
+                });
+                hist = hist.map(function(h){
+                    return h/sum;
+                })
+                // console.log('normalized hist:', hist);
+                hists.push(hist);
+            });
+            // Calculate averages.
+            var avgHist = [];
+            for (i = 0; i < beatsInMeasure*granularity; i++){
+                avgHist[i] = 0;
+                for (j = 0; j < songs2analyse.length; j++){
+                    avgHist[i] = avgHist[i] + hists[j][i];
+                }
+            }
+            // console.log('avgHist:', avgHist);
+            return avgHist;
+        }
+        
+        function loocv(id, aPointSet, ids){
+            // Calculate average histogram for all songs that aren't the
+            // selected song.
+            var avgHist = averageBeatHistogram(id, ids);
+            console.log('avgHist:', avgHist);
+            
+            // Correlate the histogram of the selected song at all possible
+            // cyclic permutations with the average histogram.
+            var currHist = beatHistogram(aPointSet);
+            var corrs = [];
+            for (i = 0; i < beatsInMeasure*granularity; i++){
+                corrs[i] =
+                    corr(cyclically_permute_array_by(currHist, i), avgHist);
+            }
+            // console.log('corrs:', corrs);
+            
+            var ma = max_argmax(corrs);
+            // console.log('ma:', ma);
+            
+            // Get estimate of startsOnBeat.
+            var startsOnBeatEst = ma[1]/granularity + 1;
+            var confidence = ma[0];
+            // Compare to ground truth.
+            var relEl = md.find(function(d){
+                return id + '.00' === d.id;
+            });
+            console.log('startsOnBeatEst:', startsOnBeatEst,
+                        'confidence:', confidence,
+                        'startsOnBeat:', relEl.startsOnBeat);
+            return {
+                startsOnBeatEst: startsOnBeatEst,
+                confidence: confidence,
+                startsOnBeat: relEl.startsOnBeat
+            };
+        }
+        
+        function start(){
+            if (ps == undefined){
+                alert('Select a song before clicking Start.')
+            }
+            else {
+                Tone.Transport.cancel(0);
+                ps.map(function(p){
+                    Tone.Transport.schedule(function(time){
+                        // console.log('Waaa!');
+                        drums.triggerAttackRelease(
+                            MNN2pitch_simple(p[1]),
+                            1,
+                            time,
+                            0.9*p[4]/127
+                        )
+                    }, p[0]*60/tempo);
+                });
+                Tone.Transport.start();
+                
+                // Display beat times.
+                // var lastOn = Math.ceil(ps[ps.length - 1][0]);
+                var j = 0;
+                Tone.Transport.scheduleRepeat(function(time){
+                    document.getElementById("beatDisplay").innerHTML = 'Beat according to MIDI: ' + (j % 4 + 1);
+                    j++;
+                }, 60/tempo);
+            }
+        }
+        
+        // Make an instrument.
+        var drums = new Tone.Sampler({
+            "C2": "edm_drum_kit/036_kick_1.wav",
+            "C#2": "edm_drum_kit/037_click.wav",
+            "D2": "edm_drum_kit/038_snare_1.wav",
+            "D#2": "edm_drum_kit/039_clap_1.wav",
+            "E2": "edm_drum_kit/040_snare_2.wav",
+            "F2": "edm_drum_kit/041_tom_1.wav",
+            "F#2": "edm_drum_kit/042_hi-hat_1.wav",
+            "G2": "edm_drum_kit/043_tom_2.wav",
+            "G#2": "edm_drum_kit/044_hi-hat_2.wav",
+            "A2": "edm_drum_kit/045_tom_3.wav",
+            "A#2": "edm_drum_kit/046_hi-hat_open.wav",
+            "B2": "edm_drum_kit/047_perc.wav",
+            "C3": "edm_drum_kit/048_plate.wav",
+            "C#3": "edm_drum_kit/049_crash.wav",
+            "D3": "edm_drum_kit/050_shaker_2.wav",
+            "D#3": "edm_drum_kit/051_ride.wav",
+            "E3": "edm_drum_kit/052_snare_3.wav",
+            "F3": "edm_drum_kit/053_clap_2.wav",
+            "F#3": "edm_drum_kit/054_shaker_1.wav",
+            "G3": "edm_drum_kit/055_scoop.wav",
+            "G#3": "edm_drum_kit/056_jump.wav"
+        }, function(){
+            console.log('Loaded!');
+            
+        }).toMaster();
+    
     </script>
 </body>
 </html>

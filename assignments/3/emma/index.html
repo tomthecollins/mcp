@@ -18,7 +18,103 @@
             "1285",
             "1310",
             "1499",
-            "1520"
+            "1520",
+            "1080",
+            "1113",
+            "1140",
+            "1145",
+            "1184",
+            "1263",
+            "1283",
+            "1563",
+            "1618",
+            "1628",
+            "1637",
+            "1638",
+            "10037",
+            "10056",
+            "10116",
+            "10120",
+            "10263",
+            "10281",
+            "10282",
+            "10283",
+            "10284",
+            "10294",
+            "10295",
+            "10296",
+            "10358",
+            "10424",
+            "10716",
+            "10737",
+            "10799",
+            "10887",
+            "10889",
+            "11147",
+            "11280",
+            "11496",
+            "11553",
+            "11681",
+            "11764",
+            "11790",
+            "11811",
+            "11878",
+            "11902",
+            "12052",
+            "12174",
+            "12419",
+            "12500",
+            "12513",
+            "12514",
+            "12515",
+            "12570",
+            "12604",
+            "12908",
+            "12928",
+            "12948",
+            "13322",
+            "13347",
+            "13388",
+            "13398",
+            "13473",
+            "13756",
+            "13816",
+            "13825",
+            "13951",
+            "13959",
+            "14038",
+            "14059",
+            "14206",
+            "14212",
+            "14216",
+            "14278",
+            "14285",
+            "14302",
+            "14327",
+            "14400",
+            "14434",
+            "14447",
+            "14522",
+            "15202",
+            "15344",
+            "15386",
+            "15464",
+            "15502",
+            "15667",
+            "15813",
+            "15827",
+            "15947",
+            "15961",
+            "15984",
+            "16123",
+            "16263",
+            "16278",
+            "16353",
+            "16357",
+            "16519",
+            "16526",
+            "16575",
+            "16591",
         ];
         
         song_ids.map(function(id){
@@ -52,7 +148,7 @@
             var MNN_mod_12 = MNN % 12;
             return lookup[MNN_mod_12] + octave.toString();
         }
-        
+        ;
         function cyclically_permute_array_by(arr, m){
             // Tom Collins 6/11/2015.
             // In
@@ -154,6 +250,7 @@
         <!--<option value="mercedes">Mercedes</option>-->
     </select>
     
+    <input type="button" onclick="loocvAll(song_ids);" value="LOOCV all"/>
     <input type="button" onclick="loocv(newSelection, ps, song_ids);" value="LOOCV hist"/>
     <input type="button" onclick="beatHistogram(ps, true);" value="Beat hist"/>
     <input type="button" onclick="start();" value="Start"/>
@@ -184,7 +281,7 @@
         }
         setTimeout(function(){
             updateSongSelection();
-        }, 2000)
+        }, 2000);
         
         // Trying to use promise and then.
         //promise1.then(function(value) {
@@ -195,10 +292,13 @@
         
         function beatHistogram(aPointSet, showTf){
             if (aPointSet == undefined){
-                alert('Select a song before clicking Beat Histogram.')
+                alert('Select a song before clicking Beat Histogram.');
             }
             else {
                 var hist = [];
+                for (var i = 0; i < beatsInMeasure*granularity; i++){
+                    hist[i] = 0;
+                }
                 aPointSet.map(function(p, idx){
                     var intPart = parseInt(p[0]);
                     var decPart = p[0] - intPart;
@@ -226,9 +326,11 @@
         
         function averageBeatHistogram(id, ids){
             // In keeping with LOOCV, remove selected song from ids.
+            // Also remove those that have a null startsOnBeat.
             var songs2analyse = ids.filter(function(curr_id){
                 return curr_id !== id;
             });
+            // console.log('songs2analyse.length:', songs2analyse.length);
             
             // Make beat histogram for each remaining song.
             var hists = [];
@@ -237,7 +339,7 @@
                 var relEl = md.find(function(d){
                     return curr_id + '.00' === d.id;
                 });
-                var startsOnBeat = relEl.startsOnBeat
+                var startsOnBeat = relEl.startsOnBeat;
                 // console.log('id:', id, 'relEl:', relEl, 'startsOnBeat:', startsOnBeat);
                 // Use startsOnBeat to correct the point set.
                 var currPs = eval('s' + curr_id);
@@ -245,6 +347,7 @@
                    p[0] = p[0] + beatsInMeasure - startsOnBeat + 1;
                    return p;
                 });
+                // console.log('currPs.slice(0, 5):', currPs.slice(0, 5));
                 var hist = beatHistogram(currPs);
                 // Normalize and push to hists.
                 // var sum = 200;
@@ -253,7 +356,7 @@
                 });
                 hist = hist.map(function(h){
                     return h/sum;
-                })
+                });
                 // console.log('normalized hist:', hist);
                 hists.push(hist);
             });
@@ -261,12 +364,55 @@
             var avgHist = [];
             for (i = 0; i < beatsInMeasure*granularity; i++){
                 avgHist[i] = 0;
+                // for (j = 0; j < 5; j++){
                 for (j = 0; j < songs2analyse.length; j++){
                     avgHist[i] = avgHist[i] + hists[j][i];
                 }
             }
             // console.log('avgHist:', avgHist);
             return avgHist;
+        }
+        
+        function loocvAll(song_ids){
+            // Remove songs that have null startsOnBeat property.
+            song_ids = song_ids.filter(function(curr_id){
+                var relEl = md.find(function(d){
+                    return curr_id + '.00' === d.id;
+                });
+                return relEl.startsOnBeat !== null;
+            });
+            console.log('song_ids.length nulls removed:', song_ids.length);
+            
+            var est = [];
+            var actual = [];
+            var accuracy = [];
+            // Define a third array here called accuracy, whose ith element
+            // takes the value 1 if result.startsOnBeatEst ===
+            // result.startsOnBeat and 0 otherwise.
+            for (var i = 0; i < song_ids.length; i++) {
+                var curr_ps = eval('s' + song_ids[i]);
+                // console.log('curr_id:', 's' + song_ids[i]);
+                // console.log('curr_ps.slice(0, 5):', curr_ps.slice(0, 5));
+                var result = loocv(song_ids[i], curr_ps, song_ids);
+                est.push(result.startsOnBeatEst);
+                actual.push(result.startsOnBeat);
+                if (result.startsOnBeatEst === result.startsOnBeat){
+                    accuracy[i] = 1;
+                }
+                else {
+                    accuracy[i] = 0;
+                }
+            }
+            // Uncomment this variable, which determines the number of songs
+            // estimated correctly.
+             var numCorrect = accuracy.reduce(function(a, b){
+                 return a + b;
+             });
+            console.log("Estimate:", est);
+            console.log("Actual:  ", actual);
+            // Uncomment these two lines.
+            console.log("Number of songs estimated correctly:", numCorrect);
+            console.log("Number of songs tested:", est.length);
         }
         
         function loocv(id, aPointSet, ids){
@@ -307,7 +453,7 @@
         
         function start(){
             if (ps == undefined){
-                alert('Select a song before clicking Start.')
+                alert('Select a song before clicking Start.');
             }
             else {
                 Tone.Transport.cancel(0);
@@ -319,7 +465,7 @@
                             1,
                             time,
                             0.9*p[4]/127
-                        )
+                        );
                     }, p[0]*60/tempo);
                 });
                 Tone.Transport.start();

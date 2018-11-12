@@ -4,5 +4,6 @@ assignments/3/david/node_modules/
 *.caf
 *.jpg
 *.jpeg
+examples/class_9/csv
 .DS_Store
 _DS_Store
